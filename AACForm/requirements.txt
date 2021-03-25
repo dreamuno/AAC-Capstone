@@ -1,4 +1,4 @@
-asgiref==3.2.3
+asgiref==3.3.1
 beautifulsoup4==4.8.0
 bleach==3.3.0
 cachetools==3.1.1
@@ -15,7 +15,7 @@ Django==3.1.6
 django-appconf==1.0.3
 django-bootstrap4==1.1.1
 django-extensions==2.2.3
-django-filter==2.2.0
+django-filter==2.4.0
 git+git://github.com/beknightedresearch/django-googledrive-storage@master
 django-nose==1.4.6
 django-summernote==0.8.11.6
@@ -62,6 +62,6 @@ sqlparse==0.3.0
 tinycss2==1.0.2
 uritemplate==3.0.0
 urllib3==1.25.9
-WeasyPrint==51
+WeasyPrint==52.4
 webencodings==0.5.1
 whitenoise==5.0.1
