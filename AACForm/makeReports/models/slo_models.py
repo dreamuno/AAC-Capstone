@@ -14,6 +14,7 @@ class SLO(models.Model):
     blooms = models.CharField(choices=BLOOMS_CHOICES,max_length=50, verbose_name="Bloom's taxonomy level")
     gradGoals = models.ManyToManyField('GradGoal', verbose_name="graduate-level goals")
     numberOfUses = models.PositiveIntegerField(default=0, verbose_name="number of uses of this SLO")
+    #accreditingBody = models.BooleanField(verbose_name="Accrediting_body")
 class SLOInReport(models.Model):
     """
     A specific version of an SLO which occurs within a report
@@ -47,3 +48,9 @@ class SLOsToStakeholder(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE, null=True)
     def __str__(self):
         return mark_safe(self.text)
+
+class AccreditingBody(models.Model):
+    """
+    Check box for accrediting bodies
+    """
+    AccreditingBody = models.BooleanField(default='False')
