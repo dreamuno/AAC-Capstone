@@ -6,6 +6,7 @@ from django.template.defaultfilters import register
 from django_summernote.widgets import SummernoteWidget
 from makeReports.models import GradGoal
 from makeReports.choices import BLOOMS_CHOICES
+from makeReports.models import AccreditingBody
 from .cleaners import CleanSummer
 from .widgets import SLOMultipleChoicesJSWidget, StkChoicesJSWidget
 
@@ -21,7 +22,7 @@ class CreateNewSLO(forms.Form):
     text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label="SLO", max_length=1000) 
     blooms = forms.ChoiceField(choices=BLOOMS_CHOICES, label="Highest Bloom's Taxonomy Level", widget=forms.Select(attrs={'class':'form-control col-5'}))
     gradGoals = forms.ModelMultipleChoiceField(queryset=GradGoal.active_objects.all(), required=False,widget=forms.CheckboxSelectMultiple, label="Graduate-level Goals")
-    AccreditingBody = forms.BooleanField()
+    accreditingBody = forms.BooleanField(label='Accrediting_body')
     def __init__(self,*args,**kwargs):
         """
         Initializes form and deletes grad field if undergraduate level
@@ -33,6 +34,7 @@ class CreateNewSLO(forms.Form):
         super(CreateNewSLO,self).__init__(*args,**kwargs)
         if not grad:
             del self.fields['gradGoals']
+
 class ImportSLOForm(forms.Form):
     """
     Form to import pre-existing SLO

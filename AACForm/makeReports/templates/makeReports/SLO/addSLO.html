@@ -22,6 +22,9 @@
     {% bootstrap_label form.gradGoals.label_tag %}
     {% bootstrap_field form.gradGoals show_label=False %}
     {% endif %}
+
+    
+    <p>{{ form.accreditingBody }} Accrediting Body </p>
     <p id='errors'></p>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>
