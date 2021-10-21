@@ -53,11 +53,13 @@ class ImportSLOForm(forms.Form):
         self.fields['slo'].queryset = sloChoices
     def clean(self):
         return super(ImportSLOForm,self).clean()
+        
 class EditImportedSLOForm(CleanSummer,forms.Form):
     """
     Form to edit imported SLO (more restricted than new)
     """
     text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label="SLO: ", max_length=1000)
+    accreditingBody = forms.BooleanField(label='Accrediting_body')
     summer_max_length = 1000
 class Single2000Textbox(CleanSummer,forms.Form):
     """
