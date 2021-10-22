@@ -84,7 +84,6 @@ class AddNewSLO(DeptReportMixin,FormView):
             gGoals = []
         rpt = self.report
         sloObj = SLO.objects.create(blooms=form.cleaned_data['blooms'])
-
         for gg in gGoals:
             sloObj.gradGoals.add(gg)
         num = self.report.numberOfSLOs
@@ -96,7 +95,8 @@ class AddNewSLO(DeptReportMixin,FormView):
             changedFromPrior=False, 
             report=rpt, 
             number = num,
-            accreditingBody = form.cleaned_data["accreditingBody"]
+            accreditingBody = form.cleaned_data["accreditingBody"],
+            accreditingBodyMeasures = form.cleaned_data["accreditingBodyMeasures"]
             )
         sloObj.save()
         sloRpt.save()

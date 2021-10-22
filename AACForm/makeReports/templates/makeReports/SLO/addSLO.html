@@ -23,8 +23,9 @@
     {% bootstrap_field form.gradGoals show_label=False %}
     {% endif %}
 
-    
-    <p>{{ form.accreditingBody }} Accrediting Body </p>
+    <p>Accrediting Body Information:</p>
+    <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
+    {{ form.accreditingBodyMeasures }}
     <p id='errors'></p>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>

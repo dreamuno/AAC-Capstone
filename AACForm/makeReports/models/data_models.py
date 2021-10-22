@@ -49,6 +49,7 @@ class ResultCommunicate(models.Model):
     """
     Model holds the text for communicating results
     """
+    date = models.DateField('ResultsDate')
     text = models.CharField(max_length=3000)
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
 class Graph(models.Model):

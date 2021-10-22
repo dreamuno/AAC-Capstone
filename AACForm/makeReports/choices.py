@@ -52,3 +52,10 @@ POSSIBLE_REQS = (
     ("results","Description of how results are communicated with stakeholders"),
     ("decAct","Description of decisions and actions for each SLO")
 )
+
+ACCREDITING_BODY_MEASURES = (
+    ('', '------'),
+    ("PF", "Performance"),
+    ("PD","Product"),
+    ("EX", "Examination")
+)
