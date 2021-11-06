@@ -20,6 +20,7 @@
 						Academic Assessment Assistant
 					</div>
 				</div></a>
+				{% if user and user.profile %}
 				<button type="button" class="btn-hamburger" data-action="nav-toggle">
 					<span></span>
 					<span></span>
@@ -27,6 +28,7 @@
 					<span></span>
 					<span></span>
 				</button>
+				{% endif %}
 				<ul class="nav-menu">
 					{% if user and user.profile %}
                 	{% if user.profile.department %}
