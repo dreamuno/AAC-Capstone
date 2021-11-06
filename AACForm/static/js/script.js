@@ -23,4 +23,4 @@ document.addEventListener('click', function(e) {
     if (!e.target.closest(`.dropdown`)) {
         dropdown.classList.remove('show');
     }
-});
+})

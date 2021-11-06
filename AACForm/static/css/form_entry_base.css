@@ -5,8 +5,8 @@
     height: 60px;
 }
 
-.sub-navbar {
-    position: absolute;
+.subnav {
+    position: fixed;
     top: 65px;
     z-index: 1;
     display: flex;
@@ -14,9 +14,10 @@
     height: 60px;
     background: #f2f2f2;
     align-items: center;
+    justify-content: center;
 }
 
-.sub-navbar ul {
+.subnav-menu {
     display: flex;
     list-style: none;
     width: 100%;
@@ -25,23 +26,88 @@
     padding: 0;
 }
 
-.sub-navbar ul li {
+.subnav-item {
     margin: 0 1rem;
     padding: 1rem;
 }
 
-.sub-navbar ul li a {
+.subnav-item > a {
     text-decoration: none;
     color: #0a0a0a;
     transition: 0.3s ease-in-out;
+    white-space: nowrap;
+    font-size: 16px;
 }
 
-.sub-navbar ul li a:hover {
-    color: #d40000;
+.subnav-item a:hover {
+    color: #B60000;
 }
 
 .content {
     max-width: 1600px;
     width: 90%;
     margin: 0 auto;
+}
+
+.toggle-button {
+    font-size: 16px;
+    display: none;
+    width: 100px;
+    height: 20px;
+    background: transparent;
+    padding: 10px;
+    text-align: center;
+    border-radius: 3px;
+    color: #B60000;
+    font-weight: bold;
+    line-height: 21px;
+    text-decoration: none;
+    transition: 0.15s ease-out;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 1400px) {
+    .subnav ul li {
+        margin: 0 0.5rem;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .subnav {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .subnav .subnav-menu {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 125px;
+        bottom: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        background-color: #f2f2f2;
+        transition: bottom 0.5s ease-in-out;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .subnav.opened .subnav-menu {
+        bottom: 0;
+    }
+
+    .subnav .subnav-item > a {
+        display: block;
+    }
+
+    .subnav .toggle-button {
+        display: block;
+    }
+
+    .subnav.opened .toggle-button {
+        background: #B60000;
+        color: #FFFFFF;
+    }
 }

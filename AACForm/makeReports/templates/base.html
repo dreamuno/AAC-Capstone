@@ -30,7 +30,7 @@
 				<ul class="nav-menu">
 					{% if user and user.profile %}
                 	{% if user.profile.department %}
-					<li class="nav-item active"><a href="/">Home</a></li>
+					<li class="nav-item"><a href="/">Home</a></li>
 					<li class="nav-item"><a href="{% url 'makeReports:rpt-list-dept' %}">Your Reports</a></li>
 					{% endif %}
                 	{% if user.profile.aac %}
