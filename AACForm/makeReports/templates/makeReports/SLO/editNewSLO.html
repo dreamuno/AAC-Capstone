@@ -17,13 +17,10 @@
     </div>
     {% bootstrap_field form.blooms show_label=False %}
     {% if form.gradGoals %}
-    <p>Graduate-Level Goals</p>
-        {% for element in form.gradGoals %}
-        <input type = "checkbox" name = "test" style="float: left; margin-top: 5px;"/>
-            <div style="margin-left: 25px;">
-                {{ element }}
-            </div>
-            <br>
+        <p>Graduate-Level Goals</p>
+        {% for option in form.gradGoals %}
+            <span style="float:left">{{ option.tag }}</span>
+            <span style="text-align: left;"> {{option.choice_label}}</span>
         {% endfor %}
 
         <p>Accrediting Body Information:</p>

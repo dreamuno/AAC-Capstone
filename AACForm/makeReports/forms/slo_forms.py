@@ -22,7 +22,7 @@ class CreateNewSLO(forms.Form):
     """
     text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label=False, max_length=1000) 
     blooms = forms.ChoiceField(choices=BLOOMS_CHOICES, label="Highest Bloom's Taxonomy Level: ", widget=forms.Select(attrs={'class':'form-control col-5'}))
-    gradGoals = forms.ModelMultipleChoiceField(queryset=GradGoal.active_objects.all(), required=False, label="Graduate-level Goals")
+    gradGoals = forms.ModelMultipleChoiceField(widget= forms.CheckboxSelectMultiple, queryset=GradGoal.active_objects.all(), required=False, label="Graduate-level Goals")
     accreditingBody = forms.BooleanField(label='Accrediting_body')
     accreditingBodyMeasures = forms.ChoiceField(choices=ACCREDITING_BODY_MEASURES, label="Highest Bloom's Taxonomy Level", required=False, widget=forms.Select(attrs={'class':'form-control col-5'}))
     def __init__(self,*args,**kwargs):
