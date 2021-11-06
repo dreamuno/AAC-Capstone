@@ -26,6 +26,7 @@ class ResultCommunicationForm(CleanSummer,forms.Form):
     """
     Form to add how results are communicated
     """
+    date = forms.DateField()
     text = forms.CharField(
         widget=SummernoteWidget(attrs={'style':'width:750px'}), 
         label="Describe how results are communicated within the program. Address each SLO."

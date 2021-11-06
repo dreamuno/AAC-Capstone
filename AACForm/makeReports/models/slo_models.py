@@ -4,6 +4,7 @@ This file contains models most directly related to Student Learning Outcomes
 from django.db import models
 from django.utils.safestring import mark_safe
 from makeReports.choices import BLOOMS_CHOICES
+from makeReports.choices import ACCREDITING_BODY_MEASURES
 from .basic_models import NonArchivedManager
 
 class SLO(models.Model):
@@ -25,6 +26,8 @@ class SLOInReport(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
     number = models.PositiveIntegerField(default=1)
     numberOfAssess = models.PositiveIntegerField(default=0, verbose_name="number of assessments")
+    accreditingBody = models.BooleanField(verbose_name="Accrediting_body")
+    accreditingBodyMeasures = models.CharField(choices=ACCREDITING_BODY_MEASURES,max_length=50, verbose_name="Accrediting Measures")
     def __str__(self):
         return self.goalText
 
@@ -47,3 +50,9 @@ class SLOsToStakeholder(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE, null=True)
     def __str__(self):
         return mark_safe(self.text)
+
+class AccreditingBody(models.Model):
+    """
+    Check box for accrediting bodies
+    """
+    AccreditingBody = models.BooleanField("Accrediting Body", default='False')

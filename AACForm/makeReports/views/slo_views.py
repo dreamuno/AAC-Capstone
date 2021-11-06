@@ -94,7 +94,9 @@ class AddNewSLO(DeptReportMixin,FormView):
             slo=sloObj, 
             changedFromPrior=False, 
             report=rpt, 
-            number = num
+            number = num,
+            accreditingBody = form.cleaned_data["accreditingBody"],
+            accreditingBodyMeasures = form.cleaned_data["accreditingBodyMeasures"]
             )
         sloObj.save()
         sloRpt.save()
