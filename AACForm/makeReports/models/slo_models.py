@@ -28,6 +28,7 @@ class SLOInReport(models.Model):
     numberOfAssess = models.PositiveIntegerField(default=0, verbose_name="number of assessments")
     accreditingBody = models.BooleanField(verbose_name="Accrediting_body")
     accreditingBodyMeasures = models.CharField(choices=ACCREDITING_BODY_MEASURES,max_length=50, verbose_name="Accrediting Measures")
+    accreditingBodyText = models.CharField(max_length=1000, verbose_name="AccreditingBodyText")
     def __str__(self):
         return self.goalText
 

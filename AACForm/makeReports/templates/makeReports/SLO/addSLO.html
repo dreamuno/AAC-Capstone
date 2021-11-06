@@ -17,16 +17,18 @@
     <div class="alert alert-secondary col-6" role="alert" id="keywords_sugg" style="display: none">
         
     </div>
-    {% bootstrap_field form.blooms show_label=True %}
+    {% bootstrap_field form.blooms show_label=True %}<br>
     {% if form.gradGoals %}
         <p>Graduate-Level Goals</p>
         {% for option in form.gradGoals %}
             <span style="float:left">{{ option.tag }}</span>
             <span style="text-align: left;"> {{option.choice_label}}</span>
-        {% endfor %}
-        <p>Accrediting Body Information:</p>
+        {% endfor %}<br>
+        <p>Accrediting Body Information</p>
         <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
         <p>Accrediting Body Measures: {{ form.accreditingBodyMeasures }}</p>
+        <p>Explination</p>
+        {% bootstrap_field form.accreditingBodyText show_label=false %}
     {% endif %}
     <p id='errors'></p>
     {% buttons %}
