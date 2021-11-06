@@ -215,17 +215,34 @@ nav.opened .btn-hamburger span:nth-child(3) {
     padding: 0;
 }
 
-/* .container {
-    padding: 0 1.5em;
-    max-width: 1600px;
-    width: 90%;
-    margin: 0 auto;
-} */
-
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1400px) {
     nav {
         width: 100vw;
         margin: 0;
+        padding: 0 0.9em;
+    }
+
+    nav .logo-text {
+        font-size: 20px;
+    }
+
+    img {
+        float: left;
+        width: 28px;
+        height: 28px;
+    }
+
+    nav .dropdown-menu {
+        left: -52px;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    nav {
+        width: 100vw;
+        margin: 0;
+        padding-left: 0.9em;
+        padding-right: 2.5em;
     }
 
     nav .logo-text {
@@ -250,6 +267,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
         background-color: #0E0E0E;
         transition: bottom 0.5s ease-in-out;
         overflow: hidden;
+        text-align: center;
     }
 
     nav.opened .nav-menu {
@@ -262,6 +280,7 @@ nav.opened .btn-hamburger span:nth-child(3) {
 
     nav .dropdown-menu {
         position: relative;
+        left: 0;
         top: 0;
         margin: 0 1.5em;
         background-color: #1F1F1F;
