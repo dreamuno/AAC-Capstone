@@ -27,11 +27,11 @@
             </div>
             <br>
         {% endfor %}
-    {% endif %}
 
-    <p>Accrediting Body Information:</p>
-    <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
-    <p>Accrediting Body Measures: {{ form.accreditingBodyMeasures }}</p>
+        <p>Accrediting Body Information:</p>
+        <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
+        <p>Accrediting Body Measures: {{ form.accreditingBodyMeasures }}</p>
+    {% endif %}
     <p id='errors'></p>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>
