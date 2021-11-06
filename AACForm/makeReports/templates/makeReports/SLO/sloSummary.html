@@ -12,8 +12,8 @@
             <div class="col">      
     <div class="row">
         <div class="col">
-                <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
-    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
+                <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-slo' report=rpt.pk %}"><button>Add SLO</button></a>
+    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}"><button>Import SLO</button></a>
         </div>
     </div>
     <div class="row">

@@ -5,12 +5,10 @@
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {% load static %}
-    {% bootstrap_label form.text.label_tag %}
-    {% bootstrap_field form.text show_label=False %}
+    {% bootstrap_field form.text show_label=False %}<br>
     <div class="alert alert-secondary col-6" role="alert" id="complex_sugg" style="display: none">
         This SLO may be too complex. Consider breaking it down into multiple SLOs.
     </div>
-    {% bootstrap_label form.blooms.label_tag %}
     <div class="alert alert-secondary col-6" role="alert" id="blooms_sugg" style="display: none">
         
     </div>
@@ -19,11 +17,20 @@
     </div>
     {% bootstrap_field form.blooms show_label=False %}
     {% if form.gradGoals %}
-    {% bootstrap_label form.gradGoals.label_tag %}
-    {% bootstrap_field form.gradGoals show_label=False %}
+    <p>Graduate-Level Goals</p>
+        {% for element in form.gradGoals %}
+        <input type = "checkbox" name = "test" style="float: left; margin-top: 5px;"/>
+            <div style="margin-left: 25px;">
+                {{ element }}
+            </div>
+            <br>
+        {% endfor %}
+
+        <p>Accrediting Body Information:</p>
+        <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
+        <p>Accrediting Body Measures: {{ form.accreditingBodyMeasures }}</p>
     {% endif %}
     <p id='errors'></p>
-    {{ forms.accreditingBody }} Accrediting Body
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>
     {% endbuttons %}
