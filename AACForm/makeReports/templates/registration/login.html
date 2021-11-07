@@ -7,8 +7,7 @@
 
 <div class="login-content">
     <h1>Sign In</h1>
-    <form method="post" spellcheck="false">
-        {% csrf_token %}
+    <form method="post" spellcheck="false">{% csrf_token %}
         {% if form.non_field_errors %}
         <div class="error">Invalid Username or Password</div>
         {% elif form.username.errors %}
