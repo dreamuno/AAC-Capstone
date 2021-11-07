@@ -1,4 +1,5 @@
 .sub-header {
+  z-index: 1;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -15,17 +16,16 @@
   width: 89%;
 }
 
-.sub-header h1 {
-  font-size: 30px;
+.sub-header-content h1 {
+  font-size: 28px;
   margin: 0;
   padding: 0;
 }
 
 .content {
-    z-index: -1;
-    position: absolute;
+  position: absolute;
   width: 100vw;
-  top:125px;
+  top: 125px;
   display: flex;
   justify-content: center;
 }
@@ -36,26 +36,22 @@
 }
 
 .help-container h1 {
-    font-size: 34px;
-    margin-top: 40px;
-    margin-bottom: 10px;
+  font-size: 34px;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 #admin-header {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 hr.solid {
-    margin: 0;
-    border-top: 1px solid #F0F0F0;
-  }
+  margin: 0;
+  border-top: 1px solid #E8E8E8;
+}
 
-  #first {
-      margin-top: 35px;
-  }
-
-.question-box:last-child {
-  margin-bottom: 60px;
+#first {
+  margin-top: 35px;
 }
 
 .question-box {
@@ -66,6 +62,10 @@ hr.solid {
   font-size: 24px;
   line-height: 34px;
   margin-bottom: 15px;
+}
+
+.question-box:last-child {
+  margin-bottom: 60px;
 }
 
 .question-box p {
