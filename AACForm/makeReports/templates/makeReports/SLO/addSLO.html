@@ -24,11 +24,14 @@
             <span style="float:left">{{ option.tag }}</span>
             <span style="text-align: left;"> {{option.choice_label}}</span>
         {% endfor %}<br>
+
         <p>Accrediting Body Information</p>
         <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
-        <p>Accrediting Body Measures: {{ form.accreditingBodyMeasures }}</p>
-        <p>Explination</p>
+        <p>Domain: {{ form.accreditingBodyDomain }}</p>
+        <p>Measures: {{ form.accreditingBodyMeasures }}</p>
+        <p>Describe specifics for accrediting body</p>
         {% bootstrap_field form.accreditingBodyText show_label=false %}
+        
     {% endif %}
     <p id='errors'></p>
     {% buttons %}
@@ -148,5 +151,5 @@
             $('#blooms_sugg').css("display", "none");
         }
     });
-</script>
+
 {% endblock %}

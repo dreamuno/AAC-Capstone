@@ -97,7 +97,8 @@ class AddNewSLO(DeptReportMixin,FormView):
             number = num,
             accreditingBody = form.cleaned_data["accreditingBody"],
             accreditingBodyMeasures = form.cleaned_data["accreditingBodyMeasures"],
-            accreditingBodyText = form.cleaned_data["accreditingBodyText"]
+            accreditingBodyText = form.cleaned_data["accreditingBodyText"],
+            accreditingBodyDomain = form.cleaned_data["accreditingBodyDomain"]
             )
         sloObj.save()
         sloRpt.save()
@@ -314,6 +315,7 @@ class EditNewSLO(DeptReportMixin,FormView):
         initial['accreditingBody'] = self.sloInRpt.accreditingBody
         initial['accreditingBodyMeasures'] = self.sloInRpt.accreditingBodyMeasures
         initial['accreditingBodyText'] = self.sloInRpt.accreditingBodyText
+        initial['accreditingBodyDomain'] = self.sloInRpt.accreditingBodyDomain
         return initial
     def get_success_url(self):
         """
@@ -342,6 +344,7 @@ class EditNewSLO(DeptReportMixin,FormView):
         self.sloInRpt.accreditingBody = form.cleaned_data["accreditingBody"]
         self.sloInRpt.accreditingBodyMeasures = form.cleaned_data["accreditingBodyMeasures"]
         self.sloInRpt.accreditingBodyText = form.cleaned_data["accreditingBodyText"]
+        self.sloInRpt.accreditingBodyDomain = form.cleaned_data["accreditingBodyDomain"]
         self.sloInRpt.save()
         self.sloInRpt.slo.save()
         return super(EditNewSLO,self).form_valid(form)

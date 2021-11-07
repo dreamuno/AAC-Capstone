@@ -7,7 +7,9 @@ Warning: This SLO's data will continue to be tracked with the data of all versio
 If you do not want this, delete this SLO and create a new one without importing.
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    <p>SLO</p>
+    {% bootstrap_field form.text show_label=False %}<br>
+
     {% buttons %}
         <button type="submit" class="btn btn-primary">Submit Changes</button>
     {% endbuttons %}

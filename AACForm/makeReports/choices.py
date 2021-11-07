@@ -55,6 +55,12 @@ POSSIBLE_REQS = (
 
 ACCREDITING_BODY_MEASURES = (
     ('', '------'),
+    ("DM", "Direct Measure"),
+    ("IM", "Indirect Measure")
+)
+
+ACCREDITING_BODY_DOMAIN = (
+    ('', '------'),
     ("PF", "Performance"),
     ("PD","Product"),
     ("EX", "Examination")
