@@ -1,5 +1,5 @@
 """
-This file contains models most directly related to data from assessments
+This file contains models most directly related to data from assessments.
 """
 import os
 from django.db import models

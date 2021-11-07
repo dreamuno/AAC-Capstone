@@ -305,3 +305,10 @@ nav .dropdown-item {
     background: transparent;
   }
 }
+
+.table {
+  border-width: thin;
+  border-spacing: 2px;
+  border-style: none;
+  border-color: black;
+}

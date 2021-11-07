@@ -7,6 +7,7 @@ from django_summernote.widgets import SummernoteWidget
 from makeReports.models import GradGoal
 from makeReports.choices import BLOOMS_CHOICES
 from makeReports.choices import ACCREDITING_BODY_MEASURES
+from makeReports.choices import ACCREDITING_BODY_DOMAIN
 from makeReports.models import AccreditingBody
 from .cleaners import CleanSummer
 from .widgets import SLOMultipleChoicesJSWidget, StkChoicesJSWidget
@@ -20,11 +21,13 @@ class CreateNewSLO(forms.Form):
     """
     Form to create a new SLO
     """
-    text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label="SLO", max_length=1000) 
-    blooms = forms.ChoiceField(choices=BLOOMS_CHOICES, label="Highest Bloom's Taxonomy Level", widget=forms.Select(attrs={'class':'form-control col-5'}))
-    gradGoals = forms.ModelMultipleChoiceField(queryset=GradGoal.active_objects.all(), required=False,widget=forms.CheckboxSelectMultiple, label="Graduate-level Goals")
-    accreditingBody = forms.BooleanField(label='Accrediting_body')
+    text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label=False, max_length=1000) 
+    blooms = forms.ChoiceField(choices=BLOOMS_CHOICES, label="Highest Bloom's Taxonomy Level: ", widget=forms.Select(attrs={'class':'form-control col-5'}))
+    gradGoals = forms.ModelMultipleChoiceField(widget= forms.CheckboxSelectMultiple, queryset=GradGoal.active_objects.all(), required=False, label="Graduate-level Goals")
+    accreditingBody = forms.BooleanField(label='Accrediting_body', required=False)
     accreditingBodyMeasures = forms.ChoiceField(choices=ACCREDITING_BODY_MEASURES, label="Highest Bloom's Taxonomy Level", required=False, widget=forms.Select(attrs={'class':'form-control col-5'}))
+    accreditingBodyText = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label=False, max_length=1000, required=False) 
+    accreditingBodyDomain = forms.ChoiceField(choices=ACCREDITING_BODY_DOMAIN, label="Accrediting Body Domain", required=False, widget=forms.Select(attrs={'class':'form-control col-5'}))
     def __init__(self,*args,**kwargs):
         """
         Initializes form and deletes grad field if undergraduate level
@@ -60,7 +63,7 @@ class EditImportedSLOForm(CleanSummer,forms.Form):
     """
     Form to edit imported SLO (more restricted than new)
     """
-    text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label="SLO: ", max_length=1000)
+    text = forms.CharField(widget= forms.Textarea(attrs={'class':'form-control col-7'}), label=False, max_length=1000)
     accreditingBody = forms.BooleanField(label='Accrediting_body')
     summer_max_length = 1000
 class Single2000Textbox(CleanSummer,forms.Form):
