@@ -1,44 +1,44 @@
 .login-content {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;  
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-content h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 .login-content p {
-    font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 40px;
-    white-space: nowrap;
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 40px;
+  white-space: nowrap;
 }
 
 .login-content a {
-    font-size: 16px;
-    display: block;
-    width: 75px;
-    height: 20px;
-    background: #FFFFFF;
-    padding: 10px;
-    text-align: center;
-    border: 2px solid #B60000;
-    border-radius: 3px;
-    color: #B60000;
-    font-weight: bold;
-    line-height: 21px;
-    text-decoration: none;
-    transition: 0.15s ease-out;
+  font-size: 16px;
+  display: block;
+  width: 75px;
+  height: 20px;
+  background: #ffffff;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid #b60000;
+  border-radius: 3px;
+  color: #b60000;
+  font-weight: bold;
+  line-height: 21px;
+  text-decoration: none;
+  transition: 0.15s ease-out;
 }
 
 .login-content a:hover {
-    background: #B60000;
-    color: #FFFFFF;
+  background: #b60000;
+  color: #ffffff;
 }

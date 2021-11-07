@@ -1,5 +1,89 @@
-.help-header {
+.sub-header {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 60px;
+  background-color: #f2f2f2;
+}
+
+.sub-header-content {
+  max-width: 1600px;
+  width: 89%;
+}
+
+.sub-header h1 {
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+    z-index: -1;
+    position: absolute;
+  width: 100vw;
+  top:125px;
+  display: flex;
+  justify-content: center;
+}
+
+.help-container {
+  max-width: 1600px;
+  width: 89%;
+}
+
+.help-container h1 {
+    font-size: 34px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+#admin-header {
+    margin-top: 50px;
+}
+
+hr.solid {
+    margin: 0;
+    border-top: 1px solid #F0F0F0;
+  }
+
+  #first {
+      margin-top: 35px;
+  }
+
+.question-box:last-child {
+  margin-bottom: 60px;
+}
+
+.question-box {
+  margin-top: 50px;
+}
+
+.question-box h3 {
+  font-size: 24px;
+  line-height: 34px;
+  margin-bottom: 15px;
+}
+
+.question-box p {
+  font-size: 20px;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1400px) {
+  .sub-header-content {
     width: 100%;
-    height: 70px;
-    background-color: #A3A3A3;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .help-container {
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
 }
