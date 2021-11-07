@@ -10,6 +10,7 @@ urlpatterns = [
     re_path(r'^', include('makeReports.urls')),
     path('summernote/', include('django_summernote.urls')),
     re_path(r'^api-auth/', include('rest_framework.urls')),
+    path(r'', include('django.contrib.auth.urls'))
 ]
 if settings.DEBUG:
      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
