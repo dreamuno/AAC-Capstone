@@ -3,8 +3,9 @@
 {% block inner_content %}
 <h3>Report Initial Information</h3>
 <form method="post" class="form" enctype="multipart/form-data" style="max-width:450px">
-    {% csrf_token %}
-    {% bootstrap_form form %}
+    {% csrf_token %} 
+    {{ form.author.label }}: {{ form.author }} <br>
+    {{ form.date_range_of_reported_data.label }}: {{ form.date_range_of_reported_data }} 
     {% buttons %}
         <button type="submit" class="btn btn-primary">Next</button>
     {% endbuttons %}
