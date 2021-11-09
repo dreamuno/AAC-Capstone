@@ -198,7 +198,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
-=======
 """
 Django settings for AACForm project.
 
@@ -399,4 +398,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
->>>>>>> origin
