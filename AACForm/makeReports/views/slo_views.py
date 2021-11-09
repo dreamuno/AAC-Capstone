@@ -94,7 +94,8 @@ class AddNewSLO(DeptReportMixin,FormView):
             slo=sloObj, 
             changedFromPrior=False, 
             report=rpt, 
-            number = num
+            number = num,
+            accreditingBody = form.cleaned_data["accreditingBody"]
             )
         sloObj.save()
         sloRpt.save()
@@ -308,6 +309,7 @@ class EditNewSLO(DeptReportMixin,FormView):
         initial['text'] = self.sloInRpt.goalText
         initial['blooms'] = self.sloInRpt.slo.blooms
         initial['gradGoals'] = self.sloInRpt.slo.gradGoals.all
+        initial['accreditingBody'] = self.sloInRpt.accreditingBody
         return initial
     def get_success_url(self):
         """
@@ -333,6 +335,7 @@ class EditNewSLO(DeptReportMixin,FormView):
         if self.grad:
             for gg in form.cleaned_data['gradGoals']:
                 self.sloInRpt.slo.gradGoals.add(gg)
+        self.sloInRpt.accreditingBody = form.cleaned_data["accreditingBody"]
         self.sloInRpt.save()
         self.sloInRpt.slo.save()
         return super(EditNewSLO,self).form_valid(form)
