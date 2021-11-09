@@ -2,12 +2,16 @@
 Holds all the URLs for pages within the makeReports application
 """
 from django.urls import include, path, re_path
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
 from makeReports import views
 
 app_name = "makeReports"
 urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),
+    path('accounts/password_change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form.html', success_url = reverse_lazy('accounts:password_change_done')), name='password_change'),
     path('', views.HomePage.as_view(), name="home-page"),
     path('help/',views.HelpPage.as_view(),name='help-page'),
     re_path(r'^user/modify/$', views.UserModifyAccount.as_view(),name='modify-acct'),
