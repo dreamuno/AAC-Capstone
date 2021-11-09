@@ -27,13 +27,9 @@ class SLOInReport(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
     number = models.PositiveIntegerField(default=1)
     numberOfAssess = models.PositiveIntegerField(default=0, verbose_name="number of assessments")
-    accreditingBody = models.BooleanField(verbose_name="Accrediting_body")
-    accreditingBodyMeasures = models.CharField(choices=ACCREDITING_BODY_MEASURES,max_length=50, verbose_name="Accrediting Measures")
-    accreditingBodyText = models.CharField(max_length=1000, verbose_name="AccreditingBodyText")
-    accreditingBodyDomain = models.CharField(choices=ACCREDITING_BODY_DOMAIN,max_length=50, verbose_name="Accrediting Body Domain")
+    accreditingBody = models.BooleanField(verbose_name="Accrediting_body", default=False)
     def __str__(self):
         return self.goalText
-
 class GradGoal(models.Model):
     """
     A graduate goal graduate level programs may obtain
