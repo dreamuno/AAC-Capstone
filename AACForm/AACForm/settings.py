@@ -29,14 +29,15 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com','localhost','127.0.0.1', '134.122.25.47']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'makeReports',
     'bootstrap4',
     'django.contrib.admin',
@@ -86,7 +87,17 @@ WSGI_APPLICATION = 'AACForm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {}
+DATABASES = {
+	'default': {
+    	'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    	'NAME': 'aaadb',
+    	'USER': 'aaadb',
+    	'PASSWORD': '4imp0rt',
+    	'HOST': 'localhost',
+    	'PORT': '5432',
+	}
+}
+
 DATABASES["default"] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
@@ -106,6 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 TEST_DATABASES = {
     'default': dj_database_url.parse(os.environ["TEST_DATABASE_URL"], conn_max_age=600)
 }
