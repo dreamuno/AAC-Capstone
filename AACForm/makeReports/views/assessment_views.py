@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from makeReports.models import (
     Assessment,
     AssessmentVersion,
+    AssessmentAccreditingBody,
     AssessmentSupplement,
     DegreeProgram,
     SLOInReport
@@ -139,6 +140,32 @@ class AddNewAssessmentSLO(AddNewAssessment):
             dict : initial form values
         """
         initial = super(AddNewAssessmentSLO,self).get_initial()
+        initial['slo'] = SLOInReport.objects.get(pk=self.kwargs['slo'])
+        return initial
+    def get_success_url(self):
+        """
+        Gets URL to go to upon success (SLO summary)
+
+        Returns:
+            str : URL of SLO summary page (:class:`~makeReports.views.slo_views.SLOSummary`)
+        """
+        return reverse_lazy('makeReports:slo-summary', args=[self.report.pk])
+
+class AddNewAssessmentAccreditingBody(DeptReportMixin,FormView):
+    """
+    View to add new assessment from the SLO page
+    
+    Keyword Args:
+        slo (str): primary key of :class:`~makeReports.models.slo_models.SLO` to add assessment
+    """
+    def get_initial(self):
+        """
+        Initializes slo of form to that of the page this view was navigated from
+
+        Returns:
+            dict : initial form values
+        """
+        initial = super(AddNewAssessment,self).get_initial()
         initial['slo'] = SLOInReport.objects.get(pk=self.kwargs['slo'])
         return initial
     def get_success_url(self):
