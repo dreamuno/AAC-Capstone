@@ -125,6 +125,81 @@ class AddNewAssessment(DeptReportMixin,FormView):
         assessObj.save()
         assessRpt.save()
         return super(AddNewAssessment, self).form_valid(form)
+class AddNewAssessmentAccreditingBody(DeptReportMixin,FormView):
+    """
+    View to add a new assessment
+    """
+    template_name = "makeReports/Assessment/addAssessmentAccBody.html"
+    form_class = CreateNewAssessment
+    def get_form_kwargs(self):
+        """
+        Gets keyword arguments for form, only allowing for SLOs in report
+        
+        Returns:
+            dict : keyword arguments for form
+        """
+        kwargs = super(AddNewAssessmentAccreditingBody,self).get_form_kwargs()
+        kwargs['sloQS'] = SLOInReport.objects.filter(report=self.report).order_by("number")
+        return kwargs
+    def get_success_url(self):
+        """
+        Gets assessment summary url (assessment summary)
+
+        Returns:
+            str : success url of success page (:class:`~makeReports.views.assessment_views.AssessmentSummary`)
+        """
+        return reverse_lazy('makeReports:assessment-summary', args=[self.report.pk])
+    def form_valid(self, form):
+        """
+        |  Creates :class:`~makeReports.models.assessment_models.Assessment` and :class:`~makeReports.models.assessment_models.AssessmentVersion` based upon form
+        |  Updates the numberOfAssess fields for :class:`~makeReports.models.slo_models.SLO`
+
+        Args:
+            form (CreateNewAssessment): completed form to be processed
+            
+        Returns:
+            HttpResponseRedirect : redirects to success URL given by get_success_url
+        """
+        rpt = self.report
+        #Must detect this data when submitting Accrediting body assessment
+        #This is forcing default value even when there is no input
+        check_allStudent = form.cleaned_data['allStudents']
+        if form.cleaned_data['allStudents'] == "":
+            check_allStudent == 'False'
+
+        assessObj = Assessment.objects.create(
+            title=form.cleaned_data['title'], 
+            domainExamination=False, 
+            domainProduct=False, 
+            domainPerformance=False, 
+            directMeasure =form.cleaned_data['directMeasure'])
+        assessRpt = AssessmentVersion.objects.create(
+            date=datetime.now(), 
+            number = form.cleaned_data['slo'].numberOfAssess+1, 
+            assessment=assessObj, 
+            description=form.cleaned_data['description'], 
+            finalTerm=form.cleaned_data['finalTerm'], 
+            where=form.cleaned_data['where'], 
+            allStudents=check_allStudent, 
+            sampleDescription=form.cleaned_data['sampleDescription'], 
+            frequency=form.cleaned_data['frequency'], 
+            frequencyChoice = form.cleaned_data['frequencyChoice'],
+            threshold=form.cleaned_data['threshold'], 
+            target=form.cleaned_data['target'],
+            slo=form.cleaned_data['slo'],
+            report=rpt, 
+            changedFromPrior=False)
+        dom = form.cleaned_data['domain']
+        if ("Pe" in dom):
+            assessObj.domainPerformance = True
+        if ("Pr" in dom):
+            assessObj.domainProduct = True
+        if ("Ex" in dom):
+            assessObj.domainExamination = True
+        assessObj.save()
+        assessRpt.save()
+        return super(AddNewAssessmentAccreditingBody, self).form_valid(form)
+
 class AddNewAssessmentSLO(AddNewAssessment):
     """
     View to add new assessment from the SLO page
@@ -151,31 +226,7 @@ class AddNewAssessmentSLO(AddNewAssessment):
         """
         return reverse_lazy('makeReports:slo-summary', args=[self.report.pk])
 
-class AddNewAssessmentAccreditingBody(DeptReportMixin,FormView):
-    """
-    View to add new assessment from the SLO page
-    
-    Keyword Args:
-        slo (str): primary key of :class:`~makeReports.models.slo_models.SLO` to add assessment
-    """
-    def get_initial(self):
-        """
-        Initializes slo of form to that of the page this view was navigated from
 
-        Returns:
-            dict : initial form values
-        """
-        initial = super(AddNewAssessment,self).get_initial()
-        initial['slo'] = SLOInReport.objects.get(pk=self.kwargs['slo'])
-        return initial
-    def get_success_url(self):
-        """
-        Gets URL to go to upon success (SLO summary)
-
-        Returns:
-            str : URL of SLO summary page (:class:`~makeReports.views.slo_views.SLOSummary`)
-        """
-        return reverse_lazy('makeReports:slo-summary', args=[self.report.pk])
 class ImportAssessment(DeptReportMixin,FormView):
     """
     View to import assessment from within the department
