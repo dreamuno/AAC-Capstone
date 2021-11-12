@@ -298,3 +298,16 @@ hr.solid {
 	.reports-todo td:nth-of-type(2):before { content: "Program"; font-weight: bold; }
 	.reports-todo td:nth-of-type(3):before { content: "Year"; font-weight: bold; }
 }
+
+.announcements {
+  margin-top: 35px;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.announce-spacer {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  margin-bottom: 30px;
+}
