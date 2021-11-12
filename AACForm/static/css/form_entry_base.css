@@ -45,7 +45,7 @@
 
 .subnav-item {
   margin: 0 1rem;
-  padding: 1rem;
+  padding: .75rem;
 }
 
 .subnav-item > a {
@@ -68,7 +68,11 @@
 
 @media screen and (max-width: 1400px) {
   .subnav-item {
-    margin: 0 0.5rem;
+    margin: 0 0.4rem;
+  }
+
+  .subnav-item > a {
+    font-size: 15px;
   }
 }
 
