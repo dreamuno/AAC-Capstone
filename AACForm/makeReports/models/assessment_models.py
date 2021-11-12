@@ -16,6 +16,7 @@ class Assessment(models.Model):
     domainProduct = models.BooleanField(verbose_name="product domain")
     domainPerformance = models.BooleanField(verbose_name="performance domain")
     directMeasure = models.BooleanField(verbose_name="direct measure", default=False)
+    accreditingBody = models.BooleanField(default=False)
     #false = indirect measure
     numberOfUses = models.PositiveIntegerField(default=0, verbose_name="number of uses")
     def __str__(self):
@@ -44,24 +45,6 @@ class AssessmentVersion(models.Model):
     threshold = models.CharField(max_length=500)
     target = models.PositiveIntegerField(default=100)
     supplements = models.ManyToManyField('AssessmentSupplement')
-    def __str__(self):
-        return self.assessment.title
-
-class AssessmentAccreditingBody(models.Model):
-    """
-    Specific versions of Assessments that occur within a report
-    """
-    report = models.ForeignKey('Report', on_delete=models.CASCADE)
-    slo = models.ForeignKey('SLOInReport', on_delete=models.CASCADE, verbose_name="SLO in report")
-    date = models.DateField()
-    title = models.CharField(max_length=300)
-    number = models.PositiveIntegerField(default=0)
-    description = models.CharField(max_length=1000)
-    frequencyChoice = models.CharField(max_length=100,choices=FREQUENCY_CHOICES,default="O", verbose_name="frequency choice")
-    domainExamination = models.BooleanField(verbose_name="examination domain")
-    domainProduct = models.BooleanField(verbose_name="product domain")
-    domainPerformance = models.BooleanField(verbose_name="performance domain")
-    #false = indirect measure
     def __str__(self):
         return self.assessment.title
 

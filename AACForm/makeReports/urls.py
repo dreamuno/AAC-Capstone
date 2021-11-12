@@ -51,8 +51,6 @@ urlpatterns = [
         views.AddNewAssessment.as_view(), name='add-assessment'),  
     re_path(r'^report/(?P<report>\d+)/slo/(?P<slo>\d+)/assessment/add/$', 
         views.AddNewAssessmentSLO.as_view(), name='add-assessment-slo'), 
-    re_path(r'^report/(?P<report>\d+)/assessment/add/acc$', 
-        views.AddNewAssessmentAccreditingBody.as_view(), name='add-assessment-slo-acc-body'), 
     re_path(r'^report/(?P<report>\d+)/assessment/import/$', 
         views.ImportAssessment.as_view(), name='import-assessment'), 
     re_path(r'^report/(?P<report>\d+)/slo/(?P<slo>\d+)/assessment/import/$', 
