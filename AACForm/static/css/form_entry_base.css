@@ -208,3 +208,7 @@ input[type="text"] {
   padding-left: 16px;
   padding-right: 16px;
 }
+
+.assessment-p p{
+  line-height: 5px;
+}

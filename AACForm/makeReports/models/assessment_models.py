@@ -15,7 +15,8 @@ class Assessment(models.Model):
     domainExamination = models.BooleanField(verbose_name="examination domain")
     domainProduct = models.BooleanField(verbose_name="product domain")
     domainPerformance = models.BooleanField(verbose_name="performance domain")
-    directMeasure = models.BooleanField(verbose_name="direct measure")
+    directMeasure = models.BooleanField(verbose_name="direct measure", default=False)
+    accreditingBody = models.BooleanField(default=False)
     #false = indirect measure
     numberOfUses = models.PositiveIntegerField(default=0, verbose_name="number of uses")
     def __str__(self):
@@ -35,14 +36,14 @@ class AssessmentVersion(models.Model):
     finalTerm = models.BooleanField(verbose_name="final term")
     #false = final year
     where = models.CharField(max_length=500, verbose_name="location of assessment")
-    allStudents = models.BooleanField(verbose_name="all students assessed")
+    allStudents = models.BooleanField(verbose_name="all students assessed", default='False')
     #false = sample of students
     sampleDescription = models.CharField(max_length=500,blank=True,null=True, verbose_name="description of sample")
     frequencyChoice = models.CharField(max_length=100,choices=FREQUENCY_CHOICES,default="O", verbose_name="frequency choice")
     frequency = models.CharField(max_length=500)
     #the below are percentage points
     threshold = models.CharField(max_length=500)
-    target = models.PositiveIntegerField()
+    target = models.PositiveIntegerField(default=100)
     supplements = models.ManyToManyField('AssessmentSupplement')
     def __str__(self):
         return self.assessment.title
