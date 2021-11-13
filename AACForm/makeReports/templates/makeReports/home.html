@@ -123,17 +123,17 @@
             <h1 id="reports-header">Announcements</h1>
             <hr class="solid">
         </div>
-        <div class="row">
-            <div class="col-3">
-                <h5>Announcements</h5>
-                <table class="table">
-                    {% for a in announ %}
-                    <tr>
-                        <td>{{a.text|safe}}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
+        {% if announ %}
+        <div class="announcements">
+            <ol type="1">
+                {% for a in announ %}
+                <li>{{a.text | safe}}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <br>
+            <p class="empty">NO ANNOUNCEMENTS</p>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -87,3 +87,22 @@ input:focus {
   background: #b60000;
   color: #ffffff;
 }
+
+.firstname-field {
+  color: #767676;
+  font-size: 17px;
+  margin-top: 30px;
+}
+
+.lastname-field {
+  color: #767676;
+  font-size: 17px;
+  margin-top: 20px;
+}
+
+.email-field {
+  color: #767676;
+  font-size: 17px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
