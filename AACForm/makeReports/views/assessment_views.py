@@ -56,6 +56,7 @@ class AssessmentSummary(DeptReportMixin,ListView):
         context['reqTodo'] = len(context['toDo']['r'])
         context['sugTodo'] = len(context['toDo']['s'])
         return section2Context(self,context)
+
 class AddNewAssessment(DeptReportMixin,FormView):
     """
     View to add a new assessment
@@ -97,7 +98,8 @@ class AddNewAssessment(DeptReportMixin,FormView):
             domainExamination=False, 
             domainProduct=False, 
             domainPerformance=False, 
-            directMeasure =form.cleaned_data['directMeasure'])
+            directMeasure =form.cleaned_data['directMeasure'],
+            accreditingBody = form.cleaned_data["accreditingBody"])
         assessRpt = AssessmentVersion.objects.create(
             date=datetime.now(), 
             number = form.cleaned_data['slo'].numberOfAssess+1, 
@@ -124,6 +126,7 @@ class AddNewAssessment(DeptReportMixin,FormView):
         assessObj.save()
         assessRpt.save()
         return super(AddNewAssessment, self).form_valid(form)
+
 class AddNewAssessmentSLO(AddNewAssessment):
     """
     View to add new assessment from the SLO page
@@ -149,6 +152,8 @@ class AddNewAssessmentSLO(AddNewAssessment):
             str : URL of SLO summary page (:class:`~makeReports.views.slo_views.SLOSummary`)
         """
         return reverse_lazy('makeReports:slo-summary', args=[self.report.pk])
+
+
 class ImportAssessment(DeptReportMixin,FormView):
     """
     View to import assessment from within the department
