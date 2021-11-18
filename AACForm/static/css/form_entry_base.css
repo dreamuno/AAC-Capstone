@@ -113,6 +113,7 @@
 
   .subnav .subnav-item > a {
     display: block;
+    font-size: 17px;
   }
 }
 
