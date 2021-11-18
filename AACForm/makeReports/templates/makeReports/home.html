@@ -123,15 +123,14 @@
             <h1 id="reports-header">Announcements</h1>
             <hr class="solid">
         </div>
-        {% if announ %}
         <div class="announcements">
+            {% if announ %}
             <ol type="1">
                 {% for a in announ %}
                 <li>{{a.text | safe}}</li>
                 {% endfor %}
             </ol>
             {% else %}
-            <br>
             <p class="empty">NO ANNOUNCEMENTS</p>
             {% endif %}
         </div>
