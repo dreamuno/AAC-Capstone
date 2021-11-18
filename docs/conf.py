@@ -26,7 +26,7 @@ django.setup()
 # -- Project information -----------------------------------------------------
 
 project = 'AAC Application Form'
-copyright = '2021,Tim Higgins, Daniel Boyd, Pratik Giri, Brandon Tran, Clayton Swapp'
+copyright = '2021, Tim Higgins, Daniel Boyd, Pratik Giri, Brandon Tran, Clayton Swapp'
 author = 'Tim Higgins, Daniel Boyd, Pratik Giri, Brandon Tran, Clayton Swapp'
 
 # The full version, including alpha/beta/rc tags
