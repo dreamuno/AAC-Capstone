@@ -12,6 +12,84 @@
         display: inherit;
     }
 </style>
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+    integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type='text/javascript'>
+    /**
+     * Creates the drop-down for the year
+     * @class importSLO
+     */
+    /**
+     * Creates drop down for year and updates upon the DOM being loaded
+     * @method onLoad
+     */
+    document.addEventListener("DOMContentLoaded", function () {
+        getYears();
+    });
+
+    /**
+     * Calls the API to update the year choices for the search,
+     * based upon the currently selected degree program
+     * @method updateYears
+     */
+    function getYears(event) {
+        try {
+            const e = document.getElementById("dp");
+            const dP = e.options[e.selectedIndex].value;
+            const year = document.getElementById("year");
+            while (year.options.length > 0) {
+                year.remove(0);
+            }
+            $.ajax({
+                type: "GET",
+                url: '/api/import/years/',
+                data: {
+                    'pk': 77
+                },
+                success: function (response) {
+                    const items = response;
+                    console.log(items);
+                    for(let i = 0; i < items.length; i++) 
+                    {
+                        const opt = items[i].value;
+                        const el = document.createElement("option");
+                        el.textContent = opt;
+                        el.value = opt;
+                        year.appendChild(el);
+                        sortSelect(year);
+                    }
+                },
+                error: function (response) {
+                    console.log("ERROR");
+                }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    function sortSelect(selElem) {
+        const tmpAry = new Array();
+        for (let i=0;i<selElem.options.length;i++) {
+            tmpAry[i] = new Array();
+            tmpAry[i][0] = selElem.options[i].text;
+            tmpAry[i][1] = selElem.options[i].value;
+        }
+        tmpAry.sort();
+        while (selElem.options.length > 0) {
+            selElem.options[0] = null;
+        }
+        for (let i=0;i<tmpAry.length;i++) {
+            const op = new Option(tmpAry[i][0], tmpAry[i][1]);
+            selElem.options[i] = op;
+        }
+        return;
+    }
+
+</script>
+{% endblock %}
 
 <h3>Import SLO</h3>
 <h5>Search For SLOs</h5>
@@ -19,13 +97,14 @@
         <!--<input id="name" type="text" name="name"></div>-->
         <div> 
             <label>Degree Program: </label>
-             <select id = "dp" name="dp" required onchange="updateYears()">
+             <select id = "dp" name="dp" required onchange="getYears(event)">
                 {% for degPro in degPro_list %}
                     <option value = "{{degPro.pk}}" {% if degPro.pk == currentDPpk %}selected{% endif %}>{{degPro.name}}</option>
                {% endfor %}
              </select>
         </div>
-        <div style="max-width:200px"><label>Year:</label> 
+        <div style="max-width:200px">
+            <label>Year:</label> 
             <select id="year" name="year" required>
             </select>
         </div>
@@ -41,39 +120,4 @@
         <button type="submit" class="btn btn-primary">Add SLOs</button>
     {% endbuttons %}
 </form>
-{% endblock %}
-{% block in_endscripts %}
-<script type='text/javascript'>
-    /**
-     * Creates the drop-down for the year
-     * @class importSLO
-     */
-    var chYear = null;
-    /**
-     * Creates drop down for year and updates upon the DOM being loaded
-     * @method onLoad
-     */
-    document.addEventListener("DOMContentLoaded", function() {
-        chYear = new Choices(document.getElementById('year'),{shouldSort:false, removeItemButton:true});
-        updateYears();    
-    });
-    /**
-     * Calls the API to update the year choices for the search,
-     * based upon the currently selected degree program
-     * @method updateYears
-     */
-    function updateYears(){
-        chYear.clearChoices()
-        chYear.setChoices(async () => {
-        try {
-            var e = document.getElementById("dp");
-            var dP = e.options[e.selectedIndex].value;
-            const items = await fetch('{% url 'makeReports:api-impt-years' %}'+'?pk='+dP);
-            return items.json();
-        } catch (err) {
-            console.error(err);
-        }
-        });
-    }
-</script>
 {% endblock %}
