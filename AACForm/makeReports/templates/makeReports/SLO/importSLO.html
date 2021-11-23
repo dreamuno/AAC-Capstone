@@ -38,15 +38,16 @@
         try {
             const e = document.getElementById("dp");
             const dP = e.options[e.selectedIndex].value;
+            console.log("you selected " + dP);
             const year = document.getElementById("year");
             while (year.options.length > 0) {
                 year.remove(0);
             }
             $.ajax({
                 type: "GET",
-                url: '/api/import/years/',
+                url: "/api/import/years/",
                 data: {
-                    'pk': 77
+                    "pk": 77
                 },
                 success: function (response) {
                     const items = response;
@@ -60,6 +61,7 @@
                         year.appendChild(el);
                         sortSelect(year);
                     }
+                    
                 },
                 error: function (response) {
                     console.log("ERROR");
