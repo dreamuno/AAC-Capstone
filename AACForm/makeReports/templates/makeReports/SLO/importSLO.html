@@ -38,7 +38,6 @@
         try {
             const e = document.getElementById("dp");
             const dP = e.options[e.selectedIndex].value;
-            console.log("you selected " + dP);
             const year = document.getElementById("year");
             while (year.options.length > 0) {
                 year.remove(0);
@@ -47,11 +46,10 @@
                 type: "GET",
                 url: "/api/import/years/",
                 data: {
-                    "pk": 77
+                    "pk": dP
                 },
                 success: function (response) {
                     const items = response;
-                    console.log(items);
                     for(let i = 0; i < items.length; i++) 
                     {
                         const opt = items[i].value;
