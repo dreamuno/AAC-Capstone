@@ -12,7 +12,7 @@
         display: inherit;
     }
 </style>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/9.0.1/choices.min.js"></script>
 <h3>Import SLO</h3>
 <h5>Search For SLOs</h5>
 <form action="{% url 'makeReports:import-slo' report=rpt.pk %}" type="get">
@@ -43,37 +43,5 @@
 </form>
 {% endblock %}
 {% block in_endscripts %}
-<script type='text/javascript'>
-    /**
-     * Creates the drop-down for the year
-     * @class importSLO
-     */
-    var chYear = null;
-    /**
-     * Creates drop down for year and updates upon the DOM being loaded
-     * @method onLoad
-     */
-    document.addEventListener("DOMContentLoaded", function() {
-        chYear = new Choices(document.getElementById('year'),{shouldSort:false, removeItemButton:true});
-        updateYears();    
-    });
-    /**
-     * Calls the API to update the year choices for the search,
-     * based upon the currently selected degree program
-     * @method updateYears
-     */
-    function updateYears(){
-        chYear.clearChoices()
-        chYear.setChoices(async () => {
-        try {
-            var e = document.getElementById("dp");
-            var dP = e.options[e.selectedIndex].value;
-            const items = await fetch('{% url 'makeReports:api-impt-years' %}'+'?pk='+dP);
-            return items.json();
-        } catch (err) {
-            console.error(err);
-        }
-        });
-    }
-</script>
+
 {% endblock %}

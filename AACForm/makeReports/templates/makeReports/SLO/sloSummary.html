@@ -9,7 +9,7 @@
 <div class="container" style="max-width:95%">
     <div class="row">
         <div class="col">
-            {% include 'makeReports/toDoList.html' %}
+            {% include 'makeReports/toDoList.html' %}<br><br>
         </div>
     </div>
 
@@ -69,6 +69,44 @@
         3. <a href="{% url 'makeReports:slo-comment' report=rpt.pk %}">Additional Comments</a>
     </div>-->
 </div>
+
+<div class = "prev SLOs">
+    <h4> Previous SLOs</h4>
+<a href="javascript:showhide('prevSLOs')">
+    <button>View</button>
+</a><br><br>
+
+<div id="prevSLOs" style="display:none; border: 2px solid #b60000;">
+    <table class="table">
+        <tbody>
+                <tr>
+                    <td>Student Learning Outcomes</td><td>Bloom's Taxonomy</td><td>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</td>
+                </tr>
+                {% for slo in slo_list %}
+                <tr>
+                    <td>
+                        <b>SLO {{slo.number}}: </b>{{slo.goalText}}
+                    </td>
+                    <td>
+                        {{slo.slo.get_blooms_display}}
+                    </td>
+                    <td>
+                        {% if slo_list.0.report.degreeProgram.level == "GR" %}
+                        {% for gG in slo.slo.gradGoals.all %}
+                                <p>{{gG.text|safe}}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+    <h5>Stakeholder Communication</h5>
+    {{stk|safe}}
+    <h5>Comment</h5>
+    {{rpt.section1Comment|safe}}
+</div>
+
 <div class="row mt-5">
     <div class="col-7">
         <h4>Communication to Stakeholders</h4>
