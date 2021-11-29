@@ -149,6 +149,50 @@
 <span id="makereports-models-slo-models-module"></span><h1>makeReports.models.slo_models module<a class="headerlink" href="#module-makeReports.models.slo_models" title="Permalink to this headline">¶</a></h1>
 <p>This file contains models most directly related to Student Learning Outcomes</p>
 <dl class="class">
+<dt id="makeReports.models.slo_models.AccreditingBody">
+<em class="property">class </em><code class="sig-prename descclassname">makeReports.models.slo_models.</code><code class="sig-name descname">AccreditingBody</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Check box for accrediting bodies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>AutoField</em>) – Id</p></li>
+<li><p><strong>AccreditingBody</strong> (<em>BooleanField</em>) – Accrediting body</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="makeReports.models.slo_models.AccreditingBody.AccreditingBody">
+<code class="sig-name descname">AccreditingBody</code><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody.AccreditingBody" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Model field:</strong> Accrediting Body</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="makeReports.models.slo_models.AccreditingBody.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="makeReports.models.slo_models.AccreditingBody.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="makeReports.models.slo_models.AccreditingBody.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Model field:</strong> ID</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="makeReports.models.slo_models.AccreditingBody.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#makeReports.models.slo_models.AccreditingBody.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="makeReports.models.slo_models.GradGoal">
 <em class="property">class </em><code class="sig-prename descclassname">makeReports.models.slo_models.</code><code class="sig-name descname">GradGoal</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.models.slo_models.GradGoal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
@@ -297,6 +341,7 @@ includes only the attributes which should never change and counts how often it i
 <li><p><strong>report</strong> (ForeignKey to <a class="reference internal" href="makeReports.models.basic_models.html#makeReports.models.basic_models.Report" title="makeReports.models.basic_models.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a>) – Report</p></li>
 <li><p><strong>number</strong> (<em>PositiveIntegerField</em>) – Number</p></li>
 <li><p><strong>numberOfAssess</strong> (<em>PositiveIntegerField</em>) – Number of assessments</p></li>
+<li><p><strong>accreditingBody</strong> (<em>BooleanField</em>) – Accrediting_body</p></li>
 </ul>
 </dd>
 </dl>
@@ -310,6 +355,12 @@ includes only the attributes which should never change and counts how often it i
 <dt id="makeReports.models.slo_models.SLOInReport.MultipleObjectsReturned">
 <em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#makeReports.models.slo_models.SLOInReport.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="makeReports.models.slo_models.SLOInReport.accreditingBody">
+<code class="sig-name descname">accreditingBody</code><a class="headerlink" href="#makeReports.models.slo_models.SLOInReport.accreditingBody" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Model field:</strong> Accrediting_body</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -479,7 +530,7 @@ includes only the attributes which should never change and counts how often it i
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Emma Dargy, Sarah McCarty, and David Ream
+        &copy; Copyright 2021,Tim Higgins, Daniel Boyd, Pratik Giri, Brandon Tran, Clayton Swapp
 
     </p>
   </div>
