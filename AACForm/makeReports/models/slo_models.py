@@ -30,6 +30,9 @@ class SLOInReport(models.Model):
     accreditingBody = models.BooleanField(verbose_name="Accrediting_body", default=False)
     def __str__(self):
         return self.goalText
+
+    def getSlo(self):
+        return self.slo
 class GradGoal(models.Model):
     """
     A graduate goal graduate level programs may obtain

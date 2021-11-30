@@ -12,9 +12,6 @@
         display: inherit;
     }
 </style>
-<<<<<<< HEAD
-<script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/9.0.1/choices.min.js"></script>
-=======
 {% block javascript %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
     integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
@@ -22,7 +19,6 @@
 <script type="text/javascript" src="{{ STATIC_URL }} /static/js/import.js"></script> 
 {% endblock %}
 
->>>>>>> 9502c66290af3cde67d86d96fd694851ce83a014
 <h3>Import SLO</h3>
 <h5>Search For SLOs</h5>
 <form action="{% url 'makeReports:import-slo' report=rpt.pk %}" type="get">
@@ -52,10 +48,4 @@
         <button type="submit" class="btn btn-primary">Add SLOs</button>
     {% endbuttons %}
 </form>
-<<<<<<< HEAD
-{% endblock %}
-{% block in_endscripts %}
-
-=======
->>>>>>> 9502c66290af3cde67d86d96fd694851ce83a014
 {% endblock %}
