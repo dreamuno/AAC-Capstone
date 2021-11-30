@@ -127,39 +127,23 @@ class ImportSLO(DeptReportMixin,FormView):
             dict : keyword arguments for form
         """
         kwargs = super(ImportSLO,self).get_form_kwargs()
-        #print(kwargs)
         yearIn = self.request.GET['year']
-       # print(yearIn)
         try:
             dPobj = DegreeProgram.objects.get(pk=self.request.GET['dp'])
-            print(dPobj)
-            dRep = Report.objects.get(pk=self.request.GET['dp'])
-            print(dRep)
         except DegreeProgram.DoesNotExist:
             raise Http404("Degree program matching URL does not exist.")
         
-        #pratik code
 
         sloChoices = SLOInReport.objects.filter(
             report__year=yearIn, 
             report__degreeProgram=dPobj
             ).order_by("number")
-        print(sloChoices)
         slosInReport = SLOInReport.objects.filter(report=self.report).order_by("number")
-        pvalue = sloChoices.values_list('slo', flat = True)
-        print(pvalue)
 
-        #slos = slosInReport.slo.objects.all()
-        #for slo in slos:
-           #print(slo.blooms)
    
         for slo in slosInReport:
             sloChoices = sloChoices.exclude(slo=slo.slo)
         kwargs['sloChoices'] = sloChoices
-        for value in pvalue:
-            print(sloChoices.filter(slo__pk = value))
-
-        print(kwargs)
         
 
         return kwargs
@@ -177,16 +161,14 @@ class ImportSLO(DeptReportMixin,FormView):
         num = rpt.numberOfSLOs
         
         for sloInRpt in form.cleaned_data['slo']:
-            #pratik code
             sloObj = SLO.objects.create(blooms = sloInRpt.slo.blooms)
             try:
                 gGoals = sloInRpt.slo.gradGoals.objects.all() 
             except:
                 gGoals = []
-            print(gGoals)    
             for gg in gGoals:
                 sloObj.gradGoals.add(gg)
-            #end code
+
             num += 1
             newS = SLOInReport.objects.create(
                 date=datetime.now(),
@@ -198,9 +180,6 @@ class ImportSLO(DeptReportMixin,FormView):
                 accreditingBody = sloInRpt.accreditingBody)
             sloObj.save()
             newS.save()    
-            #print(sloInRpt.slo.blooms)
-            #print(newS.slo.numberOfUses)
-            #print(newS.slo.gradGoals)
             if form.cleaned_data['importAssessments']:
                     assessSet = AssessmentVersion.objects.filter(slo=sloInRpt)
                     for assess in assessSet:
