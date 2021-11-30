@@ -5,22 +5,29 @@
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {% load static %}
-    {% bootstrap_label form.text.label_tag %}
-    {% bootstrap_field form.text show_label=False %}
+    <div>
+    <p>SLO</p>
+    {% bootstrap_field form.text show_label=false %}<br>
     <div class="alert alert-secondary col-6" role="alert" id="complex_sugg" style="display: none">
         This SLO may be too complex. Consider breaking it down into multiple SLOs.
     </div>
-    {% bootstrap_label form.blooms.label_tag %}
     <div class="alert alert-secondary col-6" role="alert" id="blooms_sugg" style="display: none">
         
     </div>
     <div class="alert alert-secondary col-6" role="alert" id="keywords_sugg" style="display: none">
         
     </div>
-    {% bootstrap_field form.blooms show_label=False %}
+    {% bootstrap_field form.blooms show_label=True %}<br>
     {% if form.gradGoals %}
-    {% bootstrap_label form.gradGoals.label_tag %}
-    {% bootstrap_field form.gradGoals show_label=False %}
+        <p>Graduate-Level Goals</p>
+        {% for option in form.gradGoals %}
+            <span style="float:left">{{ option.tag }}</span>
+            <span style="text-align: left;"> {{option.choice_label}}</span>
+        {% endfor %}<br>
+
+        <strong>Accrediting Body Information</strong>
+        <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
+        
     {% endif %}
     <p id='errors'></p>
     {% buttons %}
@@ -140,5 +147,5 @@
             $('#blooms_sugg').css("display", "none");
         }
     });
-</script>
+
 {% endblock %}
