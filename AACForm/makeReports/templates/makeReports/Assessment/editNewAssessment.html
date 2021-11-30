@@ -16,23 +16,71 @@
 {% block inner_content %}
 <h3>Edit Assessment</h3>
 <form method="post" class="form" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_field form.slo %}
-    {% bootstrap_field form.title %}
-    {% bootstrap_field form.description %}
-    {% bootstrap_field form.domain %}
-    {% bootstrap_field form.directMeasure %}
-    {% bootstrap_field form.finalTerm %}
-    {% bootstrap_field form.where %}
-    {% bootstrap_field form.allStudents %}
-    <div id="hide-sam">{% bootstrap_field form.sampleDescription %}</div>
-    {% bootstrap_field form.frequencyChoice %}
-    <div id="hide-freq">{% bootstrap_field form.frequency %}</div>
-    {% bootstrap_field form.threshold %}
-    {% bootstrap_field form.target %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">Submit Changes</button>
-    {% endbuttons %}
+    <div class="assessment-p">
+        {% csrf_token %}
+        <!--{% bootstrap_form form %} -->
+        <h3>SLO</h3>
+        <p>Please select an SLO from the drop down menu.</p>
+        {{ form.slo }}<br><br>
+    
+        <h3>Accrediting Body</h3>
+        <p>This attribute specifies that the assessment is dictated by an accredidation or external body. When selected, the only attributes
+            that</p><p> must be filled out are the following: <span style = "color: red;">Title, Description, Domain, Frequency of Data Collection.<span> </p>
+            <strong>{{ form.accreditingBody }} Dictated by accrediting or external body</strong><br><br>
+        
+        <h3>Title</h3>
+        <p>Please specify the title of the new assessment.</p>
+        {{ form.title }}<br><br>
+    
+        <h3>Description</h3>
+        <p>Please input a description for the assessment.</p>
+        {{ form.description }}<br><br>
+    
+        <h3>Domain</h3>
+        <p>Please specify a domain from one of the options below.</p>
+        {{ form.domain }}<br><br>
+    
+        <h3>Direct Measure</h3>
+        <p>Please specify the direct measure of the assessment.</p>
+        {{ form.directMeasure }}<br><br>
+    
+        <h3>Term</h3>
+        <p>Please specify the point in the program where the assessment is administered</p>
+        {{ form.finalTerm }}<br><br>
+    
+        <h3>Where</h3>
+        <p>Please specify where the assessment occurs.</p>
+        {{ form.where }}<br><br>
+    
+        <h3>Population Measured</h3>
+        <p>Please select which population will be measured from the drop down menu.</p>
+        {{ form.allStudents }}<br><br>
+    
+        <h3>Student Population Description</h3>
+        <p>Please describe what students are sampled(if not all).</p>
+        <div id="hide-sam">{{ form.sampleDescription }}</div><br><br>
+    
+        <h3>Frequency of Data Collection</h3>
+        <p>Please select a frequency from the drop down menu.</p>
+        {{ form.frequencyChoice }}<br><br>
+    
+        <h3>Frequency Description</h3>
+        <p>If any of the options do not properly describe a frequency for the given dataset, please list and describe one.</p>
+        <div id="hide-freq">{{ form.frequency }}</div><br><br>
+    
+        <h3>Proficiency Threshold</h3>
+        <p>Please input a proficiency threshold.</p>
+        {{ form.threshold }}<br><br>
+    
+        <h3>Program Proficiency Target</h3>
+        <p>Please input the percentage of students that achieve the proficiency threshold. DO NOT INPUT % SIGN.</p>
+        <p style="color:red;">If assessment is from accrediting or external body, please leave as is.</p>
+        {{ form.target }}<br><br>
+    
+        {% buttons %}
+            <button type="submit" class="form-button ">Add Assessment</button><br><br>
+        {% endbuttons %}
+        </div>
 </form>
 {% endblock %}
 {% block in_endscripts %}

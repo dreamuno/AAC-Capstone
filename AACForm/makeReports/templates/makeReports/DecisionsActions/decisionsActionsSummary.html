@@ -1,13 +1,10 @@
 {% extends 'form_entry_base.html' %}
 {% load bootstrap4 %}
 {% block inner_content %}
+
 <h3>Decisions and Actions</h3>
+{% include 'makeReports/toDoList.html' %}
 <div class="container" style="max-width:95%">
-        <div class="row">
-                <div class="col">
-                    {% include 'makeReports/toDoList.html' %}
-                </div>
-            </div>
     <div class="row">
         <div class="col">
             <h4>Decisions and Actions Table</h4>
@@ -46,6 +43,19 @@
             </div>
         </div>-->
     </div>
+    <div class = "prev D/A">
+        <h4> Previous Decisions/Actions</h4>
+    <a href="javascript:showhide('prevD/A')">
+        <button>View</button>
+    </a><br><br>
+
+    <div id="prevD/A" style="display:none; border: 2px solid #b60000;">
+        <br><br>{% include 'makeReports/DecisionsActions/importDecisionAction.html' %}
+
+    </div>
+    
+    </div>
+    
     <div class="row mt-5">
         <div class="col-7">
             <h4>Additional Comments</h4>
@@ -61,5 +71,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

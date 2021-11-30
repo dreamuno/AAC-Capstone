@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load static %}
+
 {% block content %}
-<h3>Modify Account</h3>
-<b>Name: </b> {{first_name}} {{last_name}}<br>
-<b>Username: </b> {{username}}<br>
-<b>Department: </b> {{department}} <br><br>
-<form method="post" class="form col-6" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">Update</button>
-    {% endbuttons %}
-</form>
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="login-content">
+    <h1>Update Profile</h1>
+    <form method="post" spellcheck="false">{% csrf_token %}
+        {% if form.errors %}
+        <div class="error">One or more fields is invalid</div>
+        {% endif %}
+        <div class="firstname-field">
+            <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+            <input type="text" name="first_name" value="{{ first_name}}">
+        </div>
+        <div class="lastname-field">
+            <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+            <input type="text" name="last_name" value="{{ last_name }}">
+        </div>
+        <div class="email-field">
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            <input type="text" name="email" value="{{ form.email.value }}">
+        </div>
+        <button type="submit">UPDATE</button>
+    </form>
+</div>
+
 {% endblock %}

@@ -1,59 +1,147 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load static %}
+
 {% block content %}
-<div class="container">
-<h3>Welcome!</h3>
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 {% if user.profile %}
-    
-      <div class="row">
-        <div class="col-9">
-    {% if user.profile.aac %}
-    Continue to AAC Administration: <a  role="button" class="btn btn-primary" href="{% url 'makeReports:admin-home'%}">Administration Home</a>
-
-    {% endif %}
-    {% if user.profile.department.name %}
-    <h3>Department Reports To-Do</h3>
-    <ul class="list-group">
-    {% for r in object_list %}
-        <li class = "list-group-item"><b>{{r.degreeProgram.name}}</b> ({{r.degreeProgram.level}}) report for {{r.year|add:"-1"}}-{{r.year}}
-                {% if r.returned %} <a  role="button" class="btn btn-danger float-right" href="{% url 'makeReports:slo-summary' report=r.pk %}">Modify</a> 
-                <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:rpt-feedback' report=r.pk %}">Feedback</a>
-                {% else %}<a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:rpt-first-page' pk=r.pk %}">Start</a>
+<div class="sub-header">
+    <div class="sub-header-content">
+        <h1>Home</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="home-container">
+        {% if user.profile.aac %}
+        <div class="row-label">
+            <h1>Administration</h1>
+            <hr class="solid">
+        </div>
+        <div class="admin-information">
+            <p>For returning Academic Assessment Committee administration, continue to the Admin Panel for additional tools.</p>
+            <a role="button" href="{% url 'makeReports:admin-home'%}">ADMIN PANEL</a>
+        </div>
+        {% endif %}
+        {% if user.profile.department.name %}
+        <div class="row-label">
+            <h1>Department Reports</h1>
+            <hr class="solid">
+        </div>
+        <div class="report-information">
+            <div class="reports-todo">
+                <h3>Department Reports To-Do</h3>
+                <p>
+                    The following list includes department reports that require completion or modification. The departments that require 
+                    completion have a 'Start' button, and ones that have been returned for modification have a 'Modify' and 'Feedback' 
+                    button.
+                </p>
+                {% if object_list %}
+                <table>
+                    <thead>
+                      <tr>
+                        <th><p>Department</p></th>
+                        <th><p>Program</p></th>
+                        <th><p>Year</p></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in object_list %}
+                        <tr>
+                            <td><p>{{ r.degreeProgram.name }}</td>
+                            {% if r.degreeProgram.level == "GR" %}
+                            <td><p>Graduate</p></td>
+                            {% elif r.degreeProgram.level == "UG" %}
+                            <td><p>Undergraduate</p></td>
+                            {% else %}
+                            <td><p>{{ r.degreeProgram.level }}</p></td>
+                            {% endif %}
+                            <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td class="buttons">
+                                <div>
+                                    {% if r.returned %}
+                                    <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:slo-summary' report=r.pk %}">MODIFY</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:rpt-feedback' report=r.pk %}">FEEDBACK</a>
+                                    {% else %}
+                                    <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:rpt-first-page' pk=r.pk %}">START</a>
+                                    {% endif %}
+                                </div>
+                                </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="empty">NO TODO LIST ITEMS</p>
                 {% endif %}
-        </li>
-    {% empty %}
-        Your department does not have any outstanding reports.
-    {% endfor %}
-    </ul>
-    <br><br>
-    <h3>Department Reports Reviewed</h3>
-    <ul class="list-group">
-    {% for r in gReps %}
-    <li class = "list-group-item"><b>{{r.degreeProgram.name}}</b> ({{r.degreeProgram.level}}) report for {{r.year|add:"-1"}}-{{r.year}}
-            <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:view-rpt' pk=r.pk %}">View</a>
-            <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:rpt-feedback' report=r.pk %}">Feedback</a>
-    </li>
-
-    {% empty %}
-        Your department does not have any reviewed reports from this year.
-    {% endfor %}
-    </ul>
-    {% endif %}
+            </div>
+            <div class="reports-todo">
+                <h3 class="second-sublabel">Previously Reviewed Reports</h3>
+                <p>
+                    The following list includes previous reports that have been reviewed with the past year.
+                </p>
+                {% if gReps %}
+                <table>
+                    <thead>
+                      <tr>
+                        <th><p>Department</p></th>
+                        <th><p>Program</p></th>
+                        <th><p>Year</p></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in gReps %}
+                        <tr>
+                            <td><p>{{ r.degreeProgram.name }}</td>
+                            {% if r.degreeProgram.level == "GR" %}
+                            <td><p>Graduate</p></td>
+                            {% elif r.degreeProgram.level == "UG" %}
+                            <td><p>Undergraduate</p></td>
+                            {% else %}
+                            <td><p>{{ r.degreeProgram.level }}</p></td>
+                            {% endif %}
+                            <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td class="buttons">
+                                <div>
+                                    <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:view-rpt' pk=r.pk %}">VIEW</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:rpt-feedback' report=r.pk %}">FEEDBACK</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="empty">NO PREVIOUS REPORTS</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row-label">
+            <h1 id="reports-header">Announcements</h1>
+            <hr class="solid">
+        </div>
+        <div class="announcements">
+            {% if announ %}
+            <ol type="1">
+                {% for a in announ %}
+                <li>{{a.text | safe}}</li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="empty">NO ANNOUNCEMENTS</p>
+            {% endif %}
+        </div>
     </div>
-    <div class="col-3">
-        <h5>Announcements</h5>
-        <table class="table">
-            {% for a in announ %}
-            <tr>
-                <td>{{a.text|safe}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        
-    </div>
+</div>
 {% else %}
-<a  role="button" class="btn btn-primary" href="accounts/login/">Login</a>
+<div class="login-content">
+    <h1>Welcome!</h1>
+    <p>Please sign in to your account to continue.</p>
+    <a role="button" href="/accounts/login">SIGN IN</a>
+</div>
 {% endif %}
-
 
 {% endblock %}
