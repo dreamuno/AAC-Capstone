@@ -10,19 +10,31 @@
     height: 60px;
     background-color: #f2f2f2;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .sub-header-content {
     max-width: 1600px;
     width: 90%;
     margin-left: 17px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .sub-header-content h1 {
     font-size: 28px;
     margin: 0;
     padding: 0;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .content {
     position: absolute;
     width: 100%;
@@ -30,20 +42,32 @@
     display: flex;
     justify-content: center;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .deptlist-container {
     max-width: 1600px;
     width: 90%;
     margin-left: 17px;
     padding-bottom: 35px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .row-label h1 {
     font-size: 34px;
     margin-top: 60px;
     margin-bottom: 10px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .content a {
     font-size: 16px;
     display: inline-block;
@@ -60,74 +84,129 @@
     white-space: nowrap;
     width: max-content;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .content a:hover {
     background: #b60000;
     color: #ffffff;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 #left-button {
     margin-right: 20px;
     display: inline-block;
 }
+<<<<<<< HEAD
  
 .departments {
     margin-top: 35px;
 }
  
+=======
+
+.departments {
+    margin-top: 35px;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .departments p {
     font-size: 20px;
     line-height: 30px;
     margin-top: 15px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .departments h3 {
     font-size: 24px;
     line-height: 34px;
     margin-bottom: 20px;
 }
+<<<<<<< HEAD
  
 .second-sublabel {
     margin-top: 40px;
 }
  
+=======
+
+.second-sublabel {
+    margin-top: 40px;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .search table {
     width: 100%;
     border-collapse: collapse;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .search td,
 .search th {
     text-align: left;
     border-style: hidden;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .search td div {
     display: flex;
     justify-content: left;
     align-items: center;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .search td p {
     font-size: 17px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .search th p {
     font-size: 16px;
     margin-top: 0;
     padding-top: 0;
 }
+<<<<<<< HEAD
  
  
 /* Dropdown */
  
+=======
+
+
+/* Dropdown */
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .list-dropdown {
     display: inline-block;
     position: relative;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-button {
     display: inline-block;
     padding: 6px;
@@ -141,16 +220,28 @@
     height: 23px;
     font-weight: bold;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-button:hover {
     background: #b60000;
     color: #ffffff;
 }
+<<<<<<< HEAD
  
 .dd-input {
     display: none;
 }
  
+=======
+
+.dd-input {
+    display: none;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu {
     position: absolute;
     top: 100%;
@@ -163,7 +254,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu a {
     background-color: transparent;
     font-weight: normal;
@@ -174,47 +269,83 @@
     margin-right: 15px;
     height: 30px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu a:hover {
     background-color: transparent;
     color: white;
 }
+<<<<<<< HEAD
  
 .dd-input~.dd-menu {
     display: none;
 }
  
+=======
+
+.dd-input~.dd-menu {
+    display: none;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-input:checked~.dd-button {
     background-color: #0e0e0e;
     color: white;
     border-radius: 0px;
 }
+<<<<<<< HEAD
  
 .dd-input:checked~.dd-menu {
     display: block;
 }
  
+=======
+
+.dd-input:checked~.dd-menu {
+    display: block;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu li {
     padding: 10px 20px;
     cursor: pointer;
     white-space: nowrap;
 }
+<<<<<<< HEAD
  
 .dd-menu li:hover {
     background-color: #f6f6f6;
 }
  
+=======
+
+.dd-menu li:hover {
+    background-color: #f6f6f6;
+}
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu li a {
     display: block;
     margin: -10px -20px;
     padding: 10px 20px;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 .dd-menu li.divider {
     padding: 0;
     border-bottom: 1px solid #cccccc;
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 @media screen and (max-width: 1400px) {
     .sub-header-content {
         width: 100%;
@@ -227,7 +358,11 @@
         margin-right: 30px;
     }
 }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
 @media screen and (max-width: 1190px) {
     .search table,
     .search thead,
@@ -305,4 +440,8 @@
     tr {
         height: 210px;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e0aff0da443b410aa9880ba0c6f8e8332abad850
