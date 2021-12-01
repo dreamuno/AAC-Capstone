@@ -99,7 +99,7 @@ class AddNewAssessment(DeptReportMixin,FormView):
             domainProduct=False, 
             domainPerformance=False, 
             directMeasure =form.cleaned_data['directMeasure'],
-            accreditingBody = form.cleaned_data["accreditingBody"])
+            accreditingBody = form.cleaned_data['accreditingBody'])
         assessRpt = AssessmentVersion.objects.create(
             date=datetime.now(), 
             number = form.cleaned_data['slo'].numberOfAssess+1, 
@@ -114,6 +114,7 @@ class AddNewAssessment(DeptReportMixin,FormView):
             threshold=form.cleaned_data['threshold'], 
             target=form.cleaned_data['target'],
             slo=form.cleaned_data['slo'],
+            accreditingBody = form.cleaned_data['accreditingBody'],
             report=rpt, 
             changedFromPrior=False)
         dom = form.cleaned_data['domain']
@@ -345,6 +346,7 @@ class EditImportedAssessment(DeptReportMixin,FormView):
         initial['frequency'] = self.assessVers.frequency
         initial['threshold'] = self.assessVers.threshold
         initial['target'] = self.assessVers.target
+        initial['accreditingBody'] = self.assessVers.accreditingBody
         initial['slo'] = self.assessVers.slo
         return initial
     def get_form_kwargs(self):
@@ -385,6 +387,7 @@ class EditImportedAssessment(DeptReportMixin,FormView):
         self.assessVers.frequency = form.cleaned_data['frequency']
         self.assessVers.threshold = form.cleaned_data['threshold']
         self.assessVers.target = form.cleaned_data['target']
+        self.assessVers.accreditingBody = form.cleaned_data['accreditingBody']
         self.assessVers.changedFromPrior = True
         if self.assessVers.slo != form.cleaned_data['slo']:
             slo = self.assessVers.slo

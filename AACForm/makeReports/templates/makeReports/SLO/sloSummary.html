@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% block inner_content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/form_entry_base.css' %}">
+<link rel="stylesheet" href="{% static 'css/SLOSummary.css' %}">
 <h1>SLO Summary</h1>
 <a role="button" id="outline" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
 <a  role="button" id="outline" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
