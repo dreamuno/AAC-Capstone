@@ -32,19 +32,19 @@
             <div class="reports-todo">
                 <h3>Department Reports To-Do</h3>
                 <p>
-                    The following list includes department reports that require completion or modification. The departments that require 
-                    completion have a 'Start' button, and ones that have been returned for modification have a 'Modify' and 'Feedback' 
-                    button.
+                    The following list includes department reports that require completion or modification. The
+                    departments that require completion have a 'Start' button, and ones that have been returned 
+                    for modification have a 'Modify' and 'Feedback' button.
                 </p>
                 {% if object_list %}
                 <table>
                     <thead>
-                      <tr>
-                        <th><p>Department</p></th>
-                        <th><p>Program</p></th>
-                        <th><p>Year</p></th>
-                        <th></th>
-                      </tr>
+                        <tr>
+                            <th><p>Department</p></th>
+                            <th><p>Program</p></th>
+                            <th><p>Year</p></th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for r in object_list %}
@@ -67,7 +67,7 @@
                                     <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:rpt-first-page' pk=r.pk %}">START</a>
                                     {% endif %}
                                 </div>
-                                </td>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -78,23 +78,21 @@
             </div>
             <div class="reports-todo">
                 <h3 class="second-sublabel">Previously Reviewed Reports</h3>
-                <p>
-                    The following list includes previous reports that have been reviewed with the past year.
-                </p>
+                <p>The following list includes previous reports that have been reviewed with the past year.</p>
                 {% if gReps %}
                 <table>
                     <thead>
-                      <tr>
-                        <th><p>Department</p></th>
-                        <th><p>Program</p></th>
-                        <th><p>Year</p></th>
-                        <th></th>
-                      </tr>
+                        <tr>
+                            <th><p>Department</p></th>
+                            <th><p>Program</p></th>
+                            <th><p>Year</p></th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for r in gReps %}
                         <tr>
-                            <td><p>{{ r.degreeProgram.name }}</td>
+                            <td><p>{{ r.degreeProgram.name }}</p></td>
                             {% if r.degreeProgram.level == "GR" %}
                             <td><p>Graduate</p></td>
                             {% elif r.degreeProgram.level == "UG" %}

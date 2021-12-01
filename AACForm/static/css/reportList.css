@@ -1,0 +1,246 @@
+.sub-header {
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f2f2f2;
+}
+
+.sub-header-content {
+  max-width: 1600px;
+  width: 90%;
+  margin-left: 17px;
+}
+
+.sub-header-content h1 {
+  font-size: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  top: 125px;
+  display: flex;
+  justify-content: center;
+}
+
+.reports-container {
+  max-width: 1600px;
+  width: 90%;
+  margin-left: 17px;
+}
+
+.row-label h1 {
+  font-size: 34px;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+
+.analysis {
+  margin-top: 35px;
+}
+
+.search {
+  margin-top: 35px;
+}
+
+.second-sublabel {
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 34px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+p {
+  font-size: 20px;
+  line-height: 30px;
+  margin: 0;
+}
+
+form button {
+  font-size: 16px;
+  width: max-content;
+  height: 45px;
+  background: transparent;
+  border: 2px solid #b60000;
+  border-radius: 3px;
+  color: #b60000;
+  font-weight: bold;
+  transition: 0.15s ease-out;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+form button:hover {
+  background: #b60000;
+  color: #ffffff;
+}
+
+.error {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  color: #b60000;
+  white-space: nowrap;
+  font-size: 17px;
+}
+
+.content a {
+  width: max-content;
+  font-size: 16px;
+  display: inline-block;
+  height: 23px;
+  background-color: #ffffff;
+  padding: 6px;
+  text-align: center;
+  border-radius: 3px;
+  color: #b60000;
+  font-weight: bold;
+  line-height: 23px;
+  text-decoration: none;
+  transition: 0.15s ease-out;
+  white-space: nowrap;
+}
+
+.analysis a {
+  margin-top: 20px;
+}
+
+.content a:hover {
+  background: #b60000;
+  color: #ffffff;
+}
+
+hr.solid {
+  margin: 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+.search table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.search td,
+.search th {
+  text-align: left;
+  border-style: hidden;
+}
+
+.search td p {
+  font-size: 17px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.search th p {
+  font-size: 16px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: 45px;
+  font-size: 15px !important;
+  font-weight: bold;
+  color: #b60000;
+  background-color: #f2dede;
+  white-space: nowrap;
+  border: 1px solid #b60000;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (max-width: 1400px) {
+    .sub-header-content {
+        width: 100%;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .reports-container {
+        width: 100%;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .search table,
+    .search thead,
+    .search tbody,
+    .search th,
+    .search td,
+    .search tr {
+      display: block;
+    }
+  
+    .search thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  
+    .search td {
+      border: none;
+      position: relative;
+      padding-left: 45%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  
+    .search td:before {
+      position: absolute;
+      top: 0px;
+      left: 6px;
+      max-width: 20%;
+      width: 100%;
+      margin: 0 !important;
+      padding: 0;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  
+    .search td:nth-of-type(1):before {
+      content: "Department";
+      font-weight: bold;
+    }
+  
+    .search td:nth-of-type(2):before {
+      content: "Year";
+      font-weight: bold;
+    }
+  
+    .buttons div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    tr {
+        padding-bottom: 15px;
+    }
+  }
+  

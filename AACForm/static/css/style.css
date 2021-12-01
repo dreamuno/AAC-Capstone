@@ -9,7 +9,7 @@ body {
 
 .header {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   width: 100vw;
   height: 60px;
@@ -39,8 +39,8 @@ nav .logo {
 
 nav img {
   float: left;
-  width: 32.5px;
-  height: 32.5px;
+  width: 28px;
+  height: 28px;
 }
 
 nav .vertical-line {
@@ -53,7 +53,7 @@ nav .vertical-line {
 nav .logo-text {
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 60px;
   color: white;
   float: left;
@@ -131,7 +131,7 @@ nav .nav-item > a {
   line-height: 60px;
   color: #a3a3a3;
   text-decoration: none;
-  transition: 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 nav .nav-item > a:hover {
@@ -223,37 +223,21 @@ nav .dropdown-item {
     padding-right: 0px;
   }
 
-  nav img {
-    float: left;
-    width: 28px;
-    height: 28px;
-  }
-
-  nav .logo-text {
-    font-size: 20px;
-  }
-
   nav .dropdown-menu {
     left: -52px;
   }
+
+  nav .nav-item > a {
+    padding: 0 1.25em;
+  }
 }
 
-@media screen and (max-width: 1190px) {
+@media screen and (max-width: 1175px) {
   nav {
     padding: 0 1.4em;
     width: 100%;
     margin: 0;
     padding-right: 30px;
-  }
-
-  nav img {
-    float: left;
-    width: 28px;
-    height: 28px;
-  }
-
-  nav .logo-text {
-    font-size: 20px;
   }
 
   nav .btn-hamburger {
@@ -304,11 +288,4 @@ nav .dropdown-item {
     width: 0px;
     background: transparent;
   }
-}
-
-.table {
-  border-width: thin;
-  border-spacing: 2px;
-  border-style: none;
-  border-color: black;
 }
