@@ -14,7 +14,7 @@
       <li class="subnav-item"><a href="{% url 'makeReports:assessment-summary' report=rpt.pk %}">II. Assessments</a></li>
       <li class="subnav-item"><a href="{% url 'makeReports:data-summary' report=rpt.pk %}">III. Data Collection</a></li>
       <li class="subnav-item"><a href="{% url 'makeReports:decisions-actions-summary' report=rpt.pk %}">IV. Decisions & Actions</a></li>
-      <li class="subnav-item"><a href="{% url 'makeReports:rpt-sup-list' report=rpt.pk %}">Report Supplements</a></li>
+      <li class="subnav-item"><a href="{% url 'makeReports:rpt-sup-list' report=rpt.pk %}">Supplements</a></li>
       <li class="subnav-item"><a href="{% url 'makeReports:submit-report' report=rpt.pk %}">Preview & Submit</a></li>
       {% if rpt.rubric %}
       <li class="subnav-item"><a href="{% url 'makeReports:dept-view-rubric' report=rpt.pk pk=rpt.rubric.rubricVersion.pk %}">View Rubric</a></li>

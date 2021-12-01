@@ -67,7 +67,7 @@
                                         href="{% url 'makeReports:add-rpt' dept=dept.pk %}">ASSIGN REPORT</a>
                                     <label class="list-dropdown">
                                         <input type="checkbox" class="dd-input" id="test">
-                                        <div class="dd-button">MORE</div>
+                                        <div class="dd-button" onselectstart="return false">MORE</div>
                                         <ul class="dd-menu">
                                             <a href="{% url 'makeReports:delete-dept' pk=dept.pk %}">Archive
                                                 Department</a>
