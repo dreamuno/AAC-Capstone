@@ -4,6 +4,7 @@ This file contains extra views needed during the form input process
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic import TemplateView, DetailView
+from django.contrib.auth.models import User
 from django.http import Http404
 from django.urls import reverse_lazy
 from makeReports.models import (
@@ -36,7 +37,7 @@ class ReportFirstPage(DeptAACMixin,UpdateView):
     View to set report wide attributes
     """
     model = Report
-    fields = ['author','date_range_of_reported_data']
+    fields = ['author','date_range_of_reported_data', 'users']
     template_name = "makeReports/ReportEntryExtras/first_page.html"
     labels = {
         'author':'Person preparing the report'
@@ -65,6 +66,7 @@ class ReportFirstPage(DeptAACMixin,UpdateView):
         """
         context = super(ReportFirstPage,self).get_context_data(**kwargs)
         context['rpt'] = self.report
+        context['users']= list(User.objects.all())
         return context
     def get_success_url(self):
         """

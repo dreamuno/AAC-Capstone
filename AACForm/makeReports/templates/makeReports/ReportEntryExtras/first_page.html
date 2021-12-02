@@ -14,9 +14,17 @@
     {% csrf_token %} 
     <strong>{{ form.author.label }}:</strong> {{ form.author }} <br>
     <strong>{{ form.date_range_of_reported_data.label }}:</strong> {{ form.date_range_of_reported_data }} <br>
+    <strong>Assign Report to User:</strong>
+    <input type="text" name="users" maxlength="100" value='{{ form.users.value }}' required="" id="id_users" list="test">
+    <datalist id="test">
+        {% for i in users %}
+        <option>{{ i }}</option>
+        {% endfor %}
+    </datalist><br>
     {% buttons %}
         <button type="submit" class="form-button">Next</button>
     {% endbuttons %}
 </form>
+
 
 {% endblock %}

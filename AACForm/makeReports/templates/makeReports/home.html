@@ -4,7 +4,6 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
-
 {% if user.profile %}
 <div class="sub-header">
     <div class="sub-header-content">
@@ -43,13 +42,15 @@
                             <th><p>Department</p></th>
                             <th><p>Program</p></th>
                             <th><p>Year</p></th>
+                            <th><p>Assigned</p></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for r in object_list %}
                         <tr>
-                            <td><p>{{ r.degreeProgram.name }}</td>
+                            <td><p>{{ r.degreeProgram.name }}<br>
+                            </td>
                             {% if r.degreeProgram.level == "GR" %}
                             <td><p>Graduate</p></td>
                             {% elif r.degreeProgram.level == "UG" %}
@@ -58,6 +59,7 @@
                             <td><p>{{ r.degreeProgram.level }}</p></td>
                             {% endif %}
                             <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td>{{ r.users }}</td>
                             <td class="buttons">
                                 <div>
                                     {% if r.returned %}
@@ -86,6 +88,7 @@
                             <th><p>Department</p></th>
                             <th><p>Program</p></th>
                             <th><p>Year</p></th>
+                            <th><p>Assigned</p></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -101,6 +104,7 @@
                             <td><p>{{ r.degreeProgram.level }}</p></td>
                             {% endif %}
                             <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td>{{ r.users }}</td>
                             <td class="buttons">
                                 <div>
                                     <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:view-rpt' pk=r.pk %}">VIEW</a>

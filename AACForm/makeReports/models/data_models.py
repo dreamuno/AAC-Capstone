@@ -5,6 +5,8 @@ import os
 from django.db import models
 from makeReports.choices import SLO_STATUS_CHOICES
 from .basic_models import gd_storage
+from datetime import datetime
+
 
 class AssessmentData(models.Model):
     """
@@ -49,7 +51,7 @@ class ResultCommunicate(models.Model):
     """
     Model holds the text for communicating results
     """
-    date = models.DateField()
+    date = models.DateField(default = datetime.today().strftime('%Y-%m-%d'))
     text = models.CharField(max_length=3000)
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
 class Graph(models.Model):

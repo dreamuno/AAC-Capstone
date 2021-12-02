@@ -3,10 +3,10 @@
 {% load static %}
 {% block in_styles %}
 <!--this page use shelves css to make the table, because Bootstrap grid system was insufficient-->
-<link href="{% static 'css/shelves.css' %}" rel="stylesheet">
 {% endblock %}
 {% block inner_content %}
-<h3>Data Collection and Analysis Summary</h3>
+<link rel="stylesheet" href="{% static 'css/data_collection.css' %}">
+<h1>Data Collection and Analysis Summary</h1>
 <div class="row-sh">
         <div class="col">
             {% include 'makeReports/toDoList.html' %}
@@ -16,7 +16,7 @@
     <div class="column-15">
         <div class="row-sh">
             <div class="column-15">
-                <h4>Data Table</h4>
+                <h2>Data Table</h2>
                 <p>
                     Aggregate values and SLO statuses in bold have been manually changed and will not update automatically.
                     <button type="submit" class="btn btn-primary" onclick="clearOver()">Clear Overrides</button>
@@ -343,7 +343,7 @@
 </div>
 <div class="row-sh mt-5">
     <div class="column">
-        <a role="button" title="Continue" class="btn btn-primary"
+        <br><a role="button" id="outline" title="Continue" class="btn btn-primary"
             href="{% url 'makeReports:decisions-actions-summary' report=rpt.pk %}">Next</a>
     </div>
 </div>
