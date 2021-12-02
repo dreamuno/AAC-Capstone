@@ -423,9 +423,16 @@ class EditNewAssessment(EditImportedAssessment):
         """
         initial = super(EditNewAssessment, self).get_initial()
         initial['title'] = self.assessVers.assessment.title
+        initial['domain'] = []
         initial['domainPerformance'] = self.assessVers.assessment.domainPerformance
+        if(initial['domainPerformance'] == True):
+            initial['domain'].append('Pe')
         initial['domainProduct'] = self.assessVers.assessment.domainProduct
+        if(initial['domainProduct'] == True):
+            initial['domain'].append('Pr')
         initial['domainExamination'] = self.assessVers.assessment.domainExamination
+        if(initial['domainExamination'] == True):
+            initial['domain'].append('Ex')
         initial['directMeasure'] = self.assessVers.assessment.directMeasure
         return initial
     def form_valid(self, form):
@@ -442,6 +449,19 @@ class EditNewAssessment(EditImportedAssessment):
             raise Http404("This assessment is imported elsewhere.")
         self.assessVers.assessment.title = form.cleaned_data['title']
         self.assessVers.assessment.domain = form.cleaned_data['domain']
+        if ("Pe" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainPerformance = True
+        else:
+            self.assessVers.assessment.domainPerformance = False
+        
+        if ("Pr" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainProduct = True
+        else:
+            self.assessVers.assessment.domainProduct = False
+        if ("Ex" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainExamination = True
+        else:
+            self.assessVers.assessment.domainExamination = False
         self.assessVers.assessment.directMeasure = form.cleaned_data['directMeasure']
         self.assessVers.assessment.save()
         return super(EditNewAssessment,self).form_valid(form)

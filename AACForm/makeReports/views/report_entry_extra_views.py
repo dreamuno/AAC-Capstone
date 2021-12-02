@@ -37,7 +37,7 @@ class ReportFirstPage(DeptAACMixin,UpdateView):
     View to set report wide attributes
     """
     model = Report
-    fields = ['author','date_range_of_reported_data', 'users']
+    fields = ['author','date_range_of_reported_data', 'users', 'accreditingBodyPrograms']
     template_name = "makeReports/ReportEntryExtras/first_page.html"
     labels = {
         'author':'Person preparing the report'
@@ -67,6 +67,7 @@ class ReportFirstPage(DeptAACMixin,UpdateView):
         context = super(ReportFirstPage,self).get_context_data(**kwargs)
         context['rpt'] = self.report
         context['users']= list(User.objects.all())
+        context['accreditingBodyPrograms'] = self.report. accreditingBodyPrograms
         return context
     def get_success_url(self):
         """
