@@ -110,6 +110,16 @@
 <div class="row mt-5">
     <div class="col-7">
         <h4>Communication to Stakeholders</h4>
+        <table style="text-align: left;">
+            <tbody>
+            <tr>
+                <td>Internal Stakeholders<p>Faculty/Staff: {{stk.faculty}}</p><p>Students: {{stk.students}}</p><p>Other Internal: {{stk.other_internal}}</p><td>
+                <td>External Stakeholders<p>Prospect Students: {{stk.prospect_students}}</p><p>Alumni: {{stk.alumni}}</p><p>Employers: {{stk.employers}}</p><p>Community Members: {{stk.community_members}}</p><p>Other External: {{stk.other_external}}</p></td>
+                <td></td>
+            </tr>
+            </tbody>
+        <table><br>
+        <p>Additional Comments:</p>
         {{stk.text|safe}}
     </div>
     <div class="col-2">
