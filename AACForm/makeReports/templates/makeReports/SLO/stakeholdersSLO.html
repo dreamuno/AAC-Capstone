@@ -5,11 +5,18 @@
 <div class="container">
     <div class="row">
         <div class="col">
-<a  role="button" class="btn btn-primary" href="{% url 'makeReports:slo-stk-import' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import</a>
+<a  role="button" class="btn btn-primary" href="{% url 'makeReports:slo-stk-import' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import</a><br><br>
 
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    <strong>Internal Stakeholder Options</strong>
+    {{ form.internal_stakeholders }}<br>
+
+    <strong>External Stakeholder Options</strong>
+    {{ form.external_stakeholders }}<br>
+
+    <p>Please provide more information. If "Other" option was selected, please specify stakeholder. </p>
+    {{ form.text }}
     {% buttons %}
         <button type="submit" class="btn btn-primary">Save</button>
     {% endbuttons %}

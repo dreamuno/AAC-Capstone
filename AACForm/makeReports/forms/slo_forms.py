@@ -67,6 +67,8 @@ class Single2000Textbox(CleanSummer,forms.Form):
     """
     Form for a single 2000 character textbox
     """
+    internal_stakeholders = forms.MultipleChoiceField(required = False, choices = (("Fa", "Faculty"), ("St", "Students"), ("Oi", "Other Internal Stakeholder") ), widget=forms.CheckboxSelectMultiple)
+    external_stakeholders = forms.MultipleChoiceField(required = False, choices = (("Ps", "Prospective Students"), ("Al", "Alumni"), ("Em", "Employers"),("Cm", "Community Members/Groups") ,("Oe", "Other External Stakeholder") ), widget=forms.CheckboxSelectMultiple)
     text = forms.CharField(widget=SummernoteWidget(attrs={'style':'width:750px'}),label="")
     summer_max_length = 2000
 

@@ -45,6 +45,7 @@ class AssessmentVersion(models.Model):
     threshold = models.CharField(max_length=500)
     target = models.PositiveIntegerField(default=100)
     supplements = models.ManyToManyField('AssessmentSupplement')
+    accreditingBody = models.BooleanField(default=False)
     def __str__(self):
         return self.assessment.title
 

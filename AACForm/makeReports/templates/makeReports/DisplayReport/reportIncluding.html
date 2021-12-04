@@ -43,6 +43,16 @@
             <b>Person Preparing the Report: {{rpt.author}}</b>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <b>Person(s) Assigned to the Report: {{rpt.users}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <b>Information about Accrediting or External Body Programs: {{rpt.accreditingBodyPrograms}}</b>
+        </div>
+    </div>
     <div class="row mb-5">
         <div class="col-8">
             {% include 'makeReports/DisplayReport/slos.html' %}

@@ -470,7 +470,8 @@ class EditResultCommunication(DeptReportMixin,FormView):
         """
         self.result_communication.report = self.report
         self.result_communication.text = form.cleaned_data['text']
-        self.result_communication.date = datetime.now() #'2020-9-10'
+        self.result_communication.date = form.cleaned_data['date']
+        print(self.result_communication.date)
         self.result_communication.save()
         return super(EditResultCommunication, self).form_valid(form)
 class Section3Comment(DeptReportMixin,FormView):

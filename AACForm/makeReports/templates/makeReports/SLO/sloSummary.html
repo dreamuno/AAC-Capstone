@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% block inner_content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/form_entry_base.css' %}">
+<link rel="stylesheet" href="{% static 'css/SLOSummary.css' %}">
 <h1>SLO Summary</h1>
 <a role="button" id="outline" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
 <a  role="button" id="outline" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
@@ -110,6 +110,16 @@
 <div class="row mt-5">
     <div class="col-7">
         <h4>Communication to Stakeholders</h4>
+        <table style="text-align: left;">
+            <tbody>
+            <tr>
+                <td>Internal Stakeholders<p>Faculty/Staff: {{stk.faculty}}</p><p>Students: {{stk.students}}</p><p>Other Internal: {{stk.other_internal}}</p><td>
+                <td>External Stakeholders<p>Prospect Students: {{stk.prospect_students}}</p><p>Alumni: {{stk.alumni}}</p><p>Employers: {{stk.employers}}</p><p>Community Members: {{stk.community_members}}</p><p>Other External: {{stk.other_external}}</p></td>
+                <td></td>
+            </tr>
+            </tbody>
+        <table><br>
+        <p>Additional Comments:</p>
         {{stk.text|safe}}
     </div>
     <div class="col-2">

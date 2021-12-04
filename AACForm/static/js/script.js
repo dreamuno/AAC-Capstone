@@ -2,6 +2,7 @@ let nav = document.querySelector('nav');
 let dropdown = nav.querySelector('.dropdown');
 let dropdownToggle = nav.querySelector("[data-action='dropdown-toggle']");
 
+
 dropdownToggle.addEventListener('click', () => {
     if (dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
@@ -65,8 +66,8 @@ function updateYears() {
             console.error(err);
         }
     });
+    
 }
-
 window.onload = function () {
     setTimeout(function () {
         const FRAME_LENGTH = document.getElementsByTagName('iframe').length;
@@ -90,5 +91,4 @@ window.onload = function () {
                 spanCount.innerHTML = MAX_VALUE - textCount + ' character(s) left';
             });
         }
-    }, 200);
-}
+    }, 200);}
