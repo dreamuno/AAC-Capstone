@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for admin page -->
 <link rel="stylesheet" href="{% static 'css/deptList.css' %}">
 
 <div class="sub-header">
@@ -23,12 +25,17 @@
                 <a role="button" class="button" href="{% url 'makeReports:arc-depts' %}">VIEW ARCHIVED</a>
             </div>
             <div class="search">
-                <h3 class="second-sublabel">Search</h3>
+                <h3>Search</h3>
                 <p>Search and modify departments by college or department name.</p>
                 <form action="{% url 'makeReports:dept-list' %}" type="get">
+                    <!-- If form input has errors, display errors -->
+                    {% if form.errors %}
+                    <div class="error">One or more fields is invalid</div>
+                    {% endif %}
                     <div class="select">
                         <label>Rubric:</label>
                         <select name="college">
+                            <!-- Populate select input with colleges -->
                             {% for col in college_list %}
                             <option value="{{col.name}}">{{col.name}}</option>
                             {% endfor %}
@@ -40,6 +47,7 @@
                     </div>
                     <button type="submit">SEARCH</button>
                 </form>
+                <!-- If colleges exist, display in table -->
                 {% if object_list %}
                 <table>
                     <thead>
@@ -54,6 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Create table rows for all colleges -->
                         {% for dept in object_list %}
                         <tr>
                             <td>
@@ -64,18 +73,14 @@
                             </td>
                             <td class="buttons">
                                 <div>
-                                    <a role="button" class="table-button"
-                                        href="{% url 'makeReports:dp-list' dept=dept.pk %}">VIEW PROGRAMS</a>
-                                    <a role="button" class="table-button"
-                                        href="{% url 'makeReports:add-rpt' dept=dept.pk %}">ASSIGN REPORT</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:dp-list' dept=dept.pk %}">VIEW PROGRAMS</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:add-rpt' dept=dept.pk %}">ASSIGN REPORT</a>
                                     <label class="list-dropdown">
                                         <input type="checkbox" class="dd-input" id="test">
                                         <div class="dd-button" onselectstart="return false">MORE</div>
                                         <ul class="dd-menu">
-                                            <a href="{% url 'makeReports:delete-dept' pk=dept.pk %}">Archive
-                                                Department</a>
-                                            <a href="{% url 'makeReports:update-dept' pk=dept.pk %}">Update
-                                                Department</a>
+                                            <a href="{% url 'makeReports:delete-dept' pk=dept.pk %}">Archive Department</a>
+                                            <a href="{% url 'makeReports:update-dept' pk=dept.pk %}">Update Department</a>
                                             <a href="{% url 'makeReports:add-dp' dept=dept.pk %}">Add Degree Program</a>
                                         </ul>
                                     </label>
@@ -85,6 +90,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <!-- Otherwise, display empty list label -->
                 {% else %}
                 <p class="empty">NO DEPARTMENTS</p>
                 {% endif %}
