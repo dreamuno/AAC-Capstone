@@ -1,10 +1,11 @@
 {% extends 'form_entry_base.html' %}
 {% load bootstrap4 %}
 {% block inner_content %}
-<h3>Edit SLO</h3>
+<h3>Edit SLO <h3>
+<h3 style ="color:#b60000;">{% if form.imported.value %} Imported From: {{form.importedFrom.value}} {% endif %}<h3>     
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% load static %}
+    {% load static %} {{import_list}}
     {% bootstrap_field form.text show_label=False %}<br>
     <div class="alert alert-secondary col-6" role="alert" id="complex_sugg" style="display: none">
         This SLO may be too complex. Consider breaking it down into multiple SLOs.
@@ -15,7 +16,7 @@
     <div class="alert alert-secondary col-6" role="alert" id="keywords_sugg" style="display: none">
         
     </div>
-    {% bootstrap_field form.blooms show_label=False %}<br>
+    {% bootstrap_field form.blooms show_label=False %}<br> 
     {% if form.gradGoals %}
         <p>Graduate-Level Goals</p>
         {% for option in form.gradGoals %}

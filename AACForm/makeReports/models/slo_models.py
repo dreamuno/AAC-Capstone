@@ -16,6 +16,9 @@ class SLO(models.Model):
     blooms = models.CharField(choices=BLOOMS_CHOICES,max_length=50, verbose_name="Bloom's taxonomy level")
     gradGoals = models.ManyToManyField('GradGoal', verbose_name="graduate-level goals")
     numberOfUses = models.PositiveIntegerField(default=0, verbose_name="number of uses of this SLO")
+    imported = models.BooleanField(default = False)
+    importedFrom = models.CharField(default = "", max_length = 50, verbose_name="imported SLO")
+
 class SLOInReport(models.Model):
     """
     A specific version of an SLO which occurs within a report
@@ -31,8 +34,6 @@ class SLOInReport(models.Model):
     def __str__(self):
         return self.goalText
 
-    def getSlo(self):
-        return self.slo
 class GradGoal(models.Model):
     """
     A graduate goal graduate level programs may obtain

@@ -55,8 +55,8 @@ class AddNewSLO(DeptReportMixin,FormView):
         Returns:
             dict : keyword arguments for form
         """
+        print(2)
         kwargs = super(AddNewSLO,self).get_form_kwargs()
-        print(kwargs)
         if self.report.degreeProgram.level == "GR":
             kwargs['grad'] = True
         else:
@@ -69,6 +69,7 @@ class AddNewSLO(DeptReportMixin,FormView):
         Returns:
             str : URL of SLO summary page (:class:`~makeReports.views.slo_views.SLOSummary`)
         """
+        print(3)
         return reverse_lazy('makeReports:slo-summary', args=[self.report.pk])
     def form_valid(self, form):
         """
@@ -80,6 +81,7 @@ class AddNewSLO(DeptReportMixin,FormView):
         Returns:
             HttpResponseRedirect : redirects to success URL given by get_success_url
         """
+        print(4)
         try:
             gGoals = form.cleaned_data["gradGoals"]
         except:
@@ -88,6 +90,10 @@ class AddNewSLO(DeptReportMixin,FormView):
         sloObj = SLO.objects.create(blooms=form.cleaned_data['blooms'])
         for gg in gGoals:
             sloObj.gradGoals.add(gg)
+        #sloObj.imported = form.cleaned_data['imported']
+        #print(sloObj.imported)
+        #sloObj.importedFrom = form.cleaned_data['importedFrom']
+        #print(sloObj.importedFrom)
         num = self.report.numberOfSLOs
         num += 1
         sloRpt = SLOInReport.objects.create(
@@ -168,7 +174,9 @@ class ImportSLO(DeptReportMixin,FormView):
                 gGoals = []
             for gg in gGoals:
                 sloObj.gradGoals.add(gg)
-
+            sloObj.imported = True
+            sloObj.importedFrom = DegreeProgram.objects.get(pk=self.request.GET['dp']).name + " " + self.request.GET['year']
+            print(sloObj.importedFrom)
             num += 1
             newS = SLOInReport.objects.create(
                 date=datetime.now(),
@@ -223,7 +231,7 @@ class EditImportedSLO(DeptReportMixin,FormView):
     Keyword Args:
         sloIR (str): primary key of :class:`~makeReports.models.slo_models.SLOInReport` to edit
     """
-    template_name = "makeReports/SLO/editImportedSLO.html"
+    template_name = "makeReports/SLO/editNewSLO.html"
     form_class = EditImportedSLOForm
     def dispatch(self,request,*args,**kwargs):
         """
@@ -285,6 +293,7 @@ class EditNewSLO(DeptReportMixin,FormView):
     """
     template_name = "makeReports/SLO/editNewSLO.html"
     form_class = CreateNewSLO
+    context_object_name = 'import_list'
     def dispatch(self,request,*args,**kwargs):
         """
         Dispatches view and attaches :class:`~makeReports.models.slo_models.SLOInReport` to instance
@@ -330,6 +339,8 @@ class EditNewSLO(DeptReportMixin,FormView):
         initial['blooms'] = self.sloInRpt.slo.blooms
         initial['gradGoals'] = self.sloInRpt.slo.gradGoals.all
         initial['accreditingBody'] = self.sloInRpt.accreditingBody
+        initial['imported'] = self.sloInRpt.slo.imported
+        initial['importedFrom'] = self.sloInRpt.slo.importedFrom
         return initial
     def get_success_url(self):
         """
@@ -356,6 +367,8 @@ class EditNewSLO(DeptReportMixin,FormView):
             for gg in form.cleaned_data['gradGoals']:
                 self.sloInRpt.slo.gradGoals.add(gg)
         self.sloInRpt.accreditingBody = form.cleaned_data["accreditingBody"]
+        print(self.sloInRpt.slo.imported)
+        print(self.sloInRpt.slo.importedFrom)
         self.sloInRpt.save()
         self.sloInRpt.slo.save()
         return super(EditNewSLO,self).form_valid(form)
