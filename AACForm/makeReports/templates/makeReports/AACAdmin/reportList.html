@@ -1,9 +1,11 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/reportList.css' %}">
+<!-- Import CSS style for AAC report list page -->
+<link rel="stylesheet" href="{% static 'css/reportListAll.css' %}">
 
 <div class="sub-header">
     <div class="sub-header-content">
@@ -18,8 +20,7 @@
         </div>
         <div class="analysis">
             <p>Download historical report data for departments and assessments.</p>
-            <a role="button" class="button" href="{% url 'makeReports:graphing-dept' user.profile.department.pk %}">HISTORICAL
-                GRAPHS</a>
+            <a role="button" class="button" href="{% url 'makeReports:graphing' %}">HISTORICAL GRAPHS</a>
             <a role="button" class="button" href="{% url 'makeReports:csv-mang' %}">DOWNLOAD ASSESSMENT DATA</a>
         </div>
         <div class="row-label">
@@ -28,9 +29,9 @@
         </div>
         <div class="search">
             <h3>Search</h3>
-            <p>Search and modify departments by college or department name. You can use as many or few fields as
-                desired.</p>
-            <form action="{% url 'makeReports:search-reports-dept' %}" type="get" spellcheck="false">
+            <p>Search and modify departments by college or department name. You can use as many or few fields as desired.</p>
+            <form action="{% url 'makeReports:search-reports' %}" type="get" spellcheck="false">
+                <!-- If form input has errors, display errors -->
                 {% if form.errors %}
                 <div class="error">One or more fields is invalid</div>
                 {% endif %}
@@ -49,7 +50,7 @@
                         <label>Submitted</label>
                     </div>
                     <div class="radio-option">
-                        <input type="radio" name="submitted" value="nS"class="type_2">
+                        <input type="radio" name="submitted" value="nS" class="type_2">
                         <label>Not Submitted</label>
                     </div>
                 </div>
@@ -69,17 +70,26 @@
                     </div>
                 </div>
                 <div class="program">
+                    <label>College:</label>
+                    <input type="text" name="college" placeholder="ex. 'Information Science & Technology'">
+                </div>
+                <div class="program">
+                    <label>Department:</label>
+                    <input type="text" name="dept" placeholder="ex. 'Computer Science'">
+                </div>
+                <div class="program">
                     <label>Degree Program:</label>
-                    <input type="text" name="dP" placeholder="ex. 'BS Geography'">
+                    <input type="text" name="dP" placeholder="ex. 'MS in Computer Science'">
                 </div>
                 <button type="submit">SEARCH</button>
             </form>
+            <!-- If programs exist, display in table -->
             {% if object_list %}
             <table>
                 <thead>
                     <tr>
                         <th>
-                            <p>Department</p>
+                            <p>Degree Program</p>
                         </th>
                         <th>
                             <p>Year</p>
@@ -88,6 +98,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Create table rows for all programs -->
                     {% for rpt in object_list %}
                     <tr>
                         <td>
@@ -98,18 +109,34 @@
                         </td>
                         <td class="buttons">
                             <div>
-                                <a role="button" class="table-button" href="{% url 'makeReports:view-rpt' pk=rpt.pk %}">VIEW</a> 
-                                {% if rpt.rubric.complete %}
-                                <a role="button" class="table-button" href="{% url 'makeReports:rpt-feedback' report=rpt.pk %}">FEEDBACK</a> 
+                                <!-- If report isn't submitted, display Submit and Modify buttons -->
+                                {% if not rpt.submitted %}
+                                <a role="button" class="table-button" href="{% url 'makeReports:manual-submit-rpt' pk=rpt.pk %}">SUBMIT</a>
+                                <a role="button" class="table-button" href="{% url 'makeReports:rpt-first-page' pk=rpt.pk %}">MODIFY</a>
                                 {% endif %}
+                                <!-- If report is completed, display Feedback button -->
+                                {% if rpt.rubric.complete %}
+                                <a role="button" class="table-button" href="{% url 'makeReports:rpt-feedback' report=rpt.pk %}">FEEDBACK</a>
+                                {% endif %}
+                                <!-- If report is submitted and not completed, display Review button -->
+                                {% if rpt.submitted and not rpt.rubric.complete %}
+                                <a role="button" class="table-button" href="{% url 'makeReports:grade-entry' report=rpt.pk %}">REVIEW</a>
+                                {% endif %}
+                                <!-- If report is submitted, display Return button -->
+                                {% if rpt.submitted %}
+                                <a role="button" class="table-button" href="{% url 'makeReports:ret-rept' pk=rpt.pk %}">RETURN FOR REVISIONS</a>
+                                {% endif %}
+                                <a role="button" class="table-button" href="{% url 'makeReports:view-rpt' pk=rpt.pk %}">VIEW</a>
+                                <a role="button" class="table-button" href="{% url 'makeReports:delete-rpt' pk=rpt.pk %}">DELETE</a>
                             </div>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <!-- Otherwise, display empty list label -->
             {% else %}
-            <p class="empty">NO TODO LIST ITEMS</p>
+            <p class="empty">NO REPORTS MATCHING QUERY</p>
             {% endif %}
         </div>
     </div>
