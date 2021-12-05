@@ -38,15 +38,39 @@ window.onload = function () {
             const spanCount = document.createElement('span');
             let textCount = iframeChild.textContent.length;
             spanCount.className = "char-count";
+            let showAnchor = false;
             spanCount.innerHTML = MAX_VALUE - iframeChild.textContent.length + ' character(s) left';
             iframeParent.parentNode.insertBefore(spanCount, iframeParent.nextSibling);
             document.getElementsByClassName("char-count")[i].style.fontSize = "12px";
+
+
             iframeChild.addEventListener('keyup', function () {
+                let anchor = iframeChild.getElementsByTagName('a').length;
                 textCount = iframeChild.textContent.length;
                 let color = "";
                 textCount > MAX_VALUE ? color = '#b60000' : color = 'black';
                 document.getElementsByClassName("char-count")[i].style.color = color;
-                spanCount.innerHTML = MAX_VALUE - textCount + ' character(s) left';
+                console.log(anchor);
+                textCount = MAX_VALUE - textCount;
+                if (!showAnchor && anchor == 1)
+                {
+                    spanCount.innerHTML = textCount + ' character(s) left. Warning: External links are not recommended.';
+                    showAnchor = true;
+                }
+                else if (showAnchor && anchor == 0)
+                {
+                    spanCount.innerHTML = textCount + ' character(s) left.';
+                    showAnchor = false;
+                }
+                else if (showAnchor)
+                {
+                    spanCount.innerHTML = textCount + ' character(s) left. Warning: External links are not recommended.';
+                }
+                else
+                {
+                    spanCount.innerHTML = textCount + ' character(s) left.';
+                    showAnchor = false;
+                }            
             });
         }
     }, 200);
