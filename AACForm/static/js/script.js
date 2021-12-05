@@ -80,7 +80,7 @@ window.onload = function () {
             const spanCount = document.createElement('span');
             let textCount = iframeChild.textContent.length;
             spanCount.className = "char-count";
-            spanCount.innerHTML = MAX_VALUE - iframeChild.textContent.length + ' character(s) left';
+            spanCount.innerHTML = MAX_VALUE - iframeChild.textContent.length + ' character(s) left.';
             iframeParent.parentNode.insertBefore(spanCount, iframeParent.nextSibling);
             document.getElementsByClassName("char-count")[i].style.fontSize = "12px";
             iframeChild.addEventListener('keyup', function () {
@@ -88,7 +88,13 @@ window.onload = function () {
                 let color = "";
                 textCount > MAX_VALUE ? color = '#b60000' : color = 'black';
                 document.getElementsByClassName("char-count")[i].style.color = color;
-                spanCount.innerHTML = MAX_VALUE - textCount + ' character(s) left';
+                spanCount.innerHTML = MAX_VALUE - textCount + ' character(s) left.';
+                if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(iframeChild.textContent)) {
+                    spanCount.innerHTML = spanCount.innerHTML + ' URL DETECTED! Please remove URL from textbox.'
+                }
+
             });
         }
     }, 200);}
+
+
