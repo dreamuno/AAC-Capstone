@@ -20,6 +20,7 @@
                 <td><b>Goal</b></td>
                 <td><b>Bloom's Taxonomy</b></td>
                 <td><b>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</b></td>
+                <td><b>Accrediting Body</b>
                 <td><b>Options</b></td>
             </tr>
             {% for slo in slo_list %}
@@ -36,6 +37,9 @@
                         <p>{{gG.text|safe}}</p>
                     {% endfor %}
                     {% endif %}
+                </td>
+                <td>
+                    {{ slo.accreditingBody }}
                 </td>
                 <td>
                    {% if slo.slo.numberOfUses is 1 %}
