@@ -5,7 +5,10 @@
 <table class="table">
     <tbody>
             <tr>
-                <td>Student Learning Outcomes</td><td>Bloom's Taxonomy</td><td>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</td>
+                <td>Student Learning Outcomes</td>
+                <td>Bloom's Taxonomy</td>
+                <td>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</td>
+                <td>Accrediting Body</td>
             </tr>
             {% for slo in slo_list %}
             <tr>
@@ -21,6 +24,9 @@
                             <p>{{gG.text|safe}}</p>
                     {% endfor %}
                     {% endif %}
+                </td>
+                <td>
+                    {{ slo.accreditingBody }}
                 </td>
             </tr>
             {% endfor %}

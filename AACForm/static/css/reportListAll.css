@@ -98,7 +98,7 @@ hr.solid {
 }
 
 .search form {
-  width: 375px;
+  width: 400px;
   display: inline-block;
   margin-top: 15px;
   margin-bottom: 35px;
@@ -178,7 +178,6 @@ input[type="number"]::-webkit-inner-spin-button {
 .program {
   color: #767676;
   font-size: 17px;
-  margin-top: 30px;
   width: 100%;
   max-width: 500px;
 }
@@ -295,6 +294,19 @@ input[type="radio"]:checked:after {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #C0C0C0;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #C0C0C0;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #C0C0C0;
 }
 
 /* Compact Screen Responsive */

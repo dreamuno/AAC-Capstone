@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for admin page -->
 <link rel="stylesheet" href="{% static 'css/adminHome.css' %}">
 
 <div class="sub-header">
@@ -18,37 +20,54 @@
         </div>
         <div class="links">
             <div class="link-info">
-                <h3 class="second-sublabel">Reports</h3>
-                <p>All reports that have been submitted. You can search all previous reports, including reports that need to be reviewed.</p>
+                <h3>Reports</h3>
+                <p>
+                    All reports that have been submitted. You can search all previous reports, including reports that need 
+                    to be reviewed.
+                </p>
                 <a role="button" href="{% url 'makeReports:report-list' %}">REPORTS</a>
             </div>
             <div class="link-info">
-                <h3 class="second-sublabel">Annoucements</h3>
-                <p>Announcements are global messaged that can be viewed by all users on the home page. These can be added, edited, or removed by admins.</p>
+                <h3>Annoucements</h3>
+                <p>
+                    Announcements are global messaged that can be viewed by all users on the home page. These can be added, 
+                    edited, or removed by admins.
+                </p>
                 <a role="button" href="{% url 'makeReports:announ-list' %}">ANNOUNCEMENTS</a>
             </div>
             <div class="link-info">
-                <h3 class="second-sublabel">Rubrics</h3>
-                <p>Search through all previous rubrics. Rubrics can be created, modified, or removed.</p>
+                <h3>Rubrics</h3>
+                <p>
+                    Search through all previous rubrics. Rubrics can be created, modified, or removed.
+                </p>
                 <a role="button" href="{% url 'makeReports:rubric-list' %}">RUBRICS</a>
             </div>
         </div>
         <div class="links">
             <div class="link-info">
-                <h3 class="second-sublabel">Template Management</h3>
-                <p>Graduate goals are selected when adding a new SLO to a report. Required fields adjust which fields are required when submitting a report.</p>
+                <h3>Template Management</h3>
+                <p>
+                    Graduate goals are selected when adding a new SLO to a report. Required fields adjust which fields 
+                    are required when submitting a report.
+                </p>
                 <a role="button" id="left-button" href="{% url 'makeReports:gg-list' %}">GRADUATE GOALS</a>
                 <a role="button" href="{% url 'makeReports:req-fields' %}">REQUIRED FIELDS</a>
             </div>
             <div class="link-info">
-                <h3 class="second-sublabel">Colleges & Departments</h3>
-                <p>View, edit, and delete different colleges and departments that are listed in the Academic Assessment Assistant.</p>
+                <h3>Colleges & Departments</h3>
+                <p>
+                    View, edit, and delete different colleges and departments that are listed in the Academic Assessment 
+                    Assistant.
+                </p>
                 <a role="button" id="left-button" href="{% url 'makeReports:college-list' %}">COLLEGES</a>
                 <a role="button" href="{% url 'makeReports:dept-list' %}?college=&name=">DEPARTMENTS</a>
             </div>
             <div class="link-info">
-                <h3 class="second-sublabel">Account Management</h3>
-                <p>Modify existing account permissions or create new user accounts. These can be used to sign-in to the application.</p>
+                <h3>Account Management</h3>
+                <p>
+                    Modify existing account permissions or create new user accounts. These can be used to sign-in to 
+                    the application.
+                </p>
                 <a role="button" id="left-button" href="{% url 'makeReports:account-list' %}">VIEW ACCOUNTS</a>
                 <a role="button" href="{% url 'makeReports:make-account' %}">CREATE ACCOUNT</a>
             </div>
@@ -59,16 +78,17 @@
         </div>
         <div class="generate-reports">
             <p>
-                Note, if a report for a degree program the year already exists, this will not assign another or change the assignment
-                for that degree program. Use create manual report or update report instead if needed.
+                Note, if a report for a degree program the year already exists, this will not assign another or change
+                the assignment for that degree program. Use create manual report or update report instead if needed.
             </p>
             <form method="post" enctype="multipart/form-data" spellcheck="false">{% csrf_token %}
+                <!-- If form input has errors, display errors -->
                 {% if form.errors %}
                 <div class="error">One or more fields is invalid</div>
                 {% endif %}
                 <div class="year">
                     <label>Year:</label>
-                    <input type="number" name="year" value="2021" min="2000" max="2100" required>
+                    <input type="number" name="year" min="2000" max="2100" placeholder="ex. '2019' for 2018-19">
                 </div>
                 <div class="select">
                     <label>Rubric:</label>
