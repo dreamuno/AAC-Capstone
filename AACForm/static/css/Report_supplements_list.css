@@ -213,6 +213,13 @@
   .assessment-p p{
     line-height: 5px;
   }
-  ul{
-    list-style-type: none;
+  .main_table {
+    table-layout: fixed;
+    empty-cells: show;
+    width:25%;
+    text-align: left;
+  }
+  td, th {
+    text-align: left;
+    vertical-align:top;
 }

@@ -423,6 +423,7 @@ class EditNewAssessment(EditImportedAssessment):
         """
         initial = super(EditNewAssessment, self).get_initial()
         initial['title'] = self.assessVers.assessment.title
+        initial['accreditingBody'] = self.assessVers.assessment.accreditingBody
         initial['domain'] = []
         initial['domainPerformance'] = self.assessVers.assessment.domainPerformance
         if(initial['domainPerformance'] == True):
@@ -448,6 +449,7 @@ class EditNewAssessment(EditImportedAssessment):
         if self.assessVers.assessment.numberOfUses >1:
             raise Http404("This assessment is imported elsewhere.")
         self.assessVers.assessment.title = form.cleaned_data['title']
+        self.assessVers.assessment.accreditingBody = form.cleaned_data['accreditingBody']
         self.assessVers.assessment.domain = form.cleaned_data['domain']
         if ("Pe" in self.assessVers.assessment.domain):
             self.assessVers.assessment.domainPerformance = True
