@@ -1,3 +1,5 @@
+/* Home Page */
+
 .sub-header {
   z-index: 1;
   position: fixed;
@@ -35,6 +37,7 @@
   max-width: 1600px;
   width: 90%;
   margin-left: 17px;
+  margin-bottom: 60px;
 }
 
 .row-label h1 {
@@ -43,18 +46,19 @@
   margin-bottom: 10px;
 }
 
-.admin-information {
-  margin-top: 35px;
+hr.solid {
+  margin: 0;
+  border-top: 1px solid #e8e8e8;
 }
 
-.second-sublabel {
-  margin-top: 40px;
+.admin-information {
+  margin-top: 35px;
 }
 
 .admin-information p {
   font-size: 20px;
   line-height: 30px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .report-information {
@@ -64,14 +68,18 @@
 .report-information p {
   font-size: 20px;
   line-height: 30px;
-  margin-top: 15px;
-  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .reports-todo h3 {
   font-size: 24px;
   line-height: 34px;
   margin-bottom: 20px;
+  margin-top: 35px;
+}
+
+.reports-todo p {
+  margin-bottom: 20px !important;
 }
 
 .reports-todo table {
@@ -80,45 +88,37 @@
   table-layout: fixed;
 }
 
-.reports-todo td, .reports-todo th {
+.reports-todo td,
+.reports-todo th {
   text-align: left;
-  border-style : hidden;
+  border-style: hidden;
 }
 
-.reports-todo td div {
+.reports-todo td p,
+.reports-todo th p {
   display: flex;
-  justify-content: left;
   align-items: center;
 }
 
 .reports-todo td p {
   font-size: 17px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0px !important;
+  padding-right: 20px;
+  margin: 0;
+  min-height: 60px;
 }
 
 .reports-todo th p {
   font-size: 16px;
-  margin-top: 0;
-  padding-top: 0;
+  margin: 0 !important;
+  min-height: 60px;
 }
 
-.empty {
+.reports-todo td div {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  width: max-content;
-  height: 45px;
-  font-size: 15px !important;
-  font-weight: bold;
-  color: #B60000;
-  background-color: #F2DEDE;
-  white-space: nowrap;
-  border: 1px solid #b60000;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .content a {
@@ -143,19 +143,36 @@
   color: #ffffff;
 }
 
-#right-button {
-  margin-left: 0;
+.table-button ~ .table-button {
+  margin-left: 20px;
 }
 
-.content a {
-  margin-left: 5px;
-  margin-right: 5px;
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: 45px;
+  font-size: 15px !important;
+  font-weight: bold;
+  color: #b60000;
+  background-color: #f2dede;
+  white-space: nowrap;
+  border: 1px solid #b60000;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-hr.solid {
-  margin: 0;
-  border-top: 1px solid #E8E8E8;
+.announcements {
+  margin-top: 35px;
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 35px;
 }
+
+/* Welcome Page */
 
 .login-content {
   display: flex;
@@ -202,13 +219,7 @@ hr.solid {
   color: #ffffff;
 }
 
-.announcements {
-  margin-top: 35px;
-  font-size: 20px;
-  line-height: 30px;
-  margin-bottom: 35px;
-}
-
+/* Compact Screen Responsive */
 @media screen and (max-width: 1400px) {
   .sub-header-content {
     width: 100%;
@@ -223,11 +234,12 @@ hr.solid {
   }
 }
 
-@media screen and (max-width: 1190px) {
-  .reports-todo table, 
-  .reports-todo thead, 
-  .reports-todo tbody, 
-  .reports-todo th, 
+/* Mobile Responsive */
+@media screen and (max-width: 1175px) {
+  .reports-todo table,
+  .reports-todo thead,
+  .reports-todo tbody,
+  .reports-todo th,
   .reports-todo td,
   .reports-todo tr {
     display: block;
@@ -243,20 +255,30 @@ hr.solid {
     border: none;
     position: relative;
     padding-left: 50%;
-    height: 30px;
     padding-top: 0;
     padding-bottom: 0;
+    display: flex;
+    align-items: center;
   }
 
   .reports-todo td:before {
     position: absolute;
     top: 0px;
-		left: 6px;
-		width: 45%; 
-		white-space: nowrap;
+    left: 6px;
+    width: 45%;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     height: 100%;
+  }
+
+  .reports-todo th p {
+    min-height: 30px;
+  }
+
+  .reports-todo td p {
+    padding-right: 0;
+    min-height: 30px;
   }
 
   .reports-todo td div {
@@ -264,21 +286,32 @@ hr.solid {
     align-items: left;
   }
 
-  .modify-buttons:first-child {
-    margin-left: 0;
-  }
-
   .buttons {
     display: flex;
+    margin-top: 5px;
+  }
+
+  tr ~ tr {
     margin-top: 20px;
-    margin-bottom: 40px;
   }
 
-  .empty {
-    padding-top: 0px;
+  .reports-todo td:nth-of-type(1):before {
+    content: "Department";
+    font-weight: bold;
   }
 
-  .reports-todo td:nth-of-type(1):before { content: "Department"; font-weight: bold; }
-	.reports-todo td:nth-of-type(2):before { content: "Program"; font-weight: bold; }
-	.reports-todo td:nth-of-type(3):before { content: "Year"; font-weight: bold; }
+  .reports-todo td:nth-of-type(2):before {
+    content: "Program";
+    font-weight: bold;
+  }
+
+  .reports-todo td:nth-of-type(3):before {
+    content: "Year";
+    font-weight: bold;
+  }
+
+  .reports-todo td:nth-of-type(4):before {
+    content: "Assigned";
+    font-weight: bold;
+  }
 }

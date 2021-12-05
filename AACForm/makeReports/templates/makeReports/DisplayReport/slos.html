@@ -1,3 +1,5 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/SLOSummary.css' %}">
 <!--things needed in context: slo_list, stk (stakeholder stuff), report-->
 <h3>I. Student Learning Outcomes (SLOs)</h3>
 <table class="table">
@@ -25,6 +27,51 @@
     </tbody>
 </table>
 <h5>Stakeholder Communication</h5>
-{{stk|safe}}
+<table class="main_table" style="max-width: 20%;">
+    <tbody>
+        <tr>
+            <td>Internal Stakeholders:</td>
+            <td>External Stakeholders:</td>
+        </tr>
+        <tr>
+            <td>
+                {% if stk.faculty == True %}
+                    <p>Faculty/Staff</p>
+                {% endif %}
+
+                {% if stk.students == True %}
+                    <p>Students</p>
+                {% endif %}
+
+                {% if stk.other_internal == True %}
+                    <p>Other Internal</p>
+                {% endif %}
+            </td>
+            <td>
+                {% if stk.prospect_students == True %}
+                    <p>Prospect Students</p>
+                {% endif %}
+
+                {% if stk.alumni == True %}
+                    <p>Alumni</p>
+                {% endif %}
+
+                {% if stk.employers == True %}
+                    <p>Employers</p>
+                {% endif %}
+
+                {% if stk.community_members == True %}
+                    <p>Community Members</p>
+                {% endif %}
+                
+                {% if stk.other_external == True %}
+                    <p>Other External</p>
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+</table>
+<p>Additional Comments:</p>
+{{stk.text|safe}}<br>
 <h5>Comment</h5>
 {{rpt.section1Comment|safe}}

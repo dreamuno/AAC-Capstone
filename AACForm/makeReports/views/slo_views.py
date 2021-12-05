@@ -414,6 +414,42 @@ class StakeholderEntry(DeptReportMixin,FormView):
         try:
             #if sts:
             initial['text']=self.sts.text
+
+            #internal stakeholder options
+            initial['internal_stakeholders'] = []
+            initial['faculty'] = self.sts.faculty
+            if( initial['faculty'] == True):
+                initial['internal_stakeholders'].append('Fa')
+            initial['students'] = self.sts.students
+            if(initial['students'] == True):
+                initial['internal_stakeholders'].append('St')
+            initial['other_internal'] = self.sts.other_internal
+            if(initial['other_internal'] == True):
+                initial['internal_stakeholders'].append('Oi')
+
+            #external stakeholder options
+            initial['external_stakeholders'] = []
+            initial['prospect_students'] = self.sts.prospect_students
+            if( initial['prospect_students'] == True):
+                initial['external_stakeholders'].append('Ps')
+
+            initial['alumni'] = self.sts.alumni
+            if(initial['alumni'] == True):
+                initial['external_stakeholders'].append('Al')
+
+            initial['employers'] = self.sts.employers
+            if(initial['employers'] == True):
+                initial['external_stakeholders'].append('Em')
+            
+            initial['community_members'] = self.sts.community_members
+            if(initial['community_members'] == True):
+                initial['external_stakeholders'].append('Cm')
+            
+            initial['other_external'] = self.sts.other_external
+            if(initial['other_external'] == True):
+                initial['external_stakeholders'].append('Oe')
+
+
         except:
             pass
         return initial
@@ -429,6 +465,41 @@ class StakeholderEntry(DeptReportMixin,FormView):
         """
         try:
             self.sts.text = form.cleaned_data['text']
+
+            #internal stakeholder options
+            internal_steakholders = form.cleaned_data['internal_stakeholders']
+            if('Fa' in internal_steakholders):
+                self.sts.faculty = True
+            else:
+                self.sts.faculty = False
+            if('St' in internal_steakholders):
+                self.sts.students = True
+            else:
+                self.sts.students = False
+            if('Oi' in internal_steakholders):
+                self.sts.other_internal = True
+            else:
+                self.sts.other_internal = False
+
+            #external stakeholder options
+            external_stakeholders = form.cleaned_data['external_stakeholders']
+            self.sts.prospect_students = False
+            self.sts.alumni = False
+            self.sts.employers = False
+            self.sts.community_members = False
+            self.sts.other_external = False
+
+            if('Ps' in external_stakeholders):
+                self.sts.prospect_students = True
+            if('Al' in external_stakeholders):
+                self.sts.alumni = True
+            if('Em' in external_stakeholders):
+                self.sts.employers = True            
+            if('Cm' in external_stakeholders):
+                self.sts.community_members = True
+            if('Oe' in external_stakeholders):
+                self.sts.other_external = True
+
             self.sts.save()
         except Exception:
             SLOsToStakeholder.objects.create(text=form.cleaned_data['text'], report=self.report)

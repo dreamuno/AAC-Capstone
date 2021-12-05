@@ -99,7 +99,7 @@ class AddNewAssessment(DeptReportMixin,FormView):
             domainProduct=False, 
             domainPerformance=False, 
             directMeasure =form.cleaned_data['directMeasure'],
-            accreditingBody = form.cleaned_data["accreditingBody"])
+            accreditingBody = form.cleaned_data['accreditingBody'])
         assessRpt = AssessmentVersion.objects.create(
             date=datetime.now(), 
             number = form.cleaned_data['slo'].numberOfAssess+1, 
@@ -114,6 +114,7 @@ class AddNewAssessment(DeptReportMixin,FormView):
             threshold=form.cleaned_data['threshold'], 
             target=form.cleaned_data['target'],
             slo=form.cleaned_data['slo'],
+            accreditingBody = form.cleaned_data['accreditingBody'],
             report=rpt, 
             changedFromPrior=False)
         dom = form.cleaned_data['domain']
@@ -345,6 +346,7 @@ class EditImportedAssessment(DeptReportMixin,FormView):
         initial['frequency'] = self.assessVers.frequency
         initial['threshold'] = self.assessVers.threshold
         initial['target'] = self.assessVers.target
+        initial['accreditingBody'] = self.assessVers.accreditingBody
         initial['slo'] = self.assessVers.slo
         return initial
     def get_form_kwargs(self):
@@ -385,6 +387,7 @@ class EditImportedAssessment(DeptReportMixin,FormView):
         self.assessVers.frequency = form.cleaned_data['frequency']
         self.assessVers.threshold = form.cleaned_data['threshold']
         self.assessVers.target = form.cleaned_data['target']
+        self.assessVers.accreditingBody = form.cleaned_data['accreditingBody']
         self.assessVers.changedFromPrior = True
         if self.assessVers.slo != form.cleaned_data['slo']:
             slo = self.assessVers.slo
@@ -420,9 +423,17 @@ class EditNewAssessment(EditImportedAssessment):
         """
         initial = super(EditNewAssessment, self).get_initial()
         initial['title'] = self.assessVers.assessment.title
+        initial['accreditingBody'] = self.assessVers.assessment.accreditingBody
+        initial['domain'] = []
         initial['domainPerformance'] = self.assessVers.assessment.domainPerformance
+        if(initial['domainPerformance'] == True):
+            initial['domain'].append('Pe')
         initial['domainProduct'] = self.assessVers.assessment.domainProduct
+        if(initial['domainProduct'] == True):
+            initial['domain'].append('Pr')
         initial['domainExamination'] = self.assessVers.assessment.domainExamination
+        if(initial['domainExamination'] == True):
+            initial['domain'].append('Ex')
         initial['directMeasure'] = self.assessVers.assessment.directMeasure
         return initial
     def form_valid(self, form):
@@ -438,7 +449,21 @@ class EditNewAssessment(EditImportedAssessment):
         if self.assessVers.assessment.numberOfUses >1:
             raise Http404("This assessment is imported elsewhere.")
         self.assessVers.assessment.title = form.cleaned_data['title']
+        self.assessVers.assessment.accreditingBody = form.cleaned_data['accreditingBody']
         self.assessVers.assessment.domain = form.cleaned_data['domain']
+        if ("Pe" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainPerformance = True
+        else:
+            self.assessVers.assessment.domainPerformance = False
+        
+        if ("Pr" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainProduct = True
+        else:
+            self.assessVers.assessment.domainProduct = False
+        if ("Ex" in self.assessVers.assessment.domain):
+            self.assessVers.assessment.domainExamination = True
+        else:
+            self.assessVers.assessment.domainExamination = False
         self.assessVers.assessment.directMeasure = form.cleaned_data['directMeasure']
         self.assessVers.assessment.save()
         return super(EditNewAssessment,self).form_valid(form)

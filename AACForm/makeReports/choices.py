@@ -2,7 +2,7 @@
 Holds static choice tuples that should not change
 """
 BLOOMS_CHOICES = (
-    ('', '------'),
+    ('', ''),
     ("KN","Knowledge"),
     ("CO","Comprehension"),
     ("AP", "Application"),
@@ -54,13 +54,13 @@ POSSIBLE_REQS = (
 )
 
 ACCREDITING_BODY_MEASURES = (
-    ('', '------'),
+    ('', ''),
     ("DM", "Direct Measure"),
     ("IM", "Indirect Measure")
 )
 
 ACCREDITING_BODY_DOMAIN = (
-    ('', '------'),
+    ('', ''),
     ("PF", "Performance"),
     ("PD","Product"),
     ("EX", "Examination")
