@@ -38,7 +38,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if slo.slo.numberOfUses is 1 %}
+                   {% if slo.slo.numberOfUses is 1 %}
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:edit-new-slo' report=rpt.pk sloIR=slo.pk %}">Edit SLO</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:delete-new-slo' report=rpt.pk pk=slo.pk %}">Delete SLO</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-assessment-slo' report=rpt.pk slo=slo.pk %}">Add New Assessment</a>
