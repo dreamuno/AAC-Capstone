@@ -21,16 +21,16 @@ Warning: This assessment's data will continue to be tracked with the data of all
 If you do not want this, delete this assessment and create a new one without importing.
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% bootstrap_field form.slo %}
-    {% bootstrap_field form.description %}
-    {% bootstrap_field form.finalTerm %}
-    {% bootstrap_field form.where %}
-    {% bootstrap_field form.allStudents %}
+    <br>{{ form.slo.label }}{{ form.slo }}<br>
+    <br>{% bootstrap_field form.description %}<br>
+    <br>{% bootstrap_field form.finalTerm %}<br>
+    <br>{% bootstrap_field form.where %}<br>
+    <br>{% bootstrap_field form.allStudents %}<br>
     <div id="hide-sam">{% bootstrap_field form.sampleDescription %}</div>
-    {% bootstrap_field form.frequencyChoice %}
+    <br>{% bootstrap_field form.frequencyChoice %}<br>
     <div id="hide-freq">{% bootstrap_field form.frequency %}</div>
-    {% bootstrap_field form.threshold %}
-    {% bootstrap_field form.target %}
+    <br>{{ form.threshold.label }} <br> {{ form.threshold }}<br>
+    <br>{{ form.target.label }}<br>{{ form.target }}<br><br>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Submit Changes</button>
     {% endbuttons %}

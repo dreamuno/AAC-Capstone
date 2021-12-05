@@ -3,6 +3,7 @@ Includes most common models used extensively by all users across the site
 """
 from django.db import models
 from django.contrib.auth.models import User
+from django_summernote.widgets import SummernoteWidget
 from gdstorage.storage import GoogleDriveStorage
 
 gd_storage = GoogleDriveStorage()
