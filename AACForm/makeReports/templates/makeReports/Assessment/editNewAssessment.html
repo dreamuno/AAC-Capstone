@@ -3,17 +3,18 @@
 {% block in_scripts %}
 {{form.media}}
 {% endblock %}
-{% block in_styles %}
-<style>
-        #hide-sam{
-            display: inherit;
-        }
-        #hide-freq{
-            display: inherit;
-        }
-        </style>
-{% endblock %}
 {% block inner_content %}
+<style>
+    #hide-sam{
+        display: inherit;
+    }
+    #hide-freq{
+        display: inherit;
+    }
+    ul{
+        list-style-type: none;
+    }
+</style>
 <h3>Edit Assessment</h3>
 {% bootstrap_form_errors form layout='inline' %}
 <form method="post" class="form" enctype="multipart/form-data" onsubmit="return validateForm();">
@@ -120,14 +121,16 @@
             message = message + 'SLO<br>';
         }
 
-        if(title.value.length > 0){
+        var check_title = stringCheck(title.value);
+        if(check_title == true){
             counter++;
         }
         else{
             message = message + "Title<br>";
         }
 
-        if(description.value.length > 0 && description.value != '<p><br></p>' && description.value != '<p></p>'){
+        var check_desc = stringCheck(description.value);
+        if(check_desc == true){
             counter++;
         }
         else{
@@ -152,7 +155,8 @@
             counter++;
         }
         else if (accrediting_body == false && where.value != 'Field is not applicaple to assessment.'){
-            if(where.value == ''){
+            var check_where = stringCheck(where.value);
+            if(check_where == false){
                 message = message + "Where<br>";
             }
             else{
@@ -169,7 +173,8 @@
             counter++;
         }
         else if (accrediting_body == false && population_description.value != 'Field is not applicaple to assessment.'){
-            if(population_description.value == ''){
+            var check_pop_desc = stringCheck(population_description.value);
+            if(check_pop_desc == false){
                 message = message + "Population Description<br>";
             }
             else{
@@ -188,7 +193,8 @@
             counter++;
         }
         else if (accrediting_body == false && frequency_description.value != 'Field is not applicaple to assessment.'){
-            if(frequency_description.value == ''){
+            var check_freq_desc = stringCheck(frequency_description.value);
+            if(check_freq_desc == false){
                 message = message + "Frequency Description<br>";
             }
             else{
@@ -207,7 +213,8 @@
         }
 
         else if (accrediting_body == false && threshold.value != 'Field is not applicaple to assessment.'){
-            if(threshold.value == ''){
+            var check_thresh = stringCheck(threshold.value);
+            if(check_thresh == false){
                 message = message + "Threshold<br>";
             }
             else{
@@ -222,6 +229,20 @@
         document.getElementById("test").innerHTML = message;
         return false;
     }
+
+function stringCheck(temp){
+    var check = temp;
+    check = check.replaceAll("<p><br></p>","");
+    check = check.replaceAll("&nbsp;","");
+    check = check.replaceAll(" ", "");
+    check = check.replaceAll("<p></p>", "");
+    
+    if(check.length > 0){
+        return true;
+    }
+    return false;
+
+}
 </script>
 {% endblock %}
 {% block in_endscripts %}
