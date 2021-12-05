@@ -98,7 +98,7 @@ hr.solid {
 }
 
 .search form {
-  width: 375px;
+  width: 400px;
   display: inline-block;
   margin-top: 15px;
   margin-bottom: 35px;
@@ -178,7 +178,6 @@ input[type="number"]::-webkit-inner-spin-button {
 .program {
   color: #767676;
   font-size: 17px;
-  margin-top: 30px;
   width: 100%;
   max-width: 500px;
 }
