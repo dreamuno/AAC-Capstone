@@ -296,6 +296,19 @@ input[type="radio"]:checked:after {
   margin: 0 !important;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #C0C0C0;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #C0C0C0;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #C0C0C0;
+}
+
 /* Compact Screen Responsive */
 @media screen and (max-width: 1400px) {
   .sub-header-content {

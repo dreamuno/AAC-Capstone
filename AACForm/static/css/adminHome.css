@@ -68,7 +68,7 @@
 
 hr.solid {
   margin: 0;
-  border-top: 1px solid #E8E8E8;
+  border-top: 1px solid #e8e8e8;
 }
 
 .links {
@@ -78,7 +78,8 @@ hr.solid {
   margin-top: 35px;
 }
 
-.links p, .generate-reports p {
+.links p,
+.generate-reports p {
   font-size: 20px;
   line-height: 30px;
   margin-top: 20px;
@@ -96,7 +97,7 @@ hr.solid {
   margin-top: 0;
 }
 
-a ~ a {
+.content a ~ a {
   margin-left: 20px;
 }
 
@@ -202,6 +203,22 @@ form button {
 form button:hover {
   background: #b60000;
   color: #ffffff;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #c0c0c0;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #c0c0c0;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #c0c0c0;
 }
 
 /* Compact Screen Responsive */
