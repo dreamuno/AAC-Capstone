@@ -42,8 +42,6 @@ window.onload = function () {
             spanCount.innerHTML = MAX_VALUE - iframeChild.textContent.length + ' character(s) left';
             iframeParent.parentNode.insertBefore(spanCount, iframeParent.nextSibling);
             document.getElementsByClassName("char-count")[i].style.fontSize = "12px";
-
-
             iframeChild.addEventListener('keyup', function () {
                 let anchor = iframeChild.getElementsByTagName('a').length;
                 textCount = iframeChild.textContent.length;
