@@ -4,21 +4,22 @@
 {{form.media}}
 {% endblock %}
 {% load static %}
-{% block in_styles %}
-<style>
-        #hide-sam{
-            display: inherit;
-        }
-        #hide-freq{
-            display: inherit;
-        }
-        </style>
-{% endblock %}
 {% block inner_content %}
+<style>
+    #hide-sam{
+        display: inherit;
+    }
+    #hide-freq{
+        display: inherit;
+    }
+    ul{
+        list-style-type: none;
+    }
+</style>
 <link rel="stylesheet" href="{% static 'css/form_entry_base.css' %}">
 <h1>Add New Assessment</h1>
 {% bootstrap_form_errors form layout='inline' %}
-<form method="post" class="form" enctype="multipart/form-data">
+<form method="post" class="form" enctype="multipart/form-data" onsubmit="return validateForm();">
     <div class="assessment-p">
     {% csrf_token %}
     <!--{% bootstrap_form form %} -->
@@ -30,7 +31,7 @@
     <p>This attribute specifies that the assessment is dictated by an accredidation or external body. When selected, the only attributes
         that</p><p> must be filled out are the following: <span style = "color: red;">Title, Description, Domain, Frequency of Data Collection.<span> </p>
         <strong>{{ form.accreditingBody }} Dictated by accrediting or external body</strong><br><br>
-    
+
     <h3>Title</h3>
     <p>Please specify the title of the new assessment.</p>
     {{ form.title }}<br><br>
@@ -80,11 +81,171 @@
     <p style="color:red;">If assessment is from accrediting or external body, please leave as is.</p>
     {{ form.target }}<br><br>
 
+    <p id="test" style="color:red; font-weight: bold"></p>
+
     {% buttons %}
-        <button type="submit" class="form-button ">Add Assessment</button><br><br>
+        <button type="submit" class="form-button" >Add Assessment</button><br><br>
     {% endbuttons %}
     </div>
 </form>
+
+<script type="text/javascript">
+    function validateForm(){
+        var slo = document.getElementById('id_slo');
+        var accrediting_body = document.getElementById('id_accreditingBody').checked;
+        var title = document.getElementById("id_title");
+        var description = document.getElementById("id_description");
+        var domain0 = document.getElementById('id_domain_0').checked;
+        var domain1 = document.getElementById('id_domain_1').checked;
+        var domain2 = document.getElementById('id_domain_2').checked;
+        var where = document.getElementById('id_where');
+        var population_description = document.getElementById('id_sampleDescription');
+        var frequency_description = document.getElementById('id_frequency');
+        var threshold = document.getElementById('id_threshold');
+        var target = document.getElementById('id_target');
+
+        var acc_value = document.getElementById("id_accreditingBody");
+        if(accrediting_body == true){
+            acc_value.value = true;
+        }
+        else{
+            acc_value = false;
+        }
+        
+
+        counter = 0;
+        message = "Requirements not met. Please go back and fill in the reqired fields: <br>";
+        if(slo.value != '')
+        {
+            counter++;
+        }
+        else{
+            message = message + 'SLO<br>';
+        }
+
+        var check_title = stringCheck(title.value);
+        if(check_title == true){
+            counter++;
+        }
+        else{
+            message = message + "Title<br>";
+        }
+
+        var check_desc = stringCheck(description.value);
+        if(check_desc == true){
+            counter++;
+        }
+        else{
+            message = message + "Description<br>";
+        }
+
+        if(domain0 == true || domain1 == true || domain2 == true){
+            counter++;
+        }
+        else{
+            message = message + "Domain<br>";
+        }
+
+
+
+        if(accrediting_body == false && where.value == 'Field is not applicaple to assessment.'){
+            where.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            where.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && where.value != 'Field is not applicaple to assessment.'){
+            var check_where = stringCheck(where.value);
+            if(check_where == false){
+                message = message + "Where<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+        
+        if(accrediting_body == false && population_description.value == 'Field is not applicaple to assessment.'){
+            population_description.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            population_description.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && population_description.value != 'Field is not applicaple to assessment.'){
+            var check_pop_desc = stringCheck(population_description.value);
+            if(check_pop_desc == false){
+                message = message + "Population Description<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+
+
+        if(accrediting_body == false && frequency_description.value == 'Field is not applicaple to assessment.'){
+            frequency_description.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            frequency_description.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && frequency_description.value != 'Field is not applicaple to assessment.'){
+            var check_freq_desc = stringCheck(frequency_description.value);
+            if(check_freq_desc == false){
+                message = message + "Frequency Description<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+
+        if(accrediting_body == false && threshold.value == 'Field is not applicaple to assessment.'){
+            threshold.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            threshold.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+
+        else if (accrediting_body == false && threshold.value != 'Field is not applicaple to assessment.'){
+            var check_thresh = stringCheck(threshold.value);
+            if(check_thresh == false){
+                message = message + "Threshold<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+        if (counter == 8){
+            return true;
+        }
+        
+        document.getElementById("test").innerHTML = message;
+        return false;
+    }
+
+function stringCheck(temp){
+    var check = temp;
+    check = check.replaceAll("<p><br></p>","");
+    check = check.replaceAll("&nbsp;","");
+    check = check.replaceAll(" ", "");
+    check = check.replaceAll("<p></p>", "");
+    
+    if(check.length > 0){
+        return true;
+    }
+    return false;
+
+}
+</script>
 {% endblock %}
 {% block in_endscripts %}
 <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.min.js"></script>

@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for update account page (Same as Login Page) -->
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <div class="login-content">
     <h1>Update Profile</h1>
     <form method="post" spellcheck="false">{% csrf_token %}
+        <!-- If there are any errors, display error -->
         {% if form.errors %}
         <div class="error">One or more fields is invalid</div>
         {% endif %}
         <div class="firstname-field">
             <label for="{{ form.first_name.id_for_label }}">First Name:</label>
-            <input type="text" name="first_name" value="{{ first_name}}">
+            <input type="text" name="first_name" value="{{ first_name}}"  placeholder="First Name">
         </div>
         <div class="lastname-field">
             <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
-            <input type="text" name="last_name" value="{{ last_name }}">
+            <input type="text" name="last_name" value="{{ last_name }}" placeholder="Last Name">
         </div>
         <div class="email-field">
             <label for="{{ form.email.id_for_label }}">Email:</label>
-            <input type="text" name="email" value="{{ form.email.value }}">
+            <input type="text" name="email" value="{{ form.email.value }}" placeholder="Email">
         </div>
         <button type="submit">UPDATE</button>
     </form>

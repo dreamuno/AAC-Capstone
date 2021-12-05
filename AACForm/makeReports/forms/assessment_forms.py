@@ -12,11 +12,11 @@ class CreateNewAssessment(forms.Form):
     """
     Form to create new assessment
     """
-    slo = forms.ModelChoiceField(label="SLO",queryset=None, widget=SLOChoicesJSWidget(attrs={'class':'form-control col-7'}))
-    title = forms.CharField(required=True, max_length=300, widget=forms.TextInput(attrs={'class':'form-control col-6'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'style':'width:750px'}),label="Describe How Measure Aligns with SLO", required=True)
-    domain = forms.MultipleChoiceField(choices = (("Pe", "Performance"), ("Pr","Product"), ("Ex","Examination") ), widget=forms.CheckboxSelectMultiple,required=True)
-    directMeasure = forms.ChoiceField(label="Direct measure",choices = ((True, "Direct Measure"), (False,"Indirect Measure")), widget=forms.Select(attrs={'class':'form-control col-6'}), required=False)
+    slo = forms.ModelChoiceField(required = False, label="SLO",queryset=None, widget=SLOChoicesJSWidget(attrs={'class':'form-control col-7'}))
+    title = forms.CharField(required = False, max_length=300, widget=forms.TextInput(attrs={'class':'form-control col-6'}))
+    description = forms.CharField(required = False, widget=SummernoteWidget(attrs={'style':'width:750px'}),label="Describe How Measure Aligns with SLO")
+    domain = forms.MultipleChoiceField(required = False, choices = (("Pe", "Performance"), ("Pr","Product"), ("Ex","Examination") ), widget=forms.CheckboxSelectMultiple)
+    directMeasure = forms.ChoiceField(required = False, label="Direct measure",choices = ((True, "Direct Measure"), (False,"Indirect Measure")), widget=forms.Select(attrs={'class':'form-control col-6'}))
     finalTerm = forms.ChoiceField(label="Point in Program Assessment is Administered",choices = ((True, "In final term"), (False, "In final year")), widget=forms.Select(attrs={'class':'form-control col-6'}),  required=False)
     where = forms.CharField(label="Where does the assessment occur",widget= SummernoteWidget(attrs={'style':'width:750px'}), required=False)
     allStudents = forms.ChoiceField(label="Population Measured",choices = ( (True, "All Students"),(False,"Sample of Students")),widget=forms.Select(attrs={'class':'form-control col-6'}),  required=False)
@@ -24,7 +24,7 @@ class CreateNewAssessment(forms.Form):
     frequencyChoice = forms.ChoiceField(label="Frequency of Data Collection", choices=FREQUENCY_CHOICES, widget=forms.Select(attrs={'class':'form-control col-4'}), required=True)
     frequency = forms.CharField(label="Describe frequency if other",widget=SummernoteWidget(attrs={'style':'width:750px','scrolling':'no'}),required=False)
     threshold = forms.CharField(max_length=500,label="Proficiency Threshold", widget=forms.TextInput(attrs={'class':'form-control col-6'}),  required=False)
-    target = forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class':'form-control col-2','addon_after':'%','placeholder':'Target'}), label="Program Proficiency Target: Percentage of students that achieve the proficiency threshold", initial=1)
+    target = forms.IntegerField(min_value=0, widget=forms.NumberInput(attrs={'class':'form-control col-2','addon_after':'%','placeholder':'Target'}), label="Program Proficiency Target: Percentage of students that achieve the proficiency threshold", initial=0)
     accreditingBody = forms.BooleanField(required=False)
     def __init__(self,*args,**kwargs):
 

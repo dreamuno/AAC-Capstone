@@ -24,11 +24,9 @@
             <span style="float:left">{{ option.tag }}</span>
             <span style="text-align: left;"> {{option.choice_label}}</span>
         {% endfor %}<br>
-
-        <strong>Accrediting Body Information</strong>
-        <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
-        
     {% endif %}
+    <strong>Accrediting Body Information</strong>
+    <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
     <p id='errors'></p>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>

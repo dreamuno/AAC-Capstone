@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% block inner_content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/form_entry_base.css' %}">
+<link rel="stylesheet" href="{% static 'css/SLOSummary.css' %}">
 <h1>SLO Summary</h1>
 <a role="button" id="outline" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
 <a  role="button" id="outline" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
@@ -14,7 +14,7 @@
     </div>
 
       <div class="col">
-<table class="table">
+<table class="main_table">
     <tbody>
             <tr>
                 <td><b>Goal</b></td>
@@ -102,6 +102,50 @@
         </tbody>
     </table>
     <h5>Stakeholder Communication</h5>
+    <table class="stakeholder_table">
+        <tbody>
+            <tr>
+                <td>Internal Stakeholders:</td>
+                <td>External Stakeholders:</td>
+            </tr>
+            <tr>
+                <td>
+                    {% if stk.faculty == True %}
+                        <p>Faculty/Staff</p>
+                    {% endif %}
+
+                    {% if stk.students == True %}
+                        <p>Students</p>
+                    {% endif %}
+
+                    {% if stk.other_internal == True %}
+                        <p>Other Internal</p>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stk.prospect_students == True %}
+                        <p>Prospect Students</p>
+                    {% endif %}
+
+                    {% if stk.alumni == True %}
+                        <p>Alumni</p>
+                    {% endif %}
+
+                    {% if stk.employers == True %}
+                        <p>Employers</p>
+                    {% endif %}
+
+                    {% if stk.community_members == True %}
+                        <p>Community Members</p>
+                    {% endif %}
+                    
+                    {% if stk.other_external == True %}
+                        <p>Other External</p>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+    </table>
     {{stk|safe}}
     <h5>Comment</h5>
     {{rpt.section1Comment|safe}}
@@ -110,6 +154,52 @@
 <div class="row mt-5">
     <div class="col-7">
         <h4>Communication to Stakeholders</h4>
+        <table class="stakeholder_table">
+            <tbody>
+            <tr>
+                <td>Internal Stakeholders:</td>
+                <td>External Stakeholders:</td>
+            </tr>
+            <tr>
+                <td>
+                    {% if stk.faculty == True %}
+                        <p>Faculty/Staff</p>
+                    {% endif %}
+
+                    {% if stk.students == True %}
+                        <p>Students</p>
+                    {% endif %}
+
+                    {% if stk.other_internal == True %}
+                        <p>Other Internal</p>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stk.prospect_students == True %}
+                        <p>Prospect Students</p>
+                    {% endif %}
+
+                    {% if stk.alumni == True %}
+                        <p>Alumni</p>
+                    {% endif %}
+
+                    {% if stk.employers == True %}
+                        <p>Employers</p>
+                    {% endif %}
+
+                    {% if stk.community_members == True %}
+                        <p>Community Members</p>
+                    {% endif %}
+                    
+                    {% if stk.other_external == True %}
+                        <p>Other External</p>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+            
+        </table><br>
+        <p>Additional Comments:</p>
         {{stk.text|safe}}
     </div>
     <div class="col-2">

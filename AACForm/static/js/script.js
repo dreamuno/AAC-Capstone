@@ -2,6 +2,10 @@ let nav = document.querySelector('nav');
 let dropdown = nav.querySelector('.dropdown');
 let dropdownToggle = nav.querySelector("[data-action='dropdown-toggle']");
 
+/**
+ * Event Listener to display additional nav-links in navbar.
+ * Adds and removes 'opened' from classpath for CSS property.
+ */
 dropdownToggle.addEventListener('click', () => {
     if (dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
@@ -12,6 +16,10 @@ dropdownToggle.addEventListener('click', () => {
 
 let navToggle = nav.querySelector("[data-action='nav-toggle']");
 
+/**
+ * Event Listener to display navigation dropdown in responsive view.
+ * Adds and removes 'show' from classpath for CSS property.
+ */
 navToggle.addEventListener('click', () => {
     if (nav.classList.contains('opened')) {
         nav.classList.remove('opened');
@@ -20,6 +28,11 @@ navToggle.addEventListener('click', () => {
     }
 });
 
+
+/**
+ * Event Listener for entire webpage.
+ * If dropdown is opened and there is a click event anywhere on the page, remove 'show' classpath.
+ */
 document.addEventListener('click', function (e) {
     if (!e.target.closest(`.dropdown`)) {
         dropdown.classList.remove('show');
@@ -36,6 +49,7 @@ function showhide(id) {
      * @class importSLO
      */
 var chYear = null;
+
 /**
  * Creates drop down for year and updates upon the DOM being loaded
  * @method onLoad
@@ -45,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(chYear);
     updateYears();
 });
+
 /**
  * Calls the API to update the year choices for the search,
  * based upon the currently selected degree program
@@ -65,4 +80,30 @@ function updateYears() {
             console.error(err);
         }
     });
+}
+
+window.onload = function () {
+    setTimeout(function () {
+        const FRAME_LENGTH = document.getElementsByTagName('iframe').length;
+        const MAX_VALUE = 1000;
+        for (let i = 0; i < FRAME_LENGTH; i++) {
+            const iframe = document.getElementsByTagName('iframe')[i];
+            const iframeContent = iframe.contentWindow.document.body;
+            const iframeChild = iframeContent.getElementsByClassName('note-editable')[0];
+            const iframeParent = iframe.parentNode;
+            const spanCount = document.createElement('span');
+            let textCount = iframeChild.textContent.length;
+            spanCount.className = "char-count";
+            spanCount.innerHTML = MAX_VALUE - iframeChild.textContent.length + ' character(s) left';
+            iframeParent.parentNode.insertBefore(spanCount, iframeParent.nextSibling);
+            document.getElementsByClassName("char-count")[i].style.fontSize = "12px";
+            iframeChild.addEventListener('keyup', function () {
+                textCount = iframeChild.textContent.length;
+                let color = "";
+                textCount > MAX_VALUE ? color = '#b60000' : color = 'black';
+                document.getElementsByClassName("char-count")[i].style.color = color;
+                spanCount.innerHTML = MAX_VALUE - textCount + ' character(s) left';
+            });
+        }
+    }, 200);
 }

@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for login page -->
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <div class="login-content">
     <h1>Sign In</h1>
     <form method="post" spellcheck="false">{% csrf_token %}
+        <!-- If there is a non-field error, display invalid username or password error -->
         {% if form.non_field_errors %}
         <div class="error">Invalid Username or Password</div>
+        <!-- If there is a username field error, display blank username error -->
         {% elif form.username.errors %}
         <div class="error">Username cannot be blank</div>
+        <!-- If there is a password field error, display blank password error -->
         {% elif form.password.errors %}
         <div class="error">Password cannot be blank</div>
         {% endif %}
         <div class="username-field">
             <label for="{{ form.username.id_for_label }}">Username:</label>
-            <input type="text" name="username">
+            <input type="text" name="username" placeholder="Username">
         </div>
         <div class="password-field">
             <label for="{{ form.password.id_for_label }}">Password:</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="Password">
         </div>
         <button type="submit">SIGN IN</button>
     </form>

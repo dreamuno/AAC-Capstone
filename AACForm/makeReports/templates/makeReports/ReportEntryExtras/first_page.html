@@ -3,7 +3,7 @@
 {% load static %}
 {% block inner_content %}
 
-<link rel="stylesheet" href="{% static 'css/first_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/Report_Initial_Information.css' %}">
 
 <div class = "form-header">
 <h1>Report Initial Information</h1>
@@ -14,9 +14,20 @@
     {% csrf_token %} 
     <strong>{{ form.author.label }}:</strong> {{ form.author }} <br>
     <strong>{{ form.date_range_of_reported_data.label }}:</strong> {{ form.date_range_of_reported_data }} <br>
+    <strong>Assign Report to User:</strong>
+    <input type="text" name="users" maxlength="100" value='{{ form.users.value }}' required="" id="id_users" list="test">
+    <datalist id="test">
+        {% for i in users %}
+        <option>{{ i }}</option>
+        {% endfor %}
+    </datalist><br>
+    <br><strong>Accredited Programs: </strong><br>
+    <p>If dictated by accrediting or external body, please give more information about the program.</p><br>
+    {{ form.accreditingBodyPrograms }} <br>
     {% buttons %}
         <button type="submit" class="form-button">Next</button>
     {% endbuttons %}
 </form>
+
 
 {% endblock %}

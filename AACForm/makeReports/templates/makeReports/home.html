@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for Home and Welcome Page -->
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
+<!-- If user is authenticated, display home page -->
 {% if user.profile %}
 <div class="sub-header">
     <div class="sub-header-content">
@@ -13,6 +16,7 @@
 </div>
 <div class="content">
     <div class="home-container">
+        <!-- If user has AAC permissions, display Administration section -->
         {% if user.profile.aac %}
         <div class="row-label">
             <h1>Administration</h1>
@@ -23,6 +27,7 @@
             <a role="button" href="{% url 'makeReports:admin-home'%}">ADMIN PANEL</a>
         </div>
         {% endif %}
+        <!-- If user has department faculty permissions, display Department Reports section -->
         {% if user.profile.department.name %}
         <div class="row-label">
             <h1>Department Reports</h1>
@@ -33,38 +38,67 @@
                 <h3>Department Reports To-Do</h3>
                 <p>
                     The following list includes department reports that require completion or modification. The
-                    departments that require completion have a 'Start' button, and ones that have been returned 
+                    departments that require completion have a 'Start' button, and ones that have been returned
                     for modification have a 'Modify' and 'Feedback' button.
                 </p>
+                <!-- If department to-do's exist, display in table -->
                 {% if object_list %}
                 <table>
                     <thead>
                         <tr>
-                            <th><p>Department</p></th>
-                            <th><p>Program</p></th>
-                            <th><p>Year</p></th>
+                            <th>
+                                <p>Department</p>
+                            </th>
+                            <th>
+                                <p>Program</p>
+                            </th>
+                            <th>
+                                <p>Year</p>
+                            </th>
+                            <th>
+                                <p>Assigned</p>
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Create table rows for all departments -->
                         {% for r in object_list %}
                         <tr>
-                            <td><p>{{ r.degreeProgram.name }}</td>
+                            <td>
+                                <p>{{ r.degreeProgram.name }}</p>
+                            </td>
+                            <!-- If degree level is 'GR', display 'Graduate' -->
                             {% if r.degreeProgram.level == "GR" %}
-                            <td><p>Graduate</p></td>
+                            <td>
+                                <p>Graduate</p>
+                            </td>
+                            <!-- If degree level is 'UG', display 'Undergraduate' -->
                             {% elif r.degreeProgram.level == "UG" %}
-                            <td><p>Undergraduate</p></td>
+                            <td>
+                                <p>Undergraduate</p>
+                            </td>
                             {% else %}
-                            <td><p>{{ r.degreeProgram.level }}</p></td>
+                            <!-- If degree level is something else, display level -->
+                            <td>
+                                <p>{{ r.degreeProgram.level }}</p>
+                            </td>
                             {% endif %}
-                            <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td>
+                                <p>{{r.year|add:"-1"}}-{{r.year}}</p>
+                            </td>
+                            <td>
+                                <p>{{ r.users }}</p>
+                            </td>
                             <td class="buttons">
                                 <div>
+                                    <!-- If department report is completed, display Modify and Feedback buttons -->
                                     {% if r.returned %}
-                                    <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:slo-summary' report=r.pk %}">MODIFY</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:slo-summary' report=r.pk %}">MODIFY</a>
                                     <a role="button" class="table-button" href="{% url 'makeReports:rpt-feedback' report=r.pk %}">FEEDBACK</a>
+                                    <!-- Otherwise, display Start button -->
                                     {% else %}
-                                    <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:rpt-first-page' pk=r.pk %}">START</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:rpt-first-page' pk=r.pk %}">START</a>
                                     {% endif %}
                                 </div>
                             </td>
@@ -72,35 +106,60 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <!-- Otherwise, display empty list label -->
                 {% else %}
                 <p class="empty">NO TODO LIST ITEMS</p>
                 {% endif %}
             </div>
             <div class="reports-todo">
-                <h3 class="second-sublabel">Previously Reviewed Reports</h3>
+                <h3>Previously Reviewed Reports</h3>
                 <p>The following list includes previous reports that have been reviewed with the past year.</p>
+                <!-- If previously reviewed reports exist, display in table -->
                 {% if gReps %}
                 <table>
                     <thead>
                         <tr>
-                            <th><p>Department</p></th>
-                            <th><p>Program</p></th>
-                            <th><p>Year</p></th>
+                            <th>
+                                <p>Department</p>
+                            </th>
+                            <th>
+                                <p>Program</p>
+                            </th>
+                            <th>
+                                <p>Year</p>
+                            </th>
+                            <th>
+                                <p>Assigned</p>
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Create table rows for all departments -->
                         {% for r in gReps %}
                         <tr>
-                            <td><p>{{ r.degreeProgram.name }}</p></td>
-                            {% if r.degreeProgram.level == "GR" %}
-                            <td><p>Graduate</p></td>
-                            {% elif r.degreeProgram.level == "UG" %}
-                            <td><p>Undergraduate</p></td>
+                            <td>
+                                <p>{{ r.degreeProgram.name }}</p>
+                            </td>
+                            {% if r.degreeProgram.level == "GR" %} asdasdasdasdasdasd
+                            <td>
+                                <p>Graduate</p>
+                            </td>
+                            {% elif r.degreeProgram.level == "UG" %} asdasdasdasdasdasd
+                            <td>
+                                <p>Undergraduate</p>
+                            </td>
                             {% else %}
-                            <td><p>{{ r.degreeProgram.level }}</p></td>
+                            <td>
+                                <p>{{ r.degreeProgram.level }}</p> asdasdasdasdasdasd
+                            </td>
                             {% endif %}
-                            <td><p>{{r.year|add:"-1"}}-{{r.year}}</p></td>
+                            <td>
+                                <p>{{r.year|add:"-1"}}-{{r.year}}</p> asdasdasdasdasdasd
+                            </td>
+                            <td>
+                                <p>{{ r.users }}</p>
+                            </td>
                             <td class="buttons">
                                 <div>
                                     <a role="button" class="table-button" id="right-button" href="{% url 'makeReports:view-rpt' pk=r.pk %}">VIEW</a>
@@ -111,6 +170,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <!-- Otherwise, display empty list label -->
                 {% else %}
                 <p class="empty">NO PREVIOUS REPORTS</p>
                 {% endif %}
@@ -122,18 +182,22 @@
             <hr class="solid">
         </div>
         <div class="announcements">
+            <!-- If announcements exist, display in ordered list -->
             {% if announ %}
             <ol type="1">
+                <!-- Create list item for all announcements -->
                 {% for a in announ %}
                 <li>{{a.text | safe}}</li>
                 {% endfor %}
             </ol>
+            <!-- Otherwise, display empty list label -->
             {% else %}
             <p class="empty">NO ANNOUNCEMENTS</p>
             {% endif %}
         </div>
     </div>
 </div>
+<!-- Otherwise, display welcome screen -->
 {% else %}
 <div class="login-content">
     <h1>Welcome!</h1>

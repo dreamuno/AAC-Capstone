@@ -48,6 +48,18 @@ class SLOsToStakeholder(models.Model):
     """
     Text describing how SLOs are communicated to stakeholders
     """
+    #internal options
+    faculty = models.BooleanField(verbose_name="Faculty/Staff", default=False)
+    students = models.BooleanField(verbose_name="Students", default=False)
+    other_internal = models.BooleanField(verbose_name="Other-internal", default=False)
+
+    #external options
+    prospect_students = models.BooleanField(verbose_name="Prospective Students", default=False)
+    alumni = models.BooleanField(verbose_name="Alumni", default=False)
+    employers = models.BooleanField(verbose_name="Employers", default=False)
+    community_members = models.BooleanField(verbose_name="Community Members", default=False)
+    other_external = models.BooleanField(verbose_name="Other-External", default=False)
+
     text = models.CharField(max_length=2000)
     report = models.ForeignKey('Report', on_delete=models.CASCADE, null=True)
     def __str__(self):
