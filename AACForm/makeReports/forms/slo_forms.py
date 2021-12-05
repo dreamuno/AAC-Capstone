@@ -25,6 +25,9 @@ class CreateNewSLO(forms.Form):
     blooms = forms.ChoiceField(choices=BLOOMS_CHOICES, label="Highest Bloom's Taxonomy Level: ", widget=forms.Select(attrs={'class':'form-control col-5'}))
     gradGoals = forms.ModelMultipleChoiceField(widget= forms.CheckboxSelectMultiple, queryset=GradGoal.active_objects.all(), required=False, label="Graduate-level Goals")
     accreditingBody = forms.BooleanField(label='Accrediting_body', required=False)
+    imported = forms.BooleanField(required=False)
+    importedFrom = forms.CharField(max_length = 50, disabled = True, required=False)
+
     def __init__(self,*args,**kwargs):
         """
         Initializes form and deletes grad field if undergraduate level

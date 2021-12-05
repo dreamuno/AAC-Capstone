@@ -1,3 +1,5 @@
+/* Login, Update Account, and Change Password Page */
+
 .login-content {
   display: flex;
   position: absolute;
@@ -13,6 +15,7 @@
 .login-content h1 {
   font-size: 36px;
   margin-bottom: 10px;
+  white-space: nowrap;
 }
 
 .login-content form {
@@ -88,19 +91,34 @@ input:focus {
   color: #ffffff;
 }
 
-.firstname-field {
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #C0C0C0;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #C0C0C0;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #C0C0C0;
+}
+
+/* Update Account and Change Password Page */
+
+.firstname-field, .old-password-field {
   color: #767676;
   font-size: 17px;
   margin-top: 30px;
 }
 
-.lastname-field {
+.lastname-field, .new-password-field {
   color: #767676;
   font-size: 17px;
   margin-top: 20px;
 }
 
-.email-field {
+.email-field, .new-password-retry-field {
   color: #767676;
   font-size: 17px;
   margin-top: 20px;

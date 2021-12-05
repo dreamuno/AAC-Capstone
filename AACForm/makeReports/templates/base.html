@@ -2,14 +2,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Academic Assessment Assistant</title>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+	<!-- Import CSS style for main navigation -->
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
+	<!-- Main Navigation -->
 	<div class="header">
 		<nav>
 			<a href="/">
@@ -19,6 +23,7 @@
 					<div class="logo-text">Academic Assessment Assistant</div>
 				</div>
 			</a>
+			<!-- If user is authenticated, navigation links -->
 			{% if user and user.profile %}
 			<button type="button" class="btn-hamburger" data-action="nav-toggle">
 				<span></span>
@@ -29,11 +34,14 @@
 			</button>
 			{% endif %}
 			<ul class="nav-menu">
+				<!-- If user is authenticated, navigation links -->
 				{% if user and user.profile %}
+				<!-- If user has department faculty permissions, display Home and Reports -->
 				{% if user.profile.department %}
 				<li class="nav-item"><a href="/">Home</a></li>
 				<li class="nav-item"><a href="{% url 'makeReports:rpt-list-dept' %}">Reports</a></li>
 				{% endif %}
+				<!-- If user has AAC permissions, display Administration, AAC Reports, and Departments -->
 				{% if user.profile.aac %}
 				<li class="nav-item"><a href="{% url 'makeReports:admin-home' %}">Administration</a></li>
 				<li class="nav-item"><a href="{% url 'makeReports:report-list' %}">AAC Reports</a></li>
@@ -52,12 +60,16 @@
 			</ul>
 		</nav>
 	</div>
+	<!-- Page Content -->
 	<div class="container">
+		<!-- Inner Content -->
 		{% block content %}
 		<p>ERROR block content not included</p>
 		{% endblock %}
-		{% block endscripts %}{% endblock %}
+		{% block endscripts %} {% endblock %}
 	</div>
+	<!-- Import JavaScript for main navigation -->
 	<script src="{% static 'js/script.js' %}"></script>
 </body>
+
 </html>

@@ -66,12 +66,14 @@
   margin: 0 auto;
 }
 
+/* Compact Screen Responsive */
 @media screen and (max-width: 1400px) {
   .subnav-item {
     margin: 0 0.4rem;
   }
 }
 
+/* Mobile Responsive */
 @media screen and (max-width: 1175px) {
   .subnav {
     width: 100vw;

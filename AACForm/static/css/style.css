@@ -215,6 +215,7 @@ nav .dropdown-item {
   padding: 0;
 }
 
+/* Compact Screen Responsive */
 @media screen and (max-width: 1400px) {
   nav {
     padding: 0 1.4em;
@@ -223,15 +224,16 @@ nav .dropdown-item {
     padding-right: 0px;
   }
 
-  nav .dropdown-menu {
-    left: -52px;
-  }
-
   nav .nav-item > a {
     padding: 0 1.25em;
   }
+
+  nav .dropdown-menu {
+    left: -52px;
+  }
 }
 
+/* Mobile Responsive */
 @media screen and (max-width: 1175px) {
   nav {
     padding: 0 1.4em;

@@ -34,6 +34,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='slo',
             name='blooms',
-            field=models.CharField(choices=[('', '------'), ('KN', 'Knowledge'), ('CO', 'Comprehension'), ('AP', 'Application'), ('AN', 'Analysis'), ('SN', 'Synthesis'), ('EV', 'Evaluation')], max_length=50, verbose_name="Bloom's taxonomy level"),
+            field=models.CharField(choices=[('', ''), ('KN', 'Knowledge'), ('CO', 'Comprehension'), ('AP', 'Application'), ('AN', 'Analysis'), ('SN', 'Synthesis'), ('EV', 'Evaluation')], max_length=50, verbose_name="Bloom's taxonomy level"),
         ),
     ]

@@ -244,7 +244,6 @@ input[type="radio"]:checked:after {
 .search table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
 }
 
 .search td,
@@ -272,12 +271,6 @@ input[type="radio"]:checked:after {
   font-size: 16px;
   margin: 0 !important;
   min-height: 60px;
-}
-
-.search td div {
-  display: flex;
-  justify-content: left;
-  align-items: center;
 }
 
 .table-button ~ .table-button {
@@ -340,7 +333,12 @@ input[type="radio"]:checked:after {
 
   .button ~ .button {
     margin-left: 0;
-    margin-top: 20px;
+    margin-top: 10px;
+  }
+
+  .table-button ~ .table-button {
+    margin-left: 0;
+    margin-top: 10px;
   }
 
   .search table,
@@ -382,7 +380,7 @@ input[type="radio"]:checked:after {
   }
 
   .search td div {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: left;
     align-items: left;
   }

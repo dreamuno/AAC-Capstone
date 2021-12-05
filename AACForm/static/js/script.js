@@ -2,7 +2,10 @@ let nav = document.querySelector('nav');
 let dropdown = nav.querySelector('.dropdown');
 let dropdownToggle = nav.querySelector("[data-action='dropdown-toggle']");
 
-
+/**
+ * Event Listener to display additional nav-links in navbar.
+ * Adds and removes 'opened' from classpath for CSS property.
+ */
 dropdownToggle.addEventListener('click', () => {
     if (dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
@@ -13,6 +16,10 @@ dropdownToggle.addEventListener('click', () => {
 
 let navToggle = nav.querySelector("[data-action='nav-toggle']");
 
+/**
+ * Event Listener to display navigation dropdown in responsive view.
+ * Adds and removes 'show' from classpath for CSS property.
+ */
 navToggle.addEventListener('click', () => {
     if (nav.classList.contains('opened')) {
         nav.classList.remove('opened');
@@ -21,6 +28,11 @@ navToggle.addEventListener('click', () => {
     }
 });
 
+
+/**
+ * Event Listener for entire webpage.
+ * If dropdown is opened and there is a click event anywhere on the page, remove 'show' classpath.
+ */
 document.addEventListener('click', function (e) {
     if (!e.target.closest(`.dropdown`)) {
         dropdown.classList.remove('show');
@@ -37,6 +49,7 @@ function showhide(id) {
      * @class importSLO
      */
 var chYear = null;
+
 /**
  * Creates drop down for year and updates upon the DOM being loaded
  * @method onLoad
@@ -46,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(chYear);
     updateYears();
 });
+
 /**
  * Calls the API to update the year choices for the search,
  * based upon the currently selected degree program
@@ -66,8 +80,8 @@ function updateYears() {
             console.error(err);
         }
     });
-    
 }
+
 window.onload = function () {
     setTimeout(function () {
         const FRAME_LENGTH = document.getElementsByTagName('iframe').length;
@@ -95,6 +109,5 @@ window.onload = function () {
 
             });
         }
-    }, 200);}
-
-
+    }, 200);
+}
