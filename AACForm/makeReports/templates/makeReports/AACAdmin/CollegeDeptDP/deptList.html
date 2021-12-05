@@ -19,23 +19,26 @@
         <div class="departments">
             <div class="links">
                 <p>Create a new department or view all archived departments.</p>
-                <a role="button" href="{% url 'makeReports:add-dept' %}">CREATE NEW</a>
-                <a role="button" id="left-button" href="{% url 'makeReports:arc-depts' %}">VIEW ARCHIVED</a>
+                <a role="button" class="button" href="{% url 'makeReports:add-dept' %}">CREATE NEW</a>
+                <a role="button" class="button" href="{% url 'makeReports:arc-depts' %}">VIEW ARCHIVED</a>
             </div>
             <div class="search">
                 <h3 class="second-sublabel">Search</h3>
                 <p>Search and modify departments by college or department name.</p>
                 <form action="{% url 'makeReports:dept-list' %}" type="get">
-                    <div class="form-group"><label for="college">College:</label>
-                        <select id="college" class="form-control" name="college">
+                    <div class="select">
+                        <label>Rubric:</label>
+                        <select name="college">
                             {% for col in college_list %}
                             <option value="{{col.name}}">{{col.name}}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="form-group"><label for="name">Name:</label><input id="name" type="text"
-                            class="form-control" name="name"></div>
-                    <button id="sub" type="submit" class="btn btn-primary" style="margin-top:1em">Search</button><br>
+                    <div class="name">
+                        <label>Department Name:</label>
+                        <input type="text" name="name" placeholder="ex. 'Mathematics'">
+                    </div>
+                    <button type="submit">SEARCH</button>
                 </form>
                 {% if object_list %}
                 <table>
@@ -61,9 +64,9 @@
                             </td>
                             <td class="buttons">
                                 <div>
-                                    <a role="button" id="left-button"
-                                        href="{% url 'makeReports:dp-list' dept=dept.pk %}">DEGREE PROGRAMS</a>
-                                    <a role="button" id="left-button"
+                                    <a role="button" class="table-button"
+                                        href="{% url 'makeReports:dp-list' dept=dept.pk %}">VIEW PROGRAMS</a>
+                                    <a role="button" class="table-button"
                                         href="{% url 'makeReports:add-rpt' dept=dept.pk %}">ASSIGN REPORT</a>
                                     <label class="list-dropdown">
                                         <input type="checkbox" class="dd-input" id="test">
