@@ -34,7 +34,7 @@ class Report(models.Model):
     submitted = models.BooleanField()
     returned = models.BooleanField(default=False)
     numberOfSLOs = models.PositiveIntegerField(default=0, verbose_name="number of SLOs")
-    users = models.CharField(max_length=100, blank=True, default='------')
+    users = models.CharField(max_length=100, blank=True, default='')
     accreditingBodyPrograms = models.CharField(max_length=500, blank=True, null=True)
 
 class Profile(models.Model):

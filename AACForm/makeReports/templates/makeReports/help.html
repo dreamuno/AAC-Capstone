@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- Content for 'base.html' -->
 {% block content %}
 
+<!-- Import CSS style for help page -->
 <link rel="stylesheet" href="{% static 'css/help.css' %}">
 
 <div class="sub-header">
@@ -14,7 +16,7 @@
     <div class="help-container">
         <h1>General Questions</h1>
         <hr class="solid">
-        <div class="question-box" id="first">
+        <div class="question-box" id="first-question">
             <h3>Why are there no reports on the home page?</h3>
             <p>
                 The Academic Assessment Committee has not yet assigned a report to your department. Contact the Academic
@@ -39,66 +41,67 @@
         <div class="question-box">
             <h3>How do I view the rubric for the report I am currently working on?</h3>
             <p>
-                Open the report by clicking 'Start'. On the far-right of the report navigation menu there is the option to
-                'View Rubric'.
+                Open the report by clicking 'Start'. On the far-right of the report navigation menu there is the option
+                to 'View Rubric'.
             </p>
         </div>
         <div class="question-box">
             <h3>What does the to-do list mean when completing a report?</h3>
             <p>
                 The to-do list automatically updates as you complete the report. The list in each section covers the
-                materials in that section, as well as prior sections. The to-do list contains two parts: required and 
-                suggested. The required section lists what must be completed in the report before you can submit it to the 
-                Academic Assessment Committee. If you feel one of these requirements does not apply to your degree program, 
-                contact the Academic Assessment Committee, and they will submit the report on your behalf. The suggested 
-                section contains automated suggestions based upon the rubric. Sometimes these suggestions will not apply or 
-                be accurate for a given degree program. You will be able to submit the report without acting upon any of these 
-                suggestions. Please use your best judgement when viewing these suggestions. Finally, the to-do list disappears
-                if there are no more suggestions or requirements to complete.
+                materials in that section, as well as prior sections. The to-do list contains two parts: required and
+                suggested. The required section lists what must be completed in the report before you can submit it to
+                the Academic Assessment Committee. If you feel one of these requirements does not apply to your degree
+                program, contact the Academic Assessment Committee, and they will submit the report on your behalf. The suggested
+                section contains automated suggestions based upon the rubric. Sometimes these suggestions will not apply or
+                be accurate for a given degree program. You will be able to submit the report without acting upon any of
+                these suggestions. Please use your best judgement when viewing these suggestions. Finally, the to-do list
+                disappears if there are no more suggestions or requirements to complete.
             </p>
         </div>
         <div class="question-box">
             <h3>What is CSV?</h3>
             <p>
-                The acronym CSV stands for 'comma-separated values'. This file type allows you to export the data within the 
-                system in a comma seperated list. CSV files can be easily imported into programs such as Excel, which gives you
-                the option to transfer data for further analysis.
+                The acronym CSV stands for 'comma-separated values'. This file type allows you to export the data within
+                the system in a comma seperated list. CSV files can be easily imported into programs such as Excel, which
+                gives you the option to transfer data for further analysis.
             </p>
         </div>
         <div class="question-box">
             <h3>Why aren't all my supplements included in the PDF of the report?</h3>
             <p>
-                The application can only include files that were already PDF's in the report PDF. Other supplements can still be
-                downloaded seperately.
+                The application can only include files that were already PDF's in the report PDF. Other supplements can
+                still be downloaded seperately.
             </p>
         </div>
+        <!-- If user has AAC permissions, show Administration Q&A -->
         {% if user.profile.aac %}
         <h1 id="admin-header">Administration Questions</h1>
         <hr class="solid">
-        <div class="question-box" id="first">
+        <div class="question-box" id="first-question">
             <h3>How can I see reports to review?</h3>
             <p>
-                With the top navigation bar, go to the 'Administration' tab. From there, click the 'Reports' link, and you can 
-                search for not yet reviewed and submitted reports.
+                With the top navigation bar, go to the 'Administration' tab. From there, click the 'Reports' link, and
+                you can search for not yet reviewed and submitted reports.
             </p>
         </div>
         <div class="question-box">
             <h3>What does 'Generate Reports' do?</h3>
             <p>
-                When degree programs are created, there is an option to assign a cycle length and starting year. For example,
-                if 2015 is the starting year and 4 is the cycle length, reports should be assigned in 2015, 2019, 2023, 2027, etc.
-                Generating a year's reports assigns a report with the selected rubric to every degree program whose starting year
-                and cycle length combination indicates it should be assigned a report in that given year. However, it does not
-                assign a report if a given degree program has already been manually assigned a report for the given year. Further, 
-                not not all degree programs will have a cycle length and starting year, in which case this button will never assign 
-                the program a report.
+                When degree programs are created, there is an option to assign a cycle length and starting year. For
+                example, if 2015 is the starting year and 4 is the cycle length, reports should be assigned in 2015, 2019, 2023,
+                2027, etc. Generating a year's reports assigns a report with the selected rubric to every degree program whose
+                starting year and cycle length combination indicates it should be assigned a report in that given year. However, it
+                does not assign a report if a given degree program has already been manually assigned a report for the given
+                year. Further, not not all degree programs will have a cycle length and starting year, in which case this button will
+                never assign the program a report.
             </p>
         </div>
         <div class="question-box">
             <h3>How do I manually assign a report?</h3>
             <p>
-                From the Departments & Programs page on the navigation bar, find the desired degree program, or department the degree
-                program is in. There will be an option to 'Assign Report', which will take you to the appropriate form.
+                From the Departments & Programs page on the navigation bar, find the desired degree program, or
+                department the degree program is in. There will be an option to 'Assign Report', which will take you to the appropriate form.
             </p>
         </div>
         {% endif %}
