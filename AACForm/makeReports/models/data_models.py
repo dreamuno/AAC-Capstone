@@ -54,6 +54,7 @@ class ResultCommunicate(models.Model):
     date = models.DateField(default = timezone.now())
     text = models.CharField(max_length=3000)
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
+
 class Graph(models.Model):
     dateTime = models.DateTimeField()
     graph = models.FileField(
