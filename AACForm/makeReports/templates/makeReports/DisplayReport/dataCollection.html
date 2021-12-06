@@ -94,8 +94,19 @@
 </div>
 <div class="row-sh mt-5">
     <div class="column">
-        <h4>Describe how results are communicated within the program</h4>
-        {{ assessment_data_dict.result_communication_text|safe }}
+        <table>
+            </thead>
+                <h4>Describe how results are communicated within the program</h4>
+            </thead>
+            <tr>
+                <td>Text</td>
+                <td>Last Updated</td>
+            </tr>
+            <tr>
+                <td>{{ assessment_data_dict.result_communication_text|safe }}</td>
+                <td>{{ assessment_data_dict.result_communication_date|safe }}</td>
+            </tr>
+        </table>
     </div>
 </div>
 <!--<div class="col-3">

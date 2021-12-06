@@ -172,17 +172,20 @@
             <tbody>
                 <tr>
                     <td>Text</td>
+                    <td>Last Updated</td>
                     <td>Options</td>
                 </tr>
                 <tr>
                     {% if assessment_data_dict.result_communication_id == None %}
                     <td>Describe how results are communicated within the program. Address each SLO.</td>
+                    <td></td>
                     <td>
                         <a role="button" title="Add Result Communication" class="btn btn-primary"
                             href="{% url 'makeReports:add-result-communication' report=rpt.pk %}">Edit</a>
                     </td>
                     {% else %}
                     <td>{{ assessment_data_dict.result_communication_text|safe }}</td>
+                    <td>{{ assessment_data_dict.result_communication_date|safe }}</td>
                     <td>
                         <a role="button" title="Edit Result Communication" class="btn btn-primary"
                             href="{% url 'makeReports:edit-result-communication' report=rpt.pk resultpk=assessment_data_dict.result_communication_id %}">Edit</a>
