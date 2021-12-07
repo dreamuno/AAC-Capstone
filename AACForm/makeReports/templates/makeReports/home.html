@@ -141,21 +141,21 @@
                             <td>
                                 <p>{{ r.degreeProgram.name }}</p>
                             </td>
-                            {% if r.degreeProgram.level == "GR" %} asdasdasdasdasdasd
+                            {% if r.degreeProgram.level == "GR" %}
                             <td>
                                 <p>Graduate</p>
                             </td>
-                            {% elif r.degreeProgram.level == "UG" %} asdasdasdasdasdasd
+                            {% elif r.degreeProgram.level == "UG" %}
                             <td>
                                 <p>Undergraduate</p>
                             </td>
                             {% else %}
                             <td>
-                                <p>{{ r.degreeProgram.level }}</p> asdasdasdasdasdasd
+                                <p>{{ r.degreeProgram.level }}</p>
                             </td>
                             {% endif %}
                             <td>
-                                <p>{{r.year|add:"-1"}}-{{r.year}}</p> asdasdasdasdasdasd
+                                <p>{{r.year|add:"-1"}}-{{r.year}}</p>
                             </td>
                             <td>
                                 <p>{{ r.users }}</p>
