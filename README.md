@@ -23,4 +23,4 @@ To see graphs or download CSV files, navigate to Your Reports or AAC Reports and
 In order to run this application, one needs to install the latest version of Python, Django, and also everything listed in requirements.txt. To run the application from your terminal, type 'python3 manage.py runserver' and go to localhost:8000 on your browser. The computer must be connected to the internet to reach the database and file server.
 
 ## Documentation Pages
- https://dreamuno.github.io/AAC-Capstone/
+https://aac-capstone-2021.github.io/AAC-Capstone/
