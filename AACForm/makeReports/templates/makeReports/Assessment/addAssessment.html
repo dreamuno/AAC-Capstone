@@ -3,40 +3,249 @@
 {% block in_scripts %}
 {{form.media}}
 {% endblock %}
-{% block in_styles %}
-<style>
-        #hide-sam{
-            display: inherit;
-        }
-        #hide-freq{
-            display: inherit;
-        }
-        </style>
-{% endblock %}
+{% load static %}
 {% block inner_content %}
-<h3>Add New Assessment</h3>
+<style>
+    #hide-sam{
+        display: inherit;
+    }
+    #hide-freq{
+        display: inherit;
+    }
+    ul{
+        list-style-type: none;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'css/form_entry_base.css' %}">
+<h1>Add New Assessment</h1>
 {% bootstrap_form_errors form layout='inline' %}
-<form method="post" class="form" enctype="multipart/form-data">
+<form method="post" class="form" enctype="multipart/form-data" onsubmit="return validateForm();">
+    <div class="assessment-p">
     {% csrf_token %}
     <!--{% bootstrap_form form %} -->
-    {% bootstrap_field form.slo %}
-    {% bootstrap_field form.title %}
-    {% bootstrap_field form.description %}
-    {% bootstrap_field form.domain %}
-    {% bootstrap_field form.directMeasure %}
-    {% bootstrap_field form.finalTerm %}
-    {% bootstrap_field form.where %}
-    {% bootstrap_field form.allStudents %}
-    <div id="hide-sam">{% bootstrap_field form.sampleDescription %}</div>
-    {% bootstrap_field form.frequencyChoice %}
-    <div id="hide-freq">{% bootstrap_field form.frequency %}</div>
-    {% bootstrap_field form.threshold %}
-    {% bootstrap_field form.target %}
+    <h3>SLO</h3>
+    <p>Please select an SLO from the drop down menu.</p>
+    {{ form.slo }}<br><br>
+
+    <h3>Accrediting Body</h3>
+    <p>This attribute specifies that the assessment is dictated by an accredidation or external body. When selected, the only attributes
+        that</p><p> must be filled out are the following: <span style = "color: red;">Title, Description, Domain, Frequency of Data Collection.<span> </p>
+        <strong>{{ form.accreditingBody }} Dictated by accrediting or external body</strong><br><br>
+
+    <h3>Title</h3>
+    <p>Please specify the title of the new assessment.</p>
+    {{ form.title }}<br><br>
+
+    <h3>Description</h3>
+    <p>Please input a description for the assessment.</p>
+    {{ form.description }}<br><br>
+
+    <h3>Domain</h3>
+    <p>Please specify a domain from one of the options below.</p>
+    {{ form.domain }}<br><br>
+
+    <h3>Direct Measure</h3>
+    <p>Please specify the direct measure of the assessment.</p>
+    {{ form.directMeasure }}<br><br>
+
+    <h3>Term</h3>
+    <p>Please specify the point in the program where the assessment is administered</p>
+    {{ form.finalTerm }}<br><br>
+
+    <h3>Where</h3>
+    <p>Please specify where the assessment occurs.</p>
+    {{ form.where }}<br><br>
+
+    <h3>Population Measured</h3>
+    <p>Please select which population will be measured from the drop down menu.</p>
+    {{ form.allStudents }}<br><br>
+
+    <h3>Student Population Description</h3>
+    <p>Please describe what students are sampled(if not all).</p>
+    <div id="hide-sam">{{ form.sampleDescription }}</div><br><br>
+
+    <h3>Frequency of Data Collection</h3>
+    <p>Please select a frequency from the drop down menu.</p>
+    {{ form.frequencyChoice }}<br><br>
+
+    <h3>Frequency Description</h3>
+    <p>If any of the options do not properly describe a frequency for the given dataset, please list and describe one.</p>
+    <div id="hide-freq">{{ form.frequency }}</div><br><br>
+
+    <h3>Proficiency Threshold</h3>
+    <p>Please input a proficiency threshold.</p>
+    {{ form.threshold }}<br><br>
+
+    <h3>Program Proficiency Target</h3>
+    <p>Please input the percentage of students that achieve the proficiency threshold. DO NOT INPUT % SIGN.</p>
+    <p style="color:red;">If assessment is from accrediting or external body, please leave as is.</p>
+    {{ form.target }}<br><br>
+
+    <p id="test" style="color:red; font-weight: bold"></p>
 
     {% buttons %}
-        <button type="submit" class="btn btn-primary">Add Assessment</button>
+        <button type="submit" class="form-button" >Add Assessment</button><br><br>
     {% endbuttons %}
+    </div>
 </form>
+
+<script type="text/javascript">
+    function validateForm(){
+        var slo = document.getElementById('id_slo');
+        var accrediting_body = document.getElementById('id_accreditingBody').checked;
+        var title = document.getElementById("id_title");
+        var description = document.getElementById("id_description");
+        var domain0 = document.getElementById('id_domain_0').checked;
+        var domain1 = document.getElementById('id_domain_1').checked;
+        var domain2 = document.getElementById('id_domain_2').checked;
+        var where = document.getElementById('id_where');
+        var population_description = document.getElementById('id_sampleDescription');
+        var frequency_description = document.getElementById('id_frequency');
+        var threshold = document.getElementById('id_threshold');
+        var target = document.getElementById('id_target');
+
+        var acc_value = document.getElementById("id_accreditingBody");
+        if(accrediting_body == true){
+            acc_value.value = true;
+        }
+        else{
+            acc_value = false;
+        }
+        
+
+        counter = 0;
+        message = "Requirements not met. Please go back and fill in the reqired fields: <br>";
+        if(slo.value != '')
+        {
+            counter++;
+        }
+        else{
+            message = message + 'SLO<br>';
+        }
+
+        var check_title = stringCheck(title.value);
+        if(check_title == true){
+            counter++;
+        }
+        else{
+            message = message + "Title<br>";
+        }
+
+        var check_desc = stringCheck(description.value);
+        if(check_desc == true){
+            counter++;
+        }
+        else{
+            message = message + "Description<br>";
+        }
+
+        if(domain0 == true || domain1 == true || domain2 == true){
+            counter++;
+        }
+        else{
+            message = message + "Domain<br>";
+        }
+
+
+
+        if(accrediting_body == false && where.value == 'Field is not applicaple to assessment.'){
+            where.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            where.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && where.value != 'Field is not applicaple to assessment.'){
+            var check_where = stringCheck(where.value);
+            if(check_where == false){
+                message = message + "Where<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+        
+        if(accrediting_body == false && population_description.value == 'Field is not applicaple to assessment.'){
+            population_description.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            population_description.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && population_description.value != 'Field is not applicaple to assessment.'){
+            var check_pop_desc = stringCheck(population_description.value);
+            if(check_pop_desc == false){
+                message = message + "Population Description<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+
+
+        if(accrediting_body == false && frequency_description.value == 'Field is not applicaple to assessment.'){
+            frequency_description.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            frequency_description.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+        else if (accrediting_body == false && frequency_description.value != 'Field is not applicaple to assessment.'){
+            var check_freq_desc = stringCheck(frequency_description.value);
+            if(check_freq_desc == false){
+                message = message + "Frequency Description<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+
+        if(accrediting_body == false && threshold.value == 'Field is not applicaple to assessment.'){
+            threshold.value = '';
+        }
+        
+        if((accrediting_body == true)){
+            threshold.value = 'Field is not applicaple to assessment.';
+            counter++;
+        }
+
+        else if (accrediting_body == false && threshold.value != 'Field is not applicaple to assessment.'){
+            var check_thresh = stringCheck(threshold.value);
+            if(check_thresh == false){
+                message = message + "Threshold<br>";
+            }
+            else{
+                counter++;
+            }
+        }
+
+        if (counter == 8){
+            return true;
+        }
+        
+        document.getElementById("test").innerHTML = message;
+        return false;
+    }
+
+function stringCheck(temp){
+    var check = temp;
+    check = check.replaceAll("<p><br></p>","");
+    check = check.replaceAll("&nbsp;","");
+    check = check.replaceAll(" ", "");
+    check = check.replaceAll("<p></p>", "");
+    
+    if(check.length > 0){
+        return true;
+    }
+    return false;
+
+}
+</script>
 {% endblock %}
 {% block in_endscripts %}
 <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.min.js"></script>

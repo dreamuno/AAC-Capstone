@@ -1,16 +1,69 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load static %}
+
+<!-- Content for 'base.html' -->
 {% block content %}
-<h3>Active Announcements List</h3>
-<a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-announ' %}">Add Announcement</a>
-<ul class="list-group col-7">
-{% for a in object_list %}
-    <li class = "list-group-item">{{a.text|safe}} Expiring on: {{a.expiration}}
-      <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:delete-announ' pk=a.pk %}">Delete</a>
-      <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:edit-announ' pk=a.pk %}">Edit</a>
-    </li>
-{% empty %}
-No active announcements.
-{% endfor %}
-</ul>
+
+<!-- Import CSS style for admin page -->
+<link rel="stylesheet" href="{% static 'css/annList.css' %}">
+
+<div class="sub-header">
+  <div class="sub-header-content">
+    <h1>Announcement List</h1>
+  </div>
+</div>
+<div class="content">
+  <div class="annlist-container">
+    <div class="row-label">
+      <h1>Announcements</h1>
+      <hr class="solid">
+    </div>
+    <div class="add-announcement">
+      <p>Search and modify departments by college or department name.</p>
+      <a role="button" class="button" href="{% url 'makeReports:add-announ' %}">CREATE NEW</a>
+    </div>
+    <div class="active-announcements">
+      <h3>Active Announcements</h3>
+      {% if object_list %}
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <p>Announcement</p>
+            </th>
+            <th>
+              <p>Expiration</p>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Create table rows for all departments -->
+          {% for a in object_list %}
+          <tr>
+            <td class="message-column">
+              {{ a.text | safe }}
+            </td>
+            <td>
+              <p>{{ a.expiration }}</p>
+            </td>
+            <td class="buttons">
+              <div>
+                <a role="button" class="table-button" href="{% url 'makeReports:edit-announ' pk=a.pk %}">EDIT</a>
+                <a role="button" class="table-button" id="right-button"
+                  href="{% url 'makeReports:delete-announ' pk=a.pk %}">DELETE</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <!-- Otherwise, display empty list label -->
+      {% else %}
+      <p class="empty">NO ACTIVE ANNOUNCEMENTS</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% endblock %}

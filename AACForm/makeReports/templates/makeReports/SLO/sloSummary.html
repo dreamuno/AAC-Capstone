@@ -1,27 +1,27 @@
 {% extends 'form_entry_base.html' %}
 {% load bootstrap4 %}
 {% block inner_content %}
-<h3>SLO Summary</h3>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/SLOSummary.css' %}">
+<h1>SLO Summary</h1>
+<a role="button" id="outline" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
+<a  role="button" id="outline" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
 <div class="container" style="max-width:95%">
     <div class="row">
         <div class="col">
-            {% include 'makeReports/toDoList.html' %}
+            {% include 'makeReports/toDoList.html' %}<br><br>
         </div>
     </div>
-    <div class="row">
-            <div class="col">      
-    <div class="row">
-        <div class="col">
-                <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-slo' report=rpt.pk %}">Add SLO</a>
-    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:import-slo' report=rpt.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}">Import SLO</a>
-        </div>
-    </div>
-    <div class="row">
+
       <div class="col">
-<table class="table">
+<table class="main_table">
     <tbody>
             <tr>
-                <td>Goal</td><td>Bloom's Taxonomy</td><td>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</td><td>Options</td>
+                <td><b>Goal</b></td>
+                <td><b>Bloom's Taxonomy</b></td>
+                <td><b>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</b></td>
+                <td><b>Accrediting Body</b>
+                <td><b>Options</b></td>
             </tr>
             {% for slo in slo_list %}
             <tr>
@@ -29,7 +29,7 @@
                     <b>SLO {{slo.number}}: </b>{{slo.goalText}}
                 </td>
                 <td>
-                    {{slo.slo.get_blooms_display}}
+                    {{slo.slo.get_blooms_display}}: </b> {{slo__pk}} 
                 </td>
                 <td>
                     {% if slo_list.0.report.degreeProgram.level == "GR" %}
@@ -39,22 +39,14 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if slo.slo.numberOfUses is 1 %}
+                    {{ slo.accreditingBody }}
+                </td>
+                <td>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:edit-new-slo' report=rpt.pk sloIR=slo.pk %}">Edit SLO</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:delete-new-slo' report=rpt.pk pk=slo.pk %}">Delete SLO</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-assessment-slo' report=rpt.pk slo=slo.pk %}">Add New Assessment</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:import-assessment-slo' report=rpt.pk slo=slo.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}&slo={{slo.pk}}">Import Assessment</a>
                     <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-edit-redirect' report=rpt.pk slopk=slo.pk %}">Decisions and Actions</a>
-
-                    {% else %}
-                    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:edit-impt-slo' report=rpt.pk sloIR=slo.pk %}">Edit SLO</a>
-                    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:delete-impt-slo' report=rpt.pk pk=slo.pk %}">Delete SLO</a>
-                    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-assessment-slo' report=rpt.pk slo=slo.pk %}">Add New Assessment</a>
-                    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:import-assessment-slo' report=rpt.pk slo=slo.pk %}?dp={{rpt.degreeProgram.pk}}&year={{rpt.year}}&slo={{slo.pk}}">Import Assessment</a>
-                    <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-edit-redirect' report=rpt.pk slopk=slo.pk %}">Decisions and Actions</a>
-
-
-                    {% endif %}
                 </td>
             </tr>
             {% empty %}
@@ -70,9 +62,137 @@
         3. <a href="{% url 'makeReports:slo-comment' report=rpt.pk %}">Additional Comments</a>
     </div>-->
 </div>
+
+<div class = "prev SLOs">
+    <h4> Previous SLOs</h4>
+<a href="javascript:showhide('prevSLOs')">
+    <button>View</button>
+</a><br><br>
+
+<div id="prevSLOs" style="display:none; border: 2px solid #b60000;">
+    <table class="table">
+        <tbody>
+                <tr>
+                    <td>Student Learning Outcomes</td><td>Bloom's Taxonomy</td><td>{% if slo_list.0.report.degreeProgram.level == "GR" %}Graduate Goals{% endif %}</td>
+                </tr>
+                {% for slo in slo_list %}
+                <tr>
+                    <td>
+                        <b>SLO {{slo.number}}: </b>{{slo.goalText}}
+                    </td>
+                    <td>
+                        {{slo.slo.get_blooms_display}}
+                    </td>
+                    <td>
+                        {% if slo_list.0.report.degreeProgram.level == "GR" %}
+                        {% for gG in slo.slo.gradGoals.all %}
+                                <p>{{gG.text|safe}}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+    <h5>Stakeholder Communication</h5>
+    <table class="stakeholder_table">
+        <tbody>
+            <tr>
+                <td>Internal Stakeholders:</td>
+                <td>External Stakeholders:</td>
+            </tr>
+            <tr>
+                <td>
+                    {% if stk.faculty == True %}
+                        <p>Faculty/Staff</p>
+                    {% endif %}
+
+                    {% if stk.students == True %}
+                        <p>Students</p>
+                    {% endif %}
+
+                    {% if stk.other_internal == True %}
+                        <p>Other Internal</p>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stk.prospect_students == True %}
+                        <p>Prospect Students</p>
+                    {% endif %}
+
+                    {% if stk.alumni == True %}
+                        <p>Alumni</p>
+                    {% endif %}
+
+                    {% if stk.employers == True %}
+                        <p>Employers</p>
+                    {% endif %}
+
+                    {% if stk.community_members == True %}
+                        <p>Community Members</p>
+                    {% endif %}
+                    
+                    {% if stk.other_external == True %}
+                        <p>Other External</p>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+    </table>
+    {{stk|safe}}
+    <h5>Comment</h5>
+    {{rpt.section1Comment|safe}}
+</div>
+
 <div class="row mt-5">
     <div class="col-7">
         <h4>Communication to Stakeholders</h4>
+        <table class="stakeholder_table">
+            <tbody>
+            <tr>
+                <td>Internal Stakeholders:</td>
+                <td>External Stakeholders:</td>
+            </tr>
+            <tr>
+                <td>
+                    {% if stk.faculty == True %}
+                        <p>Faculty/Staff</p>
+                    {% endif %}
+
+                    {% if stk.students == True %}
+                        <p>Students</p>
+                    {% endif %}
+
+                    {% if stk.other_internal == True %}
+                        <p>Other Internal</p>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stk.prospect_students == True %}
+                        <p>Prospect Students</p>
+                    {% endif %}
+
+                    {% if stk.alumni == True %}
+                        <p>Alumni</p>
+                    {% endif %}
+
+                    {% if stk.employers == True %}
+                        <p>Employers</p>
+                    {% endif %}
+
+                    {% if stk.community_members == True %}
+                        <p>Community Members</p>
+                    {% endif %}
+                    
+                    {% if stk.other_external == True %}
+                        <p>Other External</p>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+            
+        </table><br>
+        <p>Additional Comments:</p>
         {{stk.text|safe}}
     </div>
     <div class="col-2">
@@ -90,9 +210,10 @@
             <a  role="button" class="btn btn-primary" href="{% url 'makeReports:slo-comment' report=rpt.pk %}">Edit</a>
     </div>
 </div>
+<br>
 <div class="row mt-5">
         <div class="col">
-        <a  role="button" class="btn btn-primary" href="{% url 'makeReports:assessment-summary' report=rpt.pk %}">Next</a>
+        <a   class="form-button" id = "outline" role="button" href="{% url 'makeReports:assessment-summary' report=rpt.pk %}">Next</a>
         </div>
 </div>
 </div>

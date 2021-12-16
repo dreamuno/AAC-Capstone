@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load static %}
+
+<!-- Content for 'base.html' -->
 {% block content %}
-<h3> You are logged out. </h3>
+
+<!-- Import CSS style for logged out page (same as Home Page) -->
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="login-content">
+    <h1>Logout</h1>
+    <p>You have successfully logged out.</p>
+    <a role="button" href="/accounts/login">SIGN IN</a>
+</div>
+
 {% endblock %}

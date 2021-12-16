@@ -1,6 +1,7 @@
 """
 This file contains all views related to inputting data into the form
 """
+from datetime import datetime
 from django.http import Http404
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -404,6 +405,7 @@ class NewResultCommunication(DeptReportMixin,FormView):
         """
         result_communication = ResultCommunicate.objects.create(
             report = self.report, 
+            date = datetime.now(),
             text = form.cleaned_data['text']
             )
         result_communication.save()
@@ -445,6 +447,7 @@ class EditResultCommunication(DeptReportMixin,FormView):
         """
         initial = super(EditResultCommunication, self).get_initial()
         initial['text'] = self.result_communication.text
+        initial['date'] = self.result_communication.date
         return initial
     def get_success_url(self):
         """
@@ -467,6 +470,8 @@ class EditResultCommunication(DeptReportMixin,FormView):
         """
         self.result_communication.report = self.report
         self.result_communication.text = form.cleaned_data['text']
+        self.result_communication.date = form.cleaned_data['date']
+        print(self.result_communication.date)
         self.result_communication.save()
         return super(EditResultCommunication, self).form_valid(form)
 class Section3Comment(DeptReportMixin,FormView):

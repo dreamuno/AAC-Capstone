@@ -149,6 +149,58 @@
 <span id="makereports-views-basic-views-module"></span><h1>makeReports.views.basic_views module<a class="headerlink" href="#module-makeReports.views.basic_views" title="Permalink to this headline">¶</a></h1>
 <p>This file contains miscellaneous views that are used by many users</p>
 <dl class="class">
+<dt id="makeReports.views.basic_views.DisplayDecisionAction">
+<em class="property">class </em><code class="sig-prename descclassname">makeReports.views.basic_views.</code><code class="sig-name descname">DisplayDecisionAction</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.views.basic_views.DisplayDecisionAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="makeReports.views.helperFunctions.mixins.html#makeReports.views.helperFunctions.mixins.DeptAACMixin" title="makeReports.views.helperFunctions.mixins.DeptAACMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">makeReports.views.helperFunctions.mixins.DeptAACMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.TemplateView</span></code></p>
+<p>View to see report</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>pk</strong> (<em>str</em>) – primary key of <a class="reference internal" href="makeReports.models.basic_models.html#makeReports.models.basic_models.Report" title="makeReports.models.basic_models.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a> to display</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="makeReports.views.basic_views.DisplayDecisionAction.dispatch">
+<code class="sig-name descname">dispatch</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.views.basic_views.DisplayDecisionAction.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatches view and attaches <a class="reference internal" href="makeReports.models.basic_models.html#makeReports.models.basic_models.Report" title="makeReports.models.basic_models.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a> to instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – request to view page</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>pk</strong> (<em>str</em>) – primary key of <a class="reference internal" href="makeReports.models.basic_models.html#makeReports.models.basic_models.Report" title="makeReports.models.basic_models.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a> to display</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>response of page to request</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="makeReports.views.basic_views.DisplayDecisionAction.get_context_data">
+<code class="sig-name descname">get_context_data</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.views.basic_views.DisplayDecisionAction.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets template context, including the report, report supplements, and context needed
+for displaying all 4 sections</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>context for template</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="makeReports.views.basic_views.DisplayDecisionAction.template_name">
+<code class="sig-name descname">template_name</code><em class="property"> = 'makeReports/DecisionsActions/importDecisionAction.html'</em><a class="headerlink" href="#makeReports.views.basic_views.DisplayDecisionAction.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="makeReports.views.basic_views.DisplayReport">
 <em class="property">class </em><code class="sig-prename descclassname">makeReports.views.basic_views.</code><code class="sig-name descname">DisplayReport</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#makeReports.views.basic_views.DisplayReport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="makeReports.views.helperFunctions.mixins.html#makeReports.views.helperFunctions.mixins.DeptAACMixin" title="makeReports.views.helperFunctions.mixins.DeptAACMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">makeReports.views.helperFunctions.mixins.DeptAACMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">django.views.generic.base.TemplateView</span></code></p>
@@ -415,7 +467,7 @@ for displaying all 4 sections</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Emma Dargy, Sarah McCarty, and David Ream
+        &copy; Copyright 2021,Tim Higgins, Daniel Boyd, Pratik Giri, Brandon Tran, Clayton Swapp
 
     </p>
   </div>

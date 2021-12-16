@@ -1,27 +1,31 @@
 {% extends 'form_entry_base.html' %}
 {% load bootstrap4 %}
 {% block inner_content %}
-<h3>Edit SLO</h3>
+<h3>Edit SLO <h3>
+<h3 style ="color:#b60000;">{% if form.imported.value %} Imported From: {{form.importedFrom.value}} {% endif %}<h3>     
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% load static %}
-    {% bootstrap_label form.text.label_tag %}
-    {% bootstrap_field form.text show_label=False %}
+    {% load static %} {{import_list}}
+    {% bootstrap_field form.text show_label=False %}<br>
     <div class="alert alert-secondary col-6" role="alert" id="complex_sugg" style="display: none">
         This SLO may be too complex. Consider breaking it down into multiple SLOs.
     </div>
-    {% bootstrap_label form.blooms.label_tag %}
     <div class="alert alert-secondary col-6" role="alert" id="blooms_sugg" style="display: none">
         
     </div>
     <div class="alert alert-secondary col-6" role="alert" id="keywords_sugg" style="display: none">
         
     </div>
-    {% bootstrap_field form.blooms show_label=False %}
+    {% bootstrap_field form.blooms show_label=False %}<br> 
     {% if form.gradGoals %}
-    {% bootstrap_label form.gradGoals.label_tag %}
-    {% bootstrap_field form.gradGoals show_label=False %}
+        <p>Graduate-Level Goals</p>
+        {% for option in form.gradGoals %}
+            <span style="float:left">{{ option.tag }}</span>
+            <span style="text-align: left;"> {{option.choice_label}}</span>
+        {% endfor %}<br>
     {% endif %}
+    <strong>Accrediting Body Information</strong>
+        <p>{{ form.accreditingBody }} Dictated by an Accreditation or external body </p>
     <p id='errors'></p>
     {% buttons %}
         <button type="submit" class="btn btn-primary">Add SLO</button>

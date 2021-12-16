@@ -23,4 +23,28 @@ To see graphs or download CSV files, navigate to Your Reports or AAC Reports and
 In order to run this application, one needs to install the latest version of Python, Django, and also everything listed in requirements.txt. To run the application from your terminal, type 'python3 manage.py runserver' and go to localhost:8000 on your browser. The computer must be connected to the internet to reach the database and file server.
 
 ## Documentation Pages
- https://dreamuno.github.io/AAC-Capstone/
+https://aac-capstone-2021.github.io/AAC-Capstone/ 
+## Release Notes
+[P1] Finer-Grained approach for reporting by accredited programs
+* Created Accrediting body programs text box to specify further information on what accrediting body looks for
+* Added Accrediting body options for SLOs and Assessments
+* Filtered data collection results for assessments when accrediting body option is selected
+
+[P1] Stressing the important role of communication
+* Created date option field in results communication 
+* Created stakeholder options for internal and external stakeholders. 
+
+[P2, P3] Enhance UI for textboxes
+* Created word count for all summernote text boxes
+* Created URL warning for all summernote text boxes
+
+[P2] Simplify import
+* Included origin of original SLO or assment when importing or editing 
+* Ability to pull up previous report
+
+[P4]Support for Reviewing
+* Ability to assign multiple reviewers to a report
+
+[P3] Enhanced UI
+* Added UNO themed UI accross entire application. 
+>>>>>>> be1f4f1d5b9b904e61d33c0f9a5e09724f500b40

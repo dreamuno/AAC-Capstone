@@ -1,52 +1,104 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load static %}
+
+<!-- Content for 'base.html' -->
 {% block content %}
-<h3>Department List</h3>
-Looking for a deleted department? <a  role="button" class="btn btn-primary" href="{% url 'makeReports:arc-depts' %}">Archived Departments</a><br>
-<a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-dept'  %}">Create Department</a>
-<form action="{% url 'makeReports:dept-list' %}" type="get" style="max-width: 500px;">
-    <h3>Search:</h3>
-    <div class="form-group"><label for="college">College:</label>
-        <select id="college" class="form-control" name="college">
-            {% for col in college_list %}
-            <option value="{{col.name}}">{{col.name}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group"><label for="name">Name:</label><input id="name" type="text" class="form-control" name="name"></div>
-    <button id="sub" type="submit" class="btn btn-primary" style="margin-top:1em">Search</button><br>
-</form>
-<ul class="list-group">
-{% for dept in object_list %}
-    
-    <li class = "list-group-item col-10">
-        <div class="row">
-        <div class="col">
-                <b>{{dept.name}}</b> in {{dept.college.name}} 
-        </div>
-        <div class="col-2">
-        <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:dp-list' dept=dept.pk %}">Degree Programs</a>
-    </div><div class="col-2">
-        <a  role="button" class="btn btn-primary float-right" href="{% url 'makeReports:add-rpt' dept=dept.pk %}">Assign Report</a>
-        </div><div class="col-2">
-        <button class="btn btn-primary float-right"  role="button" data-toggle="collapse" data-target="#col{{dept.pk}}" aria-expanded="false" aria-controls="col{{dept.pk}}">
-                    More Options
-        </button>
-    </div>
-    </div>
-    <div class="row"><div class="col">
-        <div class="collapse" id="col{{dept.pk}}">
-            <a  role="button" class="btn btn-danger" href="{% url 'makeReports:delete-dept' pk=dept.pk %}">Archive Department</a>
-            <a  role="button" class="btn btn-primary" href="{% url 'makeReports:update-dept' pk=dept.pk %}">Update Department</a>
-            <a  role="button" class="btn btn-primary" href="{% url 'makeReports:add-dp' dept=dept.pk %}">Add Degree Program</a>
-        </div>
-    </div>
-    </div>
 
+<!-- Import CSS style for admin page -->
+<link rel="stylesheet" href="{% static 'css/deptList.css' %}">
 
-    </li>
-    {% empty %}
-No departments.
-{% endfor %}
-</ul>
+<div class="sub-header">
+    <div class="sub-header-content">
+        <h1>Department List</h1>
+    </div>
+</div>
+<div class="content">
+    <div class="deptlist-container">
+        <div class="row-label">
+            <h1>Departments</h1>
+            <hr class="solid">
+        </div>
+        <div class="departments">
+            <div class="links">
+                <p>Create a new department or view all archived departments.</p>
+                <a role="button" class="button" href="{% url 'makeReports:add-dept' %}">CREATE NEW</a>
+                <a role="button" class="button" href="{% url 'makeReports:arc-depts' %}">VIEW ARCHIVED</a>
+            </div>
+            <div class="search">
+                <h3>Search</h3>
+                <p>Search and modify departments by college or department name.</p>
+                <form action="{% url 'makeReports:dept-list' %}" type="get">
+                    <!-- If form input has errors, display errors -->
+                    {% if form.errors %}
+                    <div class="error">One or more fields is invalid</div>
+                    {% endif %}
+                    <div class="select">
+                        <label>Rubric:</label>
+                        <select name="college">
+                            <!-- Populate select input with colleges -->
+                            {% for col in college_list %}
+                            <option value="{{col.name}}">{{col.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="name">
+                        <label>Department Name:</label>
+                        <input type="text" name="name" placeholder="ex. 'Mathematics'">
+                    </div>
+                    <button type="submit">SEARCH</button>
+                </form>
+                <!-- If colleges exist, display in table -->
+                {% if object_list %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <p>Department</p>
+                            </th>
+                            <th>
+                                <p>College</p>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Create table rows for all colleges -->
+                        {% for dept in object_list %}
+                        <tr>
+                            <td>
+                                <p>{{ dept.name }}
+                            </td>
+                            <td>
+                                <p>{{ dept.college.name }}</p>
+                            </td>
+                            <td class="buttons">
+                                <div>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:dp-list' dept=dept.pk %}">VIEW PROGRAMS</a>
+                                    <a role="button" class="table-button" href="{% url 'makeReports:add-rpt' dept=dept.pk %}">ASSIGN REPORT</a>
+                                    <label class="list-dropdown">
+                                        <input type="checkbox" class="dd-input" id="test">
+                                        <div class="dd-button" onselectstart="return false">MORE</div>
+                                        <ul class="dd-menu">
+                                            <a href="{% url 'makeReports:delete-dept' pk=dept.pk %}">Archive Department</a>
+                                            <a href="{% url 'makeReports:update-dept' pk=dept.pk %}">Update Department</a>
+                                            <a href="{% url 'makeReports:add-dp' dept=dept.pk %}">Add Degree Program</a>
+                                        </ul>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- Otherwise, display empty list label -->
+                {% else %}
+                <p class="empty">NO DEPARTMENTS</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/deptList.js' %}"></script>
+
 {% endblock %}

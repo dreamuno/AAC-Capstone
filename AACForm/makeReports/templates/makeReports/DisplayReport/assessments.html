@@ -14,15 +14,22 @@
                 <td colspan="2">
                     <b>1. Title of Measure: </b><i>{{assessment.assessment.title}}</i>
                 </td>
+            </tr>
             <tr>
                 <td colspan="2">
-                    <b>2. Description of How the Measure Aligns to the SLO </b>
+                    <b>2. Dictated By Accrediting or External Body:  </b>
+                    {{assessment.assessment.accreditingBody}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>3. Description of How the Measure Aligns to the SLO </b>
                     <p>{{assessment.description|safe}}</p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <b>3. Domain</b>
+                    <b>4. Domain</b>
                 </td>
                 <td>
                         {% if assessment.assessment.domainProduct %}
@@ -39,8 +46,11 @@
                 </td>
             </tr>
             <tr>
+                {% if assessment.assessment.accreditingBody %} 
+
+                {% else %}
                 <td>
-                    <b>4. Type</b>
+                    <b>5. Type</b>
                 </td>
                 <td>
                     {% if assessment.assessment.directMeasure %}
@@ -49,9 +59,14 @@
                         Indirect Measure
                     {% endif %}
                 </td>
+                {% endif %}
+            </tr>
             <tr>
+                {% if assessment.assessment.accreditingBody %} 
+
+                {% else %}
                 <td>
-                    <b><p>5. Point in Program </p>
+                    <b><p>6. Point in Program </p>
                         Assessment is Administered</b>
                 </td>
                 <td>
@@ -62,10 +77,14 @@
                     {% endif %}
                     <p>Where does the assessment occur: <i>{{assessment.where|safe}}</i></p>
                 </td>
+                {% endif %}
             </tr>
             <tr>
+                {% if assessment.assessment.accreditingBody %} 
+
+                {% else %}
                 <td>
-                    <b>6. Population Measured</b>
+                    <b>7. Population Measured</b>
                 </td>
                 <td>
                     {% if assessment.allStudents %}
@@ -75,8 +94,11 @@
                             <p><i>{{assessment.sampleDescription|safe}}</i></p>
                     {% endif %}
                 </td>
+                {% endif %}
+            </tr>
             <tr>
-                <td><b>7. Frequency of Data Collection</b></td>
+                {% if assessment.assessment.accreditingBody %} 
+                <td><b>5. Frequency of Data Collection</b></td>
                 <td>
                     {% if assessment.frequencyChoice == "O" %}
                     {{assessment.frequency|safe}}
@@ -84,20 +106,40 @@
                     {{assessment.get_frequencyChoice_display}}
                     {% endif %}
                 </td>
-            <tr>
+                {% else %}
+                <td><b>8. Frequency of Data Collection</b></td>
                 <td>
-                    <b>8. Proficiency Threshold</b>
+                    {% if assessment.frequencyChoice == "O" %}
+                    {{assessment.frequency|safe}}
+                    {% else %}
+                    {{assessment.get_frequencyChoice_display}}
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+            <tr>
+                {% if assessment.assessment.accreditingBody %} 
+
+                {% else %}
+                <td>
+                    <b>9. Proficiency Threshold</b>
                 </td>
                 <td>
                     <i>{{assessment.threshold}}</i>
                 </td>
+                {% endif %}
+            </tr>
             <tr>
+                {% if assessment.assessment.accreditingBody %} 
+
+                {% else %}
                 <td>
-                    <b>9. Program Proficiency Target</b>
+                    <b>10. Program Proficiency Target</b>
                 </td>
                 <td>
                     <i>{{assessment.target}}%</i>
                 </td>
+                {% endif %}
             </tr>
             <tr>
                 <td>Supplements</td>
@@ -123,4 +165,11 @@
             {{rpt.section2Comment|safe}}  
     </div>
 </div>
+
+<script type="text/javascript">
+    function validateForm(){
+        console.log("I have been reached")
+    }
+
+</script>
 </div>

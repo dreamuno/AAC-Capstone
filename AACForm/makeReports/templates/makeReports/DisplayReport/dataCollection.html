@@ -1,56 +1,47 @@
 <!--things needed in context: assessment_data_dict,report-->
 <!--when included, the shelves css must also be included-->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/data_collection.css' %}">
 <h3>III. Data Collection and Analysis</h3>
-<div class="row-sh mb-5">
-    <div class="column-15">
-        <div class="row-sh">
-            <div class="column-15">
-                <h4>Data Table</h4>
-            </div>
-        </div>
-        <div class="row-sh">
-            <div class="column-15">
-                <div class="row-sh border-bottom">
-                    <div class="column-6">Measure</div>
-                    <div class="column-3">Date</div>
-                    <div class="column-2">Number of Students</div>
-                    <div class="column-2">Students Meeting Threshold</div>
-                    <div class="column-2">Aggregate</div>
-                </div>
-                {% for assessment in assessment_data_dict.assessments %}
-                <div class="row-sh align-items-center border-bottom pt-3 pb-3" {% if not assessment.slo_obj.number|divisibleby:2 %} style="background-color:rgb(228, 238, 253);" {% endif %}>
-                    <div class="column-6">
-                            <b>SLO {{assessment.slo_obj.number}} -
-                                Measure {{assessment.assessment_obj.number}}, {{assessment.assessment_text}}</b>
-                    </div>
-                    <div class="column-7">
-                    {% for d in assessment.assess_data %}
-                    <div class="row-sh align-items-center">
-                        <div class="column-3">
-                            {{d.dataRange}}
-                        </div>
-
-                        <div class="column-2">
-                            {{d.numberStudents}}
-                        </div>
-
-                        <div class="column-2">
-                            {{d.overallProficient}}%
-                        </div>
-                    </div>
-                    {% endfor %}
-                    </div>                    
-
-                    <div class="column-2">
-                        {% if assessment.agg %}
-                        {{assessment.agg}}%
-                        {% endif %}
-                    </div>
-                </div>
+<div class="container" style="max-width:50%">
+    <table class="main_table">
+        <tbody>
+            <tr>
+                <td><b>Measure</b></td>
+                <td><b>Date</b></td>
+                <td><b>Number of Students</b></td>
+                <td><b>Students Meeting Threshold</b></td>
+                <td><b>Aggregate</b></td>
+            </tr>
+            {% for assessment in assessment_data_dict.assessments %}
+            <tr>
+                <td>
+                    <b>SLO {{assessment.slo_obj.number}}: </b>{{assessment.slo_text}}<br>
+                    {{assessment.assessment_text}}
+                </td>
+                {% if assessment.assess_data %}
+                {% for d in assessment.assess_data %}
+                <td>{{d.dataRange}}</td>
+                <td>{{d.numberStudents}}</td>
+                <td>{{d.overallProficient}}</td>
                 {% endfor %}
-            </div>
-        </div>
-    </div>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %}
+                <td>
+                    {% if assessment.agg %}
+                    <div {% if assessment.agg.override %} style="font-weight: bold;" {% endif %}>
+                        {{assessment.agg}}%
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 <div class="row-sh mt-5">
     <div class="column">
@@ -103,8 +94,19 @@
 </div>
 <div class="row-sh mt-5">
     <div class="column">
-        <h4>Describe how results are communicated within the program</h4>
-        {{ assessment_data_dict.result_communication_text|safe }}
+        <table>
+            </thead>
+                <h4>Describe how results are communicated within the program</h4>
+            </thead>
+            <tr>
+                <td>Text</td>
+                <td>Last Updated</td>
+            </tr>
+            <tr>
+                <td>{{ assessment_data_dict.result_communication_text|safe }}</td>
+                <td>{{ assessment_data_dict.result_communication_date|safe }}</td>
+            </tr>
+        </table>
     </div>
 </div>
 <!--<div class="col-3">

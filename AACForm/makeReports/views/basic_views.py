@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from makeReports.models import (
     Announcement,
@@ -226,3 +227,45 @@ class HelpPage(TemplateView):
     View of help page
     """
     template_name = "makeReports/help.html"
+
+
+
+
+class DisplayDecisionAction(DeptAACMixin,TemplateView):
+    """
+    View to see report
+
+    Keyword Args:
+        pk (str): primary key of :class:`~makeReports.models.basic_models.Report` to display
+    """
+    template_name = "makeReports/DecisionsActions/importDecisionAction.html"
+    def dispatch(self,request,*args,**kwargs):
+        """
+        Dispatches view and attaches :class:`~makeReports.models.basic_models.Report` to instance
+
+        Args:
+            request (HttpRequest): request to view page
+            
+        Keyword Args:
+            pk (str): primary key of :class:`~makeReports.models.basic_models.Report` to display
+        Returns:
+            HttpResponse : response of page to request
+        """
+        try:
+            self.report = Report.objects.get(pk=self.kwargs['pk'])
+        except Report.DoesNotExist:
+            raise Http404("No report matches the URL.")
+        return super(DisplayReport,self).dispatch(request,*args,**kwargs)
+    def get_context_data(self, **kwargs):
+        """
+        Gets template context, including the report, report supplements, and context needed 
+        for displaying all 4 sections
+
+        Returns:
+            dict : context for template
+        """
+        context = super(DisplayReport,self).get_context_data(**kwargs)
+        context['rpt'] = self.report
+        context['reportSups'] = ReportSupplement.objects.filter(report=self.report)
+        context = section4Context(self,context)
+        return context    

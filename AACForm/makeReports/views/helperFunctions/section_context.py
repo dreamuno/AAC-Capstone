@@ -123,6 +123,7 @@ def section3Context(self,context):
         result_communicate_obj = ResultCommunicate.objects.get(report=self.report)
         assessment_data_dict['result_communication_id'] = result_communicate_obj.pk
         assessment_data_dict['result_communication_text'] = result_communicate_obj.text
+        assessment_data_dict['result_communication_date'] = result_communicate_obj.date
     except:
         pass
     context['assessment_data_dict'] = assessment_data_dict

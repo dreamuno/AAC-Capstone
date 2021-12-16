@@ -1,10 +1,12 @@
 """
-This file contains models most directly related to data from assessments
+This file contains models most directly related to data from assessments.
 """
 import os
 from django.db import models
+from django.utils import timezone
 from makeReports.choices import SLO_STATUS_CHOICES
 from .basic_models import gd_storage
+
 
 class AssessmentData(models.Model):
     """
@@ -49,8 +51,10 @@ class ResultCommunicate(models.Model):
     """
     Model holds the text for communicating results
     """
+    date = models.DateField(default = timezone.now())
     text = models.CharField(max_length=3000)
     report = models.ForeignKey('Report', on_delete=models.CASCADE)
+
 class Graph(models.Model):
     dateTime = models.DateTimeField()
     graph = models.FileField(

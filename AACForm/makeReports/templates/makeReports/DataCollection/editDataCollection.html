@@ -7,9 +7,17 @@
 <b>Threshold: </b> {{assess.threshold}}<br>
 <form method="post" class="form" enctype="multipart/form-data">
     {% csrf_token %}
-    {% bootstrap_form form %}
+
+    <p>Data Collection Range</p>
+    {{ form.dataRange }}
+
+    <p>Number of Students Sampled</p>
+    {{ form.numberStudents }}<br>
+
+    <p>Percentage of Students who Met/Exceeded Threshold Proficiency</p>
+    {{ form.overallProficient }}<br><br>
     {% buttons %}
-        <button type="submit" class="btn btn-primary">Submit Changes</button>
+        <button type="submit" class="btn btn-primary">Add Data</button>
     {% endbuttons %}
 </form>
 {% endblock %}
