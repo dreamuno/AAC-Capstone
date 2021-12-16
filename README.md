@@ -27,29 +27,24 @@ In order to run this application, one needs to install the latest version of Pyt
  
 ## Release Notes
 [P1] Finer-Grained approach for reporting by accredited programs
-Created Accrediting body programs text box to specify further information on what accrediting body looks for
-Added Accrediting body options for SLOs and Assessments
-Filtered data collection results for assessments when accrediting body option is selected
+* Created Accrediting body programs text box to specify further information on what accrediting body looks for
+* Added Accrediting body options for SLOs and Assessments
+* Filtered data collection results for assessments when accrediting body option is selected
 
 [P1] Stressing the important role of communication
-
-Created date option field in results communication 
-Created stakeholder options for internal and external stakeholders. 
+* Created date option field in results communication 
+* Created stakeholder options for internal and external stakeholders. 
 
 [P2, P3] Enhance UI for textboxes
-
-Created word count for all summernote text boxes
-Created URL warning for all summernote text boxes
+* Created word count for all summernote text boxes
+* Created URL warning for all summernote text boxes
 
 [P2] Simplify import
-
-Included origin of original SLO or assment when importing or editing 
-Ability to pull up previous report
+* Included origin of original SLO or assment when importing or editing 
+* Ability to pull up previous report
 
 [P4]Support for Reviewing
-
-Ability to assign multiple reviewers to a report
+* Ability to assign multiple reviewers to a report
 
 [P3] Enhanced UI
-
-Added UNO themed UI accross entire application. 
+* Added UNO themed UI accross entire application. 
